@@ -198,6 +198,16 @@ Updated planner option labels, breakdown wording, static JSON product keys, docu
 
 Recorded that price-combination images are forthcoming. The cost comparison will be updated after the images are provided and their contents can be read.
 
+## Avoiding a duplicate Fire TV line
+
+### User
+
+Asked why Fire TV Stick 4K Plus appeared twice in the selected setup.
+
+### Assistant
+
+Confirmed the total included the Fire TV only once; the result panel displayed the same device both in a separate summary row and in the itemized breakdown. Removed the redundant summary row so the Fire TV appears once, with its price and source, in the breakdown.
+
 ## eero coverage and room temperature follow-up
 
 ### User
@@ -397,3 +407,27 @@ I am uploading all the images with different price combination.
 ### Assistant
 
 Recorded that price-combination images are forthcoming. The cost comparison will be updated after the images are provided and their contents can be read.
+
+## Agent workspace context
+
+### User
+
+Asked for the workspace to be analyzed, the agent skills updated, and workspace context added so the agent could continue the tasks.
+
+### Assistant
+
+Added `AGENTS.md` as the canonical agent context: static-site architecture, the four-layer price data flow from `device-prices.csv` to `device-prices.json`, `prices.json`, `planner.js`, and the HTML price attributes, the invariants that break CI, the validation commands, the data-handling rules, the conversation-log rule, and the current open items. Added `.kilo/skills/price-catalog-and-planner`, `.kilo/skills/guide-content-and-sources`, `.kilo/skills/release-checks`, and a `/verify` command. Reduced `.github/copilot-instructions.md` and `.github/skills/` to pointers at those canonical files so the two assistants cannot drift, and updated the repository `readme.md` guidance.
+
+## Duplicate Fire TV line in the planner
+
+### User
+
+Reported that the Fire TV is added twice in the planner at the published site.
+
+### User
+
+Asked for the unit and integration test cases to be updated, everything verified, and the changes committed and pushed.
+
+### Assistant
+
+Confirmed the duplicate was a display issue only: the total already counted the Fire TV once, but the result panel showed it in both a summary row and the itemized breakdown. The summary row and its styles were removed, leaving one Fire TV line with its price and source in the breakdown. Removed a duplicated title assignment left in `planner.js` and added a test that asserts the selected Fire TV appears exactly once across every Fire TV, speaker model, and speaker count combination, that the total adds it once, that no `plan-tv` markup or styles remain, and that the selector hint still shows its source and price. Verified with 26 passing tests at 100% statement, branch, function, and line coverage for `planner.js`, plus a browser check of the rendered planner showing one Fire TV row and correct totals with and without the eero pack and Echo Sub. Committed the change and pushed it to `main` so the Pages workflow can redeploy.

@@ -51,4 +51,4 @@ Detailed working notes remain under [`docs/sources/`](docs/sources/), including 
 
 ## Agent guidance
 
-Repository-specific Copilot context is in `.github/copilot-instructions.md`. Task-specific skills for price/planner work and guide/source edits are in `.github/skills/`; load only the skill relevant to the task.
+Repository and workspace context for coding agents is in [`AGENTS.md`](AGENTS.md): architecture, price data flow, invariants that break CI, validation commands, data-handling rules, and current open items. Task-specific procedures are in `.kilo/skills/` — load only the skill relevant to the task. `.github/copilot-instructions.md` and `.github/skills/` mirror the same material for GitHub Copilot.
