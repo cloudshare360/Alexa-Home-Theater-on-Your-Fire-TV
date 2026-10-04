@@ -221,7 +221,8 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
 .planner-result { display: flex; flex-direction: column; padding: 31px; color: #182433; background: #f8f6f1; }
 .planner-result .card-kicker { color: #8a3d1d; }
 .planner-result h3 { margin-bottom: 5px; font-size: 24px; }
-.plan-tv { margin-bottom: 22px; color: #425064; font-size: 14px; line-height: 1.5; }
+.plan-tv { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; margin-bottom: 22px; color: #334155; font-size: 14px; line-height: 1.5; }
+.plan-tv strong { flex: 0 0 auto; color: #111c2c; font-size: 17px; font-weight: 800; }
 .plan-breakdown { margin: 0; padding: 0; list-style: none; }
 .plan-breakdown li { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-top: 1px solid #d8d2c8; color: #243247; font-size: 15px; line-height: 1.5; }
 .plan-breakdown li > span { display: flex; min-width: 0; flex-direction: column; }

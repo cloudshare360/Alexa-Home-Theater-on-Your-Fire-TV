@@ -250,6 +250,14 @@ Changed the results panel to a light background with high-contrast text, larger 
 
 ### User
 
+Reported that the Fire TV cost was still not obvious on the right side of the planner.
+
+### Assistant
+
+Confirmed the Fire TV line item price was present in the breakdown, but made it more prominent by displaying the selected Fire TV model and its price together at the top of the result panel as well as retaining the itemized row.
+
+### User
+
 All the images are pasted as part of Temp-Images.
 
 ### Assistant

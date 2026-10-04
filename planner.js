@@ -10,6 +10,7 @@ const eeroCountSelect = document.querySelector("#eero-count");
 const eeroPriceHint = document.querySelector("#eero-price-hint");
 const planTitle = document.querySelector("#plan-title");
 const planTv = document.querySelector("#plan-tv");
+const planTvPrice = document.querySelector("#plan-tv-price");
 const planBreakdown = document.querySelector("#plan-breakdown");
 const planTotalLabel = document.querySelector("#plan-total-label");
 const planTotal = document.querySelector("#plan-total");
@@ -379,6 +380,9 @@ function updatePlan() {
   fireTvPrice.textContent = fireTvPricing.amountInCents === null
     ? "Fire TV price not provided."
     : `${fireTvPricing.source}: ${money.format(fireTvPricing.amountInCents / 100)}`;
+  planTvPrice.textContent = fireTvPricing.amountInCents === null
+    ? "Price not provided"
+    : money.format(fireTvPricing.amountInCents / 100);
   const eeroProductKey = getProductKey(eeroModelSelect.value, eeroCountSelect.value);
   const selectedEeroListing = staticPrices.get(eeroProductKey);
   const eeroPricing = getPrice(eeroProductKey);

@@ -93,6 +93,7 @@ function createPlanner({
     "#eero-price-hint": new Element(),
     "#plan-title": new Element(),
     "#plan-tv": new Element(),
+    "#plan-tv-price": new Element(),
     "#plan-breakdown": new Element(),
     "#plan-total-label": new Element(),
     "#plan-total": new Element(),
@@ -519,6 +520,9 @@ test("recalculates every planner selection from the CSV-derived JSON price catal
               nodes["#fire-tv-price"].textContent,
               `Supplied ${fireTvOption.value === "cube" ? "cart example" : "price"}: ${formatUSD(catalogPrice("FireTV", fireTvOption.textContent))}`,
             );
+            assert.equal(nodes["#plan-tv"].textContent, fireTvOption.textContent);
+            assert.equal(nodes["#plan-tv-price"].textContent,
+              formatUSD(catalogPrice("FireTV", fireTvOption.textContent)));
             if (router) {
               assert.equal(
                 nodes["#plan-breakdown"].children[2].children[1].textContent,
@@ -641,6 +645,7 @@ test("shows unavailable prices and skips invalid catalog rows and display values
   await new Promise(setImmediate);
 
   assert.equal(nodes["#fire-tv-price"].textContent, "Fire TV price not provided.");
+  assert.equal(nodes["#plan-tv-price"].textContent, "Price not provided");
   assert.equal(nodes["#plan-total-label"].textContent, "Known subtotal");
   assert.equal(nodes["#plan-total"].textContent, "$259.99");
   assert.match(nodes["#plan-price-note"].textContent, /Prices not provided and excluded/);
