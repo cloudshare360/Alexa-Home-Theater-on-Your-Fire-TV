@@ -260,4 +260,6 @@ test("documents supplied eero specifications and pack prices on the site", () =>
   assert.match(htmlSource, /2-pack<\/span><b>\$399\.99/);
   assert.match(htmlSource, /3-pack<\/span><b>\$599\.99/);
   assert.match(htmlSource, /\$549\.99/);
+  assert.match(htmlSource, /Supplied Amazon listing: 2-pack \$259\.99 \(previously \$349\.99\)/);
+  assert.doesNotMatch(htmlSource, /Other prices have not been provided/);
 });
