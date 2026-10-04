@@ -146,6 +146,14 @@ Updated the cost document to explain that the price comparison is not a like-for
 
 I am uploading all the images with different price combination.
 
+### User
+
+Provided eero Pro 7 listing details: tri-band Wi-Fi 7, up to 3.9 Gbps, up to 2,000 sq. ft. per eero, up to 25% off, current price range $224.99–$599.99, and previous range $299.99–$799.99. Noted that planner prices were missing.
+
+### Assistant
+
+Updated the Pro 7 information card and planner hint with the supplied specs and ranges. Since the range spans configurations and no exact 1-, 2-, or 3-unit prices were provided, the planner shows the range but does not invent an exact set price or include it in the subtotal. Added a shopping-cost source note and regression tests.
+
 ### Assistant
 
 Recorded that price-combination images are forthcoming. The cost comparison will be updated after the images are provided and their contents can be read.

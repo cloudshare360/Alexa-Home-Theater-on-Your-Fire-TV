@@ -70,3 +70,16 @@ The Studio's listed woofer is built into the speaker; it is not the optional sep
 Separate product-thumbnail crops were created from the supplied cart screenshots for local reference. They are not included in the public site or version-controlled files.
 
 When adding prices, record the product/model, quantity, listed price, and any relevant subtotal or discount. Avoid including personal account or delivery details from the cart.
+
+## eero Pro 7 listing information
+
+The user supplied the following Amazon listing details on October 4, 2026:
+
+- Tri-band mesh Wi-Fi 7 router.
+- Wireless speeds up to 3.9 Gbps.
+- Coverage up to 2,000 sq. ft. per eero.
+- Up to 25% off.
+- Current price range: $224.99–$599.99.
+- Previous price range: $299.99–$799.99.
+
+These ranges cover multiple configurations; the exact price for each 1-, 2-, or 3-unit planner option was not supplied. The planner displays the range but does not treat any point in it as the selected set's exact price or include it in the subtotal.

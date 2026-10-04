@@ -25,6 +25,7 @@ function createPlanner({
   fetchFails = false,
   storage = new Map(),
   apiUrl = "https://prices.example.test/prices",
+  eeroModel = "pro-6e",
 } = {}) {
   class Element {
     constructor(value = "") {
@@ -60,7 +61,7 @@ function createPlanner({
     "#include-sub": new Element(),
     "#include-eero": new Element(),
     "#eero-picks": new Element(),
-    "#eero-model": new Element("pro-6e"),
+    "#eero-model": new Element(eeroModel),
     "#eero-count": new Element("2"),
     "#eero-price-hint": new Element(),
     "#plan-title": new Element(),
@@ -76,7 +77,10 @@ function createPlanner({
   fireTvOption.dataset.price = "89.99";
   nodes["#fire-tv-choice"].selectedOptions = [fireTvOption];
   nodes["#include-eero"].checked = true;
-  nodes["#eero-model"].selectedOptions = [{ value: "pro-6e", textContent: "eero Pro 6E · Wi-Fi 6E" }];
+  nodes["#eero-model"].selectedOptions = [{
+    value: eeroModel,
+    textContent: eeroModel === "pro-7" ? "eero Pro 7 · Wi-Fi 7" : "eero Pro 6E · Wi-Fi 6E",
+  }];
   nodes["#eero-count"].selectedOptions = [{ value: "2", textContent: "2-unit set" }];
   nodes["#eero-picks"].querySelectorAll = () => [nodes["#eero-model"], nodes["#eero-count"]];
 
@@ -218,4 +222,21 @@ test("does not use cached offer data older than one hour", async () => {
 
   assert.equal(nodes["#plan-total"].textContent, "$669.94");
   assert.match(nodes["#live-price-status"].textContent, /temporarily unavailable/);
+});
+
+test("shows the supplied Pro 7 configuration range without inventing a set price", async () => {
+  const { nodes } = createPlanner({ apiUrl: "", eeroModel: "pro-7" });
+  await new Promise(setImmediate);
+
+  assert.match(nodes["#eero-price-hint"].textContent, /\$224\.99–\$599\.99/);
+  assert.match(nodes["#eero-price-hint"].textContent, /previous range \$299\.99–\$799\.99/);
+  assert.match(nodes["#plan-breakdown"].children[2].children[1].textContent, /Price not provided/);
+  assert.equal(nodes["#plan-total"].textContent, "$409.95");
+});
+
+test("documents supplied Pro 7 speeds, coverage, and listing range on the site", () => {
+  assert.match(htmlSource, /wireless speeds up to 3\.9 Gbps/);
+  assert.match(htmlSource, /coverage up to 2,000 sq\. ft\. per eero/);
+  assert.match(htmlSource, /\$224\.99–\$599\.99/);
+  assert.match(htmlSource, /up to 25% off/);
 });

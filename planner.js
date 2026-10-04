@@ -265,6 +265,9 @@ function updatePlan() {
   const eeroPricing = includeEeroCheckbox.checked
     ? getPrice(eeroProductKey, eeroExamplePrice)
     : null;
+  if (eeroPricing && eeroModelSelect.value === "pro-7" && eeroPricing.amountInCents === null) {
+    eeroPricing.source = "Exact set price not provided";
+  }
   const subPricing = includeSubCheckbox.checked
     ? getPrice(getProductKey("sub"), examplePricesInCents.echoSub)
     : null;
@@ -329,11 +332,16 @@ function updatePlan() {
   eeroPicks.querySelectorAll("select").forEach((select) => {
     select.disabled = !includeEeroCheckbox.checked;
   });
-  eeroPriceHint.textContent = eeroPricing
-    ? eeroPricing.source === "Price not provided"
-      ? "No price is available for this model and set size; it will be excluded from the known subtotal."
-      : `${eeroPricing.source}: ${money.format(eeroPricing.amountInCents / 100)} for this set.`
-    : "No price is available for this model and set size.";
+  if (eeroModelSelect.value === "pro-7") {
+    eeroPriceHint.textContent =
+      "Supplied Amazon listing: $224.99–$599.99, up to 25% off (previous range $299.99–$799.99). Exact price for this set size was not supplied, so it is excluded from the subtotal.";
+  } else {
+    eeroPriceHint.textContent = eeroPricing
+      ? eeroPricing.source === "Price not provided"
+        ? "No price is available for this model and set size; it will be excluded from the known subtotal."
+        : `${eeroPricing.source}: ${money.format(eeroPricing.amountInCents / 100)} for this set.`
+      : "No price is available for this model and set size.";
+  }
 }
 
 for (const control of [
