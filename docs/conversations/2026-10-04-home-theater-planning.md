@@ -252,6 +252,16 @@ Clarified that the Dot Max budget example should start at two speakers and allow
 
 Set the planner defaults to Fire TV Stick 4K (2nd Generation), two Echo Dot Max speakers, and eero unchecked. The existing planner supports choosing Echo Studio instead, changing the quantity from two through five, selecting any listed Fire TV, and toggling an eero pack; totals recalculate from the price catalog. Kept the four-speaker screenshot budget as a fixed historical cart and added a link to customize it in the planner.
 
+## Dynamic budget comparison price display
+
+### User
+
+Reported that the dynamic Dot Max and Studio budget comparisons showed "Price not provided" for eero and Echo Sub although those amounts are maintained in `device-prices.json`.
+
+### Assistant
+
+Found that unchecked eero/Sub rows were assigned `hidden`, but `.cost-list li { display: flex; }` overrode the browser's default hidden styling. Added an explicit hidden-row display rule so unselected optional items no longer show misleading unavailable-price placeholders. Selected eero and Echo Sub amounts continue to be read from the JSON price catalog and included in the dynamic totals.
+
 ## Planner calculation verification
 
 ### User

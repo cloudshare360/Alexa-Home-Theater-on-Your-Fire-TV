@@ -16,6 +16,33 @@ const planTotalLabel = document.querySelector("#plan-total-label");
 const planTotal = document.querySelector("#plan-total");
 const planPriceNote = document.querySelector("#plan-price-note");
 const livePriceStatus = document.querySelector("#live-price-status");
+const budgetElements = Object.fromEntries([
+  "#budget-dot-total",
+  "#budget-dot-speaker-label",
+  "#budget-dot-speaker-total",
+  "#budget-dot-tv-label",
+  "#budget-dot-tv-price",
+  "#budget-dot-eero-row",
+  "#budget-dot-eero-label",
+  "#budget-dot-eero-price",
+  "#budget-dot-sub-row",
+  "#budget-dot-sub-price",
+  "#budget-studio-total",
+  "#budget-studio-speaker-label",
+  "#budget-studio-speaker-total",
+  "#budget-studio-tv-label",
+  "#budget-studio-tv-price",
+  "#budget-studio-eero-row",
+  "#budget-studio-eero-label",
+  "#budget-studio-eero-price",
+  "#budget-studio-sub-row",
+  "#budget-studio-sub-price",
+  "#budget-speaker-difference",
+  "#budget-difference-label",
+  "#budget-compare-count",
+  "#budget-dot-speaker-only",
+  "#budget-studio-speaker-only",
+].map((selector) => [selector, document.querySelector(selector)]));
 
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -369,6 +396,69 @@ function getPrice(productKey) {
     : { amountInCents: null, previousAmountInCents: null, source: "Price not provided" };
 }
 
+function renderBudgetComparisons() {
+  const fireTvOption = fireTvSelect.selectedOptions[0];
+  const fireTvPrice = getPrice(getProductKey(fireTvOption.value)).amountInCents;
+  const speakerCount = Number(speakerCountSelect.value);
+  const eeroEnabled = includeEeroCheckbox.checked;
+  const eeroName = eeroModelSelect.selectedOptions[0].textContent.split(" · ")[0];
+  const eeroCount = eeroCountSelect.value;
+  const eeroPrice = eeroEnabled
+    ? getPrice(getProductKey(eeroModelSelect.value, eeroCount)).amountInCents
+    : null;
+  const subEnabled = includeSubCheckbox.checked;
+  const subPrice = subEnabled
+    ? getPrice(getProductKey("sub")).amountInCents
+    : null;
+  const speakerTotals = {};
+
+  for (const [model, speakerName, productKey] of [
+    ["dot", "Echo Dot Max", "echo-dot-max"],
+    ["studio", "Echo Studio", "echo-studio-2025"],
+  ]) {
+    const unitPrice = getPrice(productKey).amountInCents;
+    const speakerTotal = unitPrice === null ? null : unitPrice * speakerCount;
+    const amounts = [speakerTotal, fireTvPrice];
+    if (eeroEnabled) amounts.push(eeroPrice);
+    if (subEnabled) amounts.push(subPrice);
+    const total = amounts.every((amount) => amount !== null)
+      ? amounts.reduce((sum, amount) => sum + amount, 0)
+      : null;
+    speakerTotals[model] = speakerTotal;
+
+    budgetElements[`#budget-${model}-speaker-label`].textContent =
+      `${speakerCount} × ${speakerName}`;
+    budgetElements[`#budget-${model}-speaker-total`].textContent =
+      speakerTotal === null ? "Price not provided" : money.format(speakerTotal / 100);
+    budgetElements[`#budget-${model}-tv-label`].textContent = fireTvOption.textContent;
+    budgetElements[`#budget-${model}-tv-price`].textContent =
+      fireTvPrice === null ? "Price not provided" : money.format(fireTvPrice / 100);
+    budgetElements[`#budget-${model}-eero-row`].hidden = !eeroEnabled;
+    budgetElements[`#budget-${model}-eero-label`].textContent =
+      `${eeroName} · ${eeroCount}-pack`;
+    budgetElements[`#budget-${model}-eero-price`].textContent =
+      eeroPrice === null ? "Price not provided" : money.format(eeroPrice / 100);
+    budgetElements[`#budget-${model}-sub-row`].hidden = !subEnabled;
+    budgetElements[`#budget-${model}-sub-price`].textContent =
+      subPrice === null ? "Price not provided" : money.format(subPrice / 100);
+    budgetElements[`#budget-${model}-total`].textContent =
+      total === null ? "Incomplete" : money.format(total / 100);
+  }
+
+  const difference = speakerTotals.studio === null || speakerTotals.dot === null
+    ? null
+    : speakerTotals.studio - speakerTotals.dot;
+  budgetElements["#budget-speaker-difference"].textContent =
+    difference === null ? "Unavailable" : money.format(Math.abs(difference) / 100);
+  budgetElements["#budget-difference-label"].textContent =
+    `speaker difference at ${speakerCount} units`;
+  budgetElements["#budget-compare-count"].textContent = String(speakerCount);
+  budgetElements["#budget-dot-speaker-only"].textContent =
+    speakerTotals.dot === null ? "Price not provided" : money.format(speakerTotals.dot / 100);
+  budgetElements["#budget-studio-speaker-only"].textContent =
+    speakerTotals.studio === null ? "Price not provided" : money.format(speakerTotals.studio / 100);
+}
+
 function updatePlan() {
   const fireTvOption = fireTvSelect.selectedOptions[0];
   const speakerModel = document.querySelector('input[name="speaker-model"]:checked');
@@ -459,6 +549,7 @@ function updatePlan() {
       ? "No price is available for this model and set size; it will be excluded from the known subtotal."
       : `${eeroPricing.source}: ${money.format(eeroPricing.amountInCents / 100)} for this set.`;
   }
+  renderBudgetComparisons();
 }
 
 for (const control of [

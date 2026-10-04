@@ -307,6 +307,7 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
 .budget-customize a:hover, .budget-customize a:focus-visible { color: var(--ink); }
 .cost-list { margin: 0; padding: 0; list-style: none; }
 .cost-list li { display: flex; justify-content: space-between; gap: 10px; padding: 9px 0; border-top: 1px solid #eeece7; font-size: 10px; }
+.cost-list li[hidden] { display: none; }
 .cost-list li span { color: #747f90; }
 .cost-list li b { white-space: nowrap; }
 .budget-upgrade { border-color: #e3bcaa; background: #fffaf7; }

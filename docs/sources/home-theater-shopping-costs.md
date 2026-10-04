@@ -21,6 +21,8 @@ Using the supplied October 4, 2026 catalog snapshot, a starter theater with one 
 
 These figures are arithmetic from user-supplied listing prices, not live offers or checkout quotes. Verify that the exact Fire TV/Echo models remain compatible before buying; some Fire TV devices support only two matching Echo speakers, while the supplied guide describes other supported configurations with more speakers.
 
+The site's configuration planner starts from a two-speaker Fire TV Stick and Echo Dot Max setup. Users can switch between Echo Dot Max and Echo Studio, choose any listed Fire TV, and set the matching Echo speaker quantity from two through five; the equipment estimate recalculates from the CSV-derived catalog. eero is optional and can be added as a selected pack. The Budget section compares Dot Max and Studio at the selected Fire TV, speaker count, optional eero pack, and optional Sub, recalculating both totals and the speaker-only difference. The supplied four-speaker cart amounts remain historical screenshot examples in these notes, not fixed totals in the interactive comparison.
+
 The planner starts with two Echo Dot Max speakers and the lowest-cost supplied Fire TV Stick. Users can switch between Echo Dot Max and Echo Studio, choose any listed Fire TV, and set the matching Echo speaker quantity from two through five; the equipment estimate recalculates from the CSV-derived catalog. eero is optional and can be added as a selected pack. The fixed four-speaker cart below remains unchanged as a historical screenshot example.
 
 ## Cart configuration A: four Echo Dot Max speakers

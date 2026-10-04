@@ -44,6 +44,7 @@ test("provides responsive viewport, tablet, and mobile layouts", () => {
   assert.match(stylesSource, /\.planner-result \{[^}]*background: #f8f6f1/);
   assert.match(stylesSource, /\.plan-breakdown li \{[^}]*font-size: 15px/);
   assert.match(stylesSource, /\.plan-breakdown li small \{[^}]*font-size: 12px/);
+  assert.match(stylesSource, /\.cost-list li\[hidden\] \{ display: none; \}/);
   assert.match(stylesSource, /\.plan-tv strong \{[^}]*font-size: 16px; font-weight: 700; text-align: right/);
 });
 
@@ -93,7 +94,7 @@ test("starts planner at two Dot Max speakers with selectable Studio, Fire TV, an
   assert.match(htmlSource, /<input id="include-eero" type="checkbox">/);
   assert.match(htmlSource, /<div class="eero-picks" id="eero-picks" hidden>/);
   assert.match(htmlSource, /id="plan-title">2 Echo Dot Max speakers/);
-  assert.match(htmlSource, /fixed cart snapshot,[\s\S]*?Echo Dot Max or Echo Studio,[\s\S]*?total updates/);
+  assert.match(htmlSource, /Updates with the Fire TV, speaker quantity, and optional eero\/Sub selections above/);
 });
 
 test("publishes illustrative two-to-five speaker layouts with an optional Echo Sub", () => {
@@ -137,6 +138,7 @@ function createPlanner({
       this.listeners = {};
       this.checked = false;
       this.disabled = false;
+      this.hidden = false;
     }
 
     addEventListener(event, listener) {
@@ -174,6 +176,31 @@ function createPlanner({
     "#plan-total": new Element(),
     "#plan-price-note": new Element(),
     "#live-price-status": new Element(),
+    "#budget-dot-total": new Element(),
+    "#budget-dot-speaker-label": new Element(),
+    "#budget-dot-speaker-total": new Element(),
+    "#budget-dot-tv-label": new Element(),
+    "#budget-dot-tv-price": new Element(),
+    "#budget-dot-eero-row": new Element(),
+    "#budget-dot-eero-label": new Element(),
+    "#budget-dot-eero-price": new Element(),
+    "#budget-dot-sub-row": new Element(),
+    "#budget-dot-sub-price": new Element(),
+    "#budget-studio-total": new Element(),
+    "#budget-studio-speaker-label": new Element(),
+    "#budget-studio-speaker-total": new Element(),
+    "#budget-studio-tv-label": new Element(),
+    "#budget-studio-tv-price": new Element(),
+    "#budget-studio-eero-row": new Element(),
+    "#budget-studio-eero-label": new Element(),
+    "#budget-studio-eero-price": new Element(),
+    "#budget-studio-sub-row": new Element(),
+    "#budget-studio-sub-price": new Element(),
+    "#budget-speaker-difference": new Element(),
+    "#budget-difference-label": new Element(),
+    "#budget-compare-count": new Element(),
+    "#budget-dot-speaker-only": new Element(),
+    "#budget-studio-speaker-only": new Element(),
   };
   const fireTvOptions = [
     ["cube", "Fire TV Cube (3rd Generation)"],
@@ -660,6 +687,95 @@ test("shows eero Pro 6E and Pro 7 pack prices in the budget section", () => {
   assert.match(budgetSection, /cart examples above use an eero Pro 6E 2 Pack/);
 });
 
+test("updates both budget comparisons from the selected planner configuration", async () => {
+  const { nodes, speakers, fireTvOptions } = createPlanner({ apiUrl: "" });
+  await new Promise(setImmediate);
+  nodes["#include-eero"].checked = false;
+  nodes["#include-sub"].checked = false;
+  nodes["#speaker-count"].listeners.change();
+  assert.match(nodes["#budget-dot-total"].textContent, /^\$\d+\.\d{2}$/);
+  assert.equal(nodes["#budget-dot-eero-row"].hidden, true);
+  assert.equal(nodes["#budget-dot-sub-row"].hidden, true);
+  const routerOptions = [
+    null,
+    ...["pro-6e", "pro-7"].flatMap((model) =>
+      ["1", "2", "3"].map((count) => ({ model, count })),
+    ),
+  ];
+
+  for (const fireTv of fireTvOptions) {
+    for (const speakerCount of ["2", "3", "4", "5"]) {
+      for (const router of routerOptions) {
+        for (const includeSub of [false, true]) {
+          nodes["#fire-tv-choice"].selectedOptions = [fireTv];
+          nodes["#speaker-count"].value = speakerCount;
+          nodes["#include-eero"].checked = router !== null;
+          nodes["#include-sub"].checked = includeSub;
+          nodes["#eero-model"].value = router?.model ?? "pro-6e";
+          nodes["#eero-count"].value = router?.count ?? "1";
+          nodes["#eero-model"].selectedOptions = [{
+            value: router?.model ?? "pro-6e",
+            textContent: router?.model === "pro-7" ? "eero Pro 7 · Wi-Fi 7" : "eero Pro 6E · Wi-Fi 6E",
+          }];
+          nodes["#eero-count"].selectedOptions = [{
+            value: router?.count ?? "1",
+            textContent: `${router?.count ?? "1"} Pack`,
+          }];
+          nodes["#speaker-count"].listeners.change();
+
+          const tvPrice = Math.round(devicePriceCatalog.items.find((item) =>
+            item.deviceType === "FireTV" && item.deviceName === fireTv.textContent).price * 100);
+          const routerProductName = router?.model === "pro-7" ? "eero Pro 7" : "eero Pro 6E";
+          const routerPrice = router
+            ? Math.round(devicePriceCatalog.items.find((item) =>
+              item.deviceName === routerProductName && item.quantity === Number(router.count)).price * 100)
+            : 0;
+          const subPrice = Math.round(devicePriceCatalog.items.find((item) =>
+            item.deviceName === "Echo Sub").price * 100);
+          const accessories = tvPrice +
+            routerPrice +
+            (includeSub ? subPrice : 0);
+          const dotSpeakers = Math.round(devicePriceCatalog.items.find((item) =>
+            item.deviceName === "Echo Dot Max").price * 100) * Number(speakerCount);
+          const studioSpeakers = Math.round(devicePriceCatalog.items.find((item) =>
+            item.deviceName === "Echo Studio (2025 release)").price * 100) * Number(speakerCount);
+
+          assert.equal(nodes["#budget-dot-speaker-label"].textContent, `${speakerCount} × Echo Dot Max`);
+          assert.equal(nodes["#budget-dot-speaker-total"].textContent, formatUSD(dotSpeakers));
+          assert.equal(nodes["#budget-studio-speaker-label"].textContent, `${speakerCount} × Echo Studio`);
+          assert.equal(nodes["#budget-studio-speaker-total"].textContent, formatUSD(studioSpeakers));
+          assert.equal(nodes["#budget-dot-tv-label"].textContent, fireTv.textContent);
+          assert.equal(nodes["#budget-dot-total"].textContent, formatUSD(accessories + dotSpeakers));
+          assert.equal(nodes["#budget-studio-total"].textContent, formatUSD(accessories + studioSpeakers));
+          assert.equal(nodes["#budget-dot-eero-row"].hidden, router === null);
+          assert.equal(nodes["#budget-studio-eero-row"].hidden, router === null);
+          if (router) {
+            const expectedRouterLabel = `${routerProductName} · ${router.count}-pack`;
+            assert.equal(nodes["#budget-dot-eero-label"].textContent, expectedRouterLabel);
+            assert.equal(nodes["#budget-studio-eero-label"].textContent, expectedRouterLabel);
+            assert.equal(nodes["#budget-dot-eero-price"].textContent, formatUSD(routerPrice));
+            assert.equal(nodes["#budget-studio-eero-price"].textContent, formatUSD(routerPrice));
+          }
+          assert.equal(nodes["#budget-dot-sub-row"].hidden, !includeSub);
+          assert.equal(nodes["#budget-studio-sub-row"].hidden, !includeSub);
+          assert.equal(nodes["#budget-speaker-difference"].textContent,
+            formatUSD(studioSpeakers - dotSpeakers));
+          assert.equal(nodes["#budget-compare-count"].textContent, speakerCount);
+        }
+      }
+    }
+  }
+
+  nodes["#speaker-count"].value = "2";
+  for (const speaker of speakers) {
+    for (const choice of speakers) choice.checked = choice === speaker;
+    nodes["#speaker-count"].listeners.change();
+    const speakerName = speaker.value === "studio" ? "Echo Studio" : "Echo Dot Max";
+    assert.equal(nodes[`#budget-${speaker.value === "studio" ? "studio" : "dot"}-speaker-label`].textContent,
+      `2 × ${speakerName}`);
+  }
+});
+
 test("loads product amounts from the CSV-derived JSON catalog", async () => {
   const { nodes, priceDisplayElements } = createPlanner({ apiUrl: "" });
   await new Promise(setImmediate);
@@ -745,6 +861,8 @@ test("shows unavailable prices and skips invalid catalog rows and display values
   assert.equal(nodes["#plan-total-label"].textContent, "Known subtotal");
   assert.equal(nodes["#plan-total"].textContent, "$259.99");
   assert.match(nodes["#plan-price-note"].textContent, /Prices not provided and excluded/);
+  assert.equal(nodes["#budget-dot-total"].textContent, "Incomplete");
+  assert.equal(nodes["#budget-dot-speaker-total"].textContent, "Price not provided");
   assert.equal(priceDisplayElements[9][1].textContent, "$129.99 each");
   assert.equal(priceDisplayElements[10][1].textContent, "");
   assert.equal(priceDisplayElements[12][1].textContent, "$129.99");
@@ -762,6 +880,15 @@ test("shows unavailable prices and skips invalid catalog rows and display values
   nodes["#speaker-count"].listeners.change();
   assert.match(nodes["#plan-title"].textContent, /^1 Echo Dot Max speaker$/);
   assert.equal(nodes["#plan-total"].textContent, "$0.00");
+  const missingSubCatalog = JSON.parse(JSON.stringify(devicePriceCatalog));
+  missingSubCatalog.items.find((item) => item.deviceName === "Echo Sub").price = null;
+  const missingSub = createPlanner({ apiUrl: "", priceCatalog: missingSubCatalog });
+  await new Promise(setImmediate);
+  missingSub.nodes["#include-sub"].checked = true;
+  missingSub.nodes["#include-sub"].listeners.change();
+  assert.equal(missingSub.nodes["#budget-dot-sub-row"].hidden, false);
+  assert.equal(missingSub.nodes["#budget-dot-sub-price"].textContent, "Price not provided");
+  assert.equal(missingSub.nodes["#budget-dot-total"].textContent, "Incomplete");
 });
 
 test("shows a live router offer when its static catalog row is missing", async () => {

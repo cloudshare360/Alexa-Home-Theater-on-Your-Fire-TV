@@ -463,36 +463,37 @@
 
           <div class="budget-grid">
             <article class="budget-card budget-entry">
-              <p class="card-kicker">Supplied cart example · four speakers</p>
+              <p class="card-kicker">Live comparison · Dot Max</p>
               <h3>Echo Dot Max</h3>
-              <p class="budget-total" data-config-total-key="dot-max-cart">$669.94</p>
-              <p class="budget-caption">Cart subtotal shown</p>
+              <p class="budget-total" id="budget-dot-total">$197.97</p>
+              <p class="budget-caption">Estimated total for the selections above</p>
               <ul class="cost-list">
-                <li><span>4 × Echo Dot Max</span><b data-product-price-key="echo-dot-max" data-price-quantity="4">$319.96</b></li>
-                <li><span>eero Pro 6E</span><b data-product-price-key="eero-pro-6e-2-pack">$259.99</b></li>
-                <li><span>Fire TV Cube</span><b data-product-price-key="fire-tv-cube-3rd-gen">$89.99</b></li>
+                <li><span id="budget-dot-speaker-label">2 × Echo Dot Max</span><b id="budget-dot-speaker-total">$159.98</b></li>
+                <li><span id="budget-dot-tv-label">Fire TV Stick 4K (2nd Generation)</span><b id="budget-dot-tv-price">$37.99</b></li>
+                <li id="budget-dot-eero-row" hidden><span id="budget-dot-eero-label">eero Pro 6E · 2-pack</span><b id="budget-dot-eero-price">$259.99</b></li>
+                <li id="budget-dot-sub-row" hidden><span>Echo Sub</span><b id="budget-dot-sub-price">$129.99</b></li>
               </ul>
-              <p class="budget-customize">This is a fixed cart snapshot, not a required starting quantity. <a href="#planner">Choose any Fire TV, Echo Dot Max or Echo Studio, adjust from 2 to 5 matching speakers, and optionally add an eero pack. The total updates with your choices.</a></p>
+              <p class="budget-customize">Updates with the Fire TV, speaker quantity, and optional eero/Sub selections above.</p>
             </article>
             <article class="budget-card budget-upgrade">
-              <p class="card-kicker">Configuration B · four speakers + sub</p>
+              <p class="card-kicker">Live comparison · Studio</p>
               <h3>Echo Studio</h3>
-              <p class="budget-total" data-config-total-key="studio-cart">$1,199.93</p>
-              <p class="budget-caption">Cart subtotal shown</p>
+              <p class="budget-total" id="budget-studio-total">$397.97</p>
+              <p class="budget-caption">Estimated total for the selections above</p>
               <ul class="cost-list">
-                <li><span>4 × Echo Studio</span><b data-product-price-key="echo-studio-2025" data-price-quantity="4">$719.96</b></li>
-                <li><span>Echo Sub</span><b data-product-price-key="echo-sub">$129.99</b></li>
-                <li><span>eero Pro 6E</span><b data-product-price-key="eero-pro-6e-2-pack">$259.99</b></li>
-                <li><span>Fire TV Cube</span><b data-product-price-key="fire-tv-cube-3rd-gen">$89.99</b></li>
+                <li><span id="budget-studio-speaker-label">2 × Echo Studio</span><b id="budget-studio-speaker-total">$359.98</b></li>
+                <li><span id="budget-studio-tv-label">Fire TV Stick 4K (2nd Generation)</span><b id="budget-studio-tv-price">$37.99</b></li>
+                <li id="budget-studio-eero-row" hidden><span id="budget-studio-eero-label">eero Pro 6E · 2-pack</span><b id="budget-studio-eero-price">$259.99</b></li>
+                <li id="budget-studio-sub-row" hidden><span>Echo Sub</span><b id="budget-studio-sub-price">$129.99</b></li>
               </ul>
             </article>
             <article class="budget-card budget-note">
               <span class="note-star" aria-hidden="true">✳</span>
               <p class="card-kicker">Compare like for like</p>
-              <h3><span data-config-difference="four-studio-speakers:four-dot-max-speakers">$400.00</span> more<br>for four Studios</h3>
-              <p>The cart comparison also adds an <span data-current-price-key="echo-sub">$129.99</span> Echo Sub to the Studio configuration. That’s why the two full cart totals differ by <span data-config-difference="studio-cart:dot-max-cart">$529.99</span>—not just the speaker price.</p>
+              <h3><span id="budget-speaker-difference">$200.00</span><br><span id="budget-difference-label">speaker difference at 2 units</span></h3>
+              <p>Both estimates use the same selected Fire TV and optional eero/Sub choices. Change the speaker count in the planner to compare a different size.</p>
               <div class="budget-divider"></div>
-              <p class="five-speaker"><b>Five speakers, speaker-only estimate</b><br>Dot Max: <span data-product-price-key="echo-dot-max" data-price-quantity="5">$399.95</span><br>Studio: <span data-product-price-key="echo-studio-2025" data-price-quantity="5">$899.95</span></p>
+              <p class="five-speaker"><b>Speaker-only estimate at <span id="budget-compare-count">2</span> speakers</b><br>Dot Max: <span id="budget-dot-speaker-only">$159.98</span><br>Studio: <span id="budget-studio-speaker-only">$359.98</span></p>
             </article>
           </div>
           <section class="budget-router-prices" aria-labelledby="budget-router-heading">
