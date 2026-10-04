@@ -3,3 +3,8 @@ Temp-Images/
 
 # Product-photo crops are local research assets and are not part of the public site.
 docs/sources/images/
+
+# Local environment files may contain credentials.
+.env
+.env.*
+!.env.example
