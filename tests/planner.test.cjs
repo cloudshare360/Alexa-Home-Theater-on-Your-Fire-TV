@@ -137,7 +137,7 @@ function createPlanner({
     },
   };
   vm.runInNewContext(plannerSource, context, { filename: "planner.js" });
-  return { nodes, storage };
+  return { nodes, speaker, storage };
 }
 
 const liveOffers = {
@@ -248,6 +248,29 @@ test("uses supplied eero pack prices in the matching planner configuration", asy
     assert.equal(planner.nodes["#plan-breakdown"].children[2].children[1].textContent, packPrice);
     assert.equal(planner.nodes["#plan-total"].textContent, total);
   }
+});
+
+test("recalculates the selected configuration when planner controls change", async () => {
+  const { nodes, speaker } = createPlanner({ apiUrl: "" });
+
+  const fireTvStick = nodes["#fire-tv-choice"].selectedOptions[0];
+  fireTvStick.value = "stick-4k";
+  fireTvStick.textContent = "Fire TV Stick 4K (2nd Generation)";
+  fireTvStick.dataset.price = "";
+  nodes["#fire-tv-choice"].listeners.change();
+  assert.equal(nodes["#plan-total-label"].textContent, "Known subtotal");
+  assert.equal(nodes["#plan-total"].textContent, "$579.95");
+  assert.match(nodes["#plan-price-note"].textContent, /Fire TV Stick 4K/);
+
+  speaker.value = "studio";
+  speaker.dataset.price = "179.99";
+  speaker.closest = () => ({
+    querySelector: () => ({ textContent: "Echo Studio (2025 release)" }),
+  });
+  nodes["#speaker-count"].value = "2";
+  nodes["#speaker-count"].listeners.change();
+  assert.equal(nodes["#plan-total"].textContent, "$619.97");
+  assert.match(nodes["#plan-title"].textContent, /2 Echo Studio/);
 });
 
 test("documents supplied eero specifications and pack prices on the site", () => {
