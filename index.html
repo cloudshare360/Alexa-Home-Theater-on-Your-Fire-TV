@@ -354,7 +354,8 @@
               <ul class="plan-breakdown" id="plan-breakdown"></ul>
               <div class="plan-total-row"><span id="plan-total-label">Estimated equipment subtotal</span><strong id="plan-total">$0.00</strong></div>
               <p class="plan-price-note" id="plan-price-note"></p>
-              <p class="planner-disclaimer">Price estimates use the supplied cart screenshots; they are not live prices and exclude tax and other items. Unavailable prices are omitted from the known subtotal. Verify exact Fire TV/Echo pairing with Amazon: supported speaker counts may vary by Fire TV model.</p>
+              <p class="live-price-status" id="live-price-status" role="status" aria-live="polite">Live pricing is not connected. Supplied cart examples are shown where available.</p>
+              <p class="planner-disclaimer">Amazon offer prices are estimates, not checkout quotes, and exclude tax. If live pricing is unavailable, supplied cart-example prices remain identified; prices without either source are omitted. Verify exact Fire TV/Echo pairing with Amazon: supported speaker counts may vary by Fire TV model.</p>
               <a class="button button-light" href="https://www.amazon.com/gp/help/customer/display.html?nodeId=TWcIor5YmepcPzYSah" target="_blank" rel="noopener">Check device compatibility <span aria-hidden="true">↗</span></a>
             </aside>
           </div>
@@ -455,6 +456,7 @@
         </div>
       </div>
     </footer>
+    <script src="pricing-config.js" defer></script>
     <script src="planner.js" defer></script>
   </body>
   </html>

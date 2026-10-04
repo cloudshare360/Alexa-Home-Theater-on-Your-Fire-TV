@@ -25,7 +25,11 @@ The workflow at `.github/workflows/pages.yml` deploys the site when changes are 
 4. Open the **Actions** tab and check the **Deploy GitHub Pages** workflow.
 5. After it succeeds, open the Pages URL shown in the workflow deployment.
 
-The deployment workflow deliberately publishes only `index.html`, `styles.css`, and `planner.js`. It does not publish the `Temp-Images` cart screenshots, the conversation/source documents, or product-photo crops.
+The deployment workflow publishes `index.html`, `styles.css`, `planner.js`, and `pricing-config.js`. It does not publish the `Temp-Images` cart screenshots, the conversation/source documents, or product-photo crops.
+
+### Live price endpoint
+
+The planner can read offers from a server-side endpoint, but the endpoint is not configured by default. After deploying a compliant backend, set its public HTTPS URL as `apiUrl` in `pricing-config.js`. The browser never stores Creators API credentials. If a refresh fails, a previously fetched offer is used only while it is less than one hour old; otherwise, the planner shows the supplied cart examples or an unavailable-price message.
 
 ## Preview locally
 
@@ -41,4 +45,4 @@ Then open <http://localhost:8000>.
 
 The device details and setup instructions are based on supplied comparison imagery and pasted excerpts from Amazon and WIRED. Prices are examples from cart screenshots, not current offers. Compatibility, app steps, specifications, and prices can change; check manufacturer sources before buying or setting up devices.
 
-Detailed working notes remain under [`docs/sources/`](docs/sources/), including [Alexa Home Theater setup](docs/sources/alexa-home-theater-amazon-help.md), [eero Built-in](docs/sources/eero-built-in-echo-speakers.md), [Echo Studio Wi-Fi and smart-home capabilities](docs/sources/echo-studio-wifi-smart-home.md), and [shopping costs](docs/sources/home-theater-shopping-costs.md).
+Detailed working notes remain under [`docs/sources/`](docs/sources/), including [Alexa Home Theater setup](docs/sources/alexa-home-theater-amazon-help.md), [eero Built-in](docs/sources/eero-built-in-echo-speakers.md), [Echo Studio Wi-Fi and smart-home capabilities](docs/sources/echo-studio-wifi-smart-home.md), [shopping costs](docs/sources/home-theater-shopping-costs.md), and the proposed [Amazon live-pricing architecture](docs/sources/amazon-live-pricing-architecture.md).

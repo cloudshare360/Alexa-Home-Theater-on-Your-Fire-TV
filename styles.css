@@ -223,11 +223,14 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
 .plan-tv { margin-bottom: 22px; color: #b6c1cd; font-size: 10px; }
 .plan-breakdown { margin: 0; padding: 0; list-style: none; }
 .plan-breakdown li { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-top: 1px solid rgb(255 255 255 / 13%); color: #c3ccd6; font-size: 10px; }
+.plan-breakdown li > span { display: flex; flex-direction: column; }
+.plan-breakdown li small { color: #9eacbc; font-size: 8px; }
 .plan-breakdown li b { color: white; text-align: right; }
 .plan-total-row { display: flex; justify-content: space-between; gap: 10px; margin-top: auto; padding-top: 17px; border-top: 1px solid rgb(255 255 255 / 22%); }
 .plan-total-row span { color: #bec8d3; font-size: 10px; }
 .plan-total-row strong { color: #fff; font-family: var(--font-display); font-size: 25px; letter-spacing: -.04em; }
 .plan-price-note { margin: 10px 0 0; color: #f2a27b; font-size: 9px; line-height: 1.6; }
+.live-price-status { margin: 10px 0 0; color: #bec8d3; font-size: 9px; line-height: 1.6; }
 .planner-disclaimer { margin: 15px 0 13px; color: #9eacbc; font-size: 9px; line-height: 1.7; }
 .planner-result .button { align-self: flex-start; }
 .eero-choice { margin: 0; padding: 17px 0; border: 0; border-bottom: 1px solid #ece9e3; }
@@ -313,6 +316,10 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
 .footer-meta .copyright { margin: 0; color: #77869a; }
 
 @media (max-width: 900px) {
+  .site-header { flex-wrap: wrap; gap: 10px; padding-block: 12px; }
+  .main-nav { width: 100%; gap: clamp(16px, 2.5vw, 36px); overflow-x: auto; padding: 4px 0; scrollbar-width: none; }
+  .main-nav::-webkit-scrollbar { display: none; }
+  .main-nav a { flex: 0 0 auto; }
   .hero { min-height: 500px; gap: 15px; }
   .hero-art { transform: scale(.88); }
   .speaker-card { grid-template-columns: 1fr; }

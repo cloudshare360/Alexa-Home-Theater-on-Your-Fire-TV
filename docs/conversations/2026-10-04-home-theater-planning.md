@@ -170,6 +170,40 @@ Transcribed the device and cart price details into the [home-theater shopping-co
 
 Done.
 
+## Pricing API follow-up
+
+### User
+
+If the official pricing API does not work, use web crawling to fetch the price at runtime.
+
+### Assistant
+
+Explained that the site should not scrape Amazon pages as a fallback. Asked which alternative to use when Creators API refresh fails.
+
+### User
+
+At runtime.
+
+### Assistant
+
+Clarified that runtime fallback can use a previously successful offer, clearly marked with its retrieval time and limited to the documented one-hour offers cache window. Asked the user to choose the fallback.
+
+### User
+
+Selected the last successfully fetched API offer with a retrieval time and stale/cached status.
+
+### Assistant
+
+Asked which backend host to target, since GitHub Pages is static.
+
+### User
+
+Selected front-end integration only for now.
+
+### Assistant
+
+Added configurable browser-side price loading, per-product source labels, and a one-hour local fallback. The integration remains inactive until a server-side endpoint is deployed and its HTTPS URL is set in `pricing-config.js`. The endpoint must return verified, approved product offers; credentials remain server-side.
+
 ### User
 
 I am uploading all the images with different price combination.
