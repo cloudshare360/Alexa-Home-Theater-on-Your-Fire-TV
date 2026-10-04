@@ -567,6 +567,23 @@ test("documents supplied eero specifications and pack prices on the site", () =>
   assert.doesNotMatch(htmlSource, /Other prices have not been provided/);
 });
 
+test("shows eero Pro 6E and Pro 7 pack prices in the budget section", () => {
+  const budgetSection = htmlSource.split('<section class="budget-section" id="budget">')[1]
+    .split("</section>")[0];
+  assert.match(budgetSection, /eero Pro 6E &amp; eero Pro 7/);
+  for (const model of ["6e", "7"]) {
+    for (const pack of [1, 2, 3]) {
+      const key = `eero-pro-${model}-${pack}-pack`;
+      assert.match(budgetSection, new RegExp(`data-current-price-key="${key}"`));
+      assert.ok(devicePriceCatalog.items.some((item) => item.deviceType === "Router" &&
+        item.deviceName === `eero Pro ${model.toUpperCase()}` &&
+        item.quantity === pack && item.quantityUnit === "Pack"),
+      `Missing CSV-derived router price for ${key}`);
+    }
+  }
+  assert.match(budgetSection, /cart examples above use an eero Pro 6E 2 Pack/);
+});
+
 test("loads product amounts from the CSV-derived JSON catalog", async () => {
   const { nodes, priceDisplayElements } = createPlanner({ apiUrl: "" });
   await new Promise(setImmediate);

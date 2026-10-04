@@ -266,6 +266,14 @@ Matched the summary Fire TV amount's font size, weight, and right alignment to i
 
 ### User
 
+Asked to show eero Pro 7 and eero Pro 6E in the budget section.
+
+### Assistant
+
+Added a responsive comparison table in the budget section showing both eero models and their supplied 1 Pack, 2 Pack, and 3 Pack prices, with previous prices where supplied. Clarified that the pictured cart budgets continue to use the Pro 6E 2 Pack.
+
+### User
+
 All the images are pasted as part of Temp-Images.
 
 ### Assistant
