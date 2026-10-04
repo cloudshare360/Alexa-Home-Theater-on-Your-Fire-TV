@@ -6,16 +6,16 @@
       "source": "Supplied cart example"
     },
     "fire-tv-stick-4k-max-2nd-gen": {
-      "amount": null,
-      "source": "Price not provided"
+      "amount": 44.99,
+      "source": "Supplied price"
     },
     "fire-tv-stick-4k-2nd-gen": {
-      "amount": null,
-      "source": "Price not provided"
+      "amount": 37.99,
+      "source": "Supplied price"
     },
     "fire-tv-stick-4k-plus": {
-      "amount": null,
-      "source": "Price not provided"
+      "amount": 37.99,
+      "source": "Supplied price"
     },
     "echo-dot-max": {
       "amount": 79.99,

@@ -174,6 +174,18 @@ Asked to keep prices static in a JSON file and have the planner read from it.
 
 Moved product prices, prior eero pack prices, and example-cart component mappings to `prices.json`. The planner fetches the catalog on page load, uses it for selection totals and marked-up product/budget prices, and continues to prefer configured live offers when available. The Pages workflow publishes the JSON file.
 
+### User
+
+Provided Fire TV prices: Cube (3rd Generation) $89.99; Stick 4K Max (2nd Generation) $44.99; Stick 4K (2nd Generation) $37.99; Stick 4K Plus $37.99.
+
+### User
+
+Provided speaker prices: Echo Studio (2025 release) $179.99; Echo Dot Max $79.99; Echo Sub $129.99.
+
+### Assistant
+
+Added the Fire TV Stick prices to the static JSON catalog and updated the planner regression test to verify exact totals for the selected Fire TV and speaker configuration.
+
 ### Assistant
 
 Recorded that price-combination images are forthcoming. The cost comparison will be updated after the images are provided and their contents can be read.

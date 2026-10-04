@@ -285,20 +285,18 @@ test("recalculates the selected configuration when planner controls change", asy
   const fireTvStick = nodes["#fire-tv-choice"].selectedOptions[0];
   fireTvStick.value = "stick-4k";
   fireTvStick.textContent = "Fire TV Stick 4K (2nd Generation)";
-  fireTvStick.dataset.price = "";
   nodes["#fire-tv-choice"].listeners.change();
-  assert.equal(nodes["#plan-total-label"].textContent, "Known subtotal");
-  assert.equal(nodes["#plan-total"].textContent, "$579.95");
-  assert.match(nodes["#plan-price-note"].textContent, /Fire TV Stick 4K/);
+  assert.equal(nodes["#plan-total-label"].textContent, "Estimated equipment subtotal");
+  assert.equal(nodes["#plan-total"].textContent, "$617.94");
+  assert.equal(nodes["#plan-breakdown"].children[1].children[1].textContent, "$37.99");
 
   speaker.value = "studio";
-  speaker.dataset.price = "179.99";
   speaker.closest = () => ({
     querySelector: () => ({ textContent: "Echo Studio (2025 release)" }),
   });
   nodes["#speaker-count"].value = "2";
   nodes["#speaker-count"].listeners.change();
-  assert.equal(nodes["#plan-total"].textContent, "$619.97");
+  assert.equal(nodes["#plan-total"].textContent, "$657.96");
   assert.match(nodes["#plan-title"].textContent, /2 Echo Studio/);
 });
 
@@ -331,4 +329,11 @@ test("loads the static product price catalog from the JSON file", async () => {
   assert.equal(priceDisplayElements[4][1].textContent, "$669.94");
   assert.equal(priceDisplayElements[5][1].textContent, "$400.00");
   assert.equal(priceDisplayElements[6][1].textContent, "$529.99");
+});
+
+test("includes supplied prices for each Fire TV device", () => {
+  assert.equal(staticPrices.prices["fire-tv-cube-3rd-gen"].amount, 89.99);
+  assert.equal(staticPrices.prices["fire-tv-stick-4k-max-2nd-gen"].amount, 44.99);
+  assert.equal(staticPrices.prices["fire-tv-stick-4k-2nd-gen"].amount, 37.99);
+  assert.equal(staticPrices.prices["fire-tv-stick-4k-plus"].amount, 37.99);
 });

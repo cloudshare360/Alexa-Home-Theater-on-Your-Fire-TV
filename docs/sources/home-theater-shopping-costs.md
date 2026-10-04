@@ -94,3 +94,28 @@ The user supplied the following Amazon listing details on October 4, 2026:
 - 3-pack: $374.99, previously $499.99.
 
 The planner uses the matching supplied listing price for the selected pack size. These are examples from the supplied listing and are not live quotes.
+
+## Fire TV device prices
+
+The user supplied these Fire TV prices on October 4, 2026:
+
+| Device | Price |
+|---|---:|
+| Fire TV Cube (3rd Generation) | $89.99 |
+| Fire TV Stick 4K Max (2nd Generation) | $44.99 |
+| Fire TV Stick 4K (2nd Generation) | $37.99 |
+| Fire TV Stick 4K Plus | $37.99 |
+
+These prices are maintained in [the static price catalog](../../prices.json) and used when calculating the planner subtotal.
+
+## Speaker and subwoofer prices
+
+The user supplied these prices on October 4, 2026:
+
+| Device | Price |
+|---|---:|
+| Echo Studio (2025 release) | $179.99 |
+| Echo Dot Max | $79.99 |
+| Echo Sub | $129.99 |
+
+These are cart-example prices, not live offers.
