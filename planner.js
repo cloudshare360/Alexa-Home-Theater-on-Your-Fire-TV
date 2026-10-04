@@ -34,12 +34,12 @@ const productKeys = new Set([
   "echo-dot-max",
   "echo-studio-2025",
   "echo-sub",
-  "eero-pro-6e-1-unit",
-  "eero-pro-6e-2-unit",
-  "eero-pro-6e-3-unit",
-  "eero-pro-7-1-unit",
-  "eero-pro-7-2-unit",
-  "eero-pro-7-3-unit",
+  "eero-pro-6e-1-pack",
+  "eero-pro-6e-2-pack",
+  "eero-pro-6e-3-pack",
+  "eero-pro-7-1-pack",
+  "eero-pro-7-2-pack",
+  "eero-pro-7-3-pack",
 ]);
 let livePrices = new Map();
 
@@ -157,7 +157,7 @@ function getProductKey(value, eeroCount) {
   if (value === "studio") return "echo-studio-2025";
   if (value === "sub") return "echo-sub";
   if (value === "pro-6e" || value === "pro-7") {
-    return `eero-${value}-${eeroCount}-unit`;
+    return `eero-${value}-${eeroCount}-pack`;
   }
   return null;
 }
@@ -384,7 +384,7 @@ function updatePlan() {
     const eeroModelName = eeroModelSelect.selectedOptions[0].textContent.split(" · ")[0];
     const eeroCount = Number(eeroCountSelect.value);
     items.push([
-      `${eeroModelName} · ${eeroCount}-unit set`,
+      `${eeroModelName} · ${eeroCount}-pack`,
       eeroPricing.amountInCents,
       eeroPricing.source,
     ]);

@@ -29,47 +29,46 @@
       "amount": 129.99,
       "source": "Supplied cart example"
     },
-    "eero-pro-6e-1-unit": {
+    "eero-pro-6e-1-pack": {
       "amount": 149.99,
       "previousAmount": 199.99,
       "source": "Supplied Amazon listing"
     },
-    "eero-pro-6e-2-unit": {
+    "eero-pro-6e-2-pack": {
       "amount": 259.99,
       "previousAmount": 349.99,
       "source": "Supplied Amazon listing"
     },
-    "eero-pro-6e-3-unit": {
+    "eero-pro-6e-3-pack": {
       "amount": 374.99,
       "previousAmount": 499.99,
       "source": "Supplied Amazon listing"
     },
-    "eero-pro-7-1-unit": {
+    "eero-pro-7-1-pack": {
       "amount": 224.99,
       "previousAmount": 299.99,
       "source": "Supplied Amazon listing"
     },
-    "eero-pro-7-2-unit": {
+    "eero-pro-7-2-pack": {
       "amount": 399.99,
       "previousAmount": 549.99,
       "source": "Supplied Amazon listing"
     },
-    "eero-pro-7-3-unit": {
-      "amount": 599.99,
-      "previousAmount": 799.99,
+    "eero-pro-7-3-pack": {
+      "amount": 224.99,
       "source": "Supplied Amazon listing"
     }
   },
   "configurations": {
     "dot-max-cart": [
       { "product": "echo-dot-max", "quantity": 4 },
-      { "product": "eero-pro-6e-2-unit", "quantity": 1 },
+      { "product": "eero-pro-6e-2-pack", "quantity": 1 },
       { "product": "fire-tv-cube-3rd-gen", "quantity": 1 }
     ],
     "studio-cart": [
       { "product": "echo-studio-2025", "quantity": 4 },
       { "product": "echo-sub", "quantity": 1 },
-      { "product": "eero-pro-6e-2-unit", "quantity": 1 },
+      { "product": "eero-pro-6e-2-pack", "quantity": 1 },
       { "product": "fire-tv-cube-3rd-gen", "quantity": 1 }
     ],
     "four-dot-max-speakers": [

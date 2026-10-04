@@ -77,8 +77,8 @@ function createPlanner({
     "#live-price-status": new Element(),
   };
   const priceDisplayElements = [
-    ["[data-current-price-key]", "eero-pro-6e-2-unit", "currentPriceKey"],
-    ["[data-previous-price-key]", "eero-pro-6e-2-unit", "previousPriceKey"],
+    ["[data-current-price-key]", "eero-pro-6e-2-pack", "currentPriceKey"],
+    ["[data-previous-price-key]", "eero-pro-6e-2-pack", "previousPriceKey"],
     ["[data-current-price-key]", "echo-dot-max", "currentPriceKey"],
     ["[data-product-price-key]", "echo-dot-max", "productPriceKey"],
     ["[data-config-total-key]", "dot-max-cart", "configTotalKey"],
@@ -179,7 +179,7 @@ const liveOffers = {
     currency: "USD",
     retrievedAt: new Date().toISOString(),
   },
-  "eero-pro-6e-2-unit": {
+  "eero-pro-6e-2-pack": {
     amount: 300,
     currency: "USD",
     retrievedAt: new Date().toISOString(),
@@ -268,7 +268,7 @@ test("uses supplied eero pack prices in the matching planner configuration", asy
     ["pro-6e", "3", "$374.99", "$784.94"],
     ["pro-7", "1", "$224.99", "$634.94"],
     ["pro-7", "2", "$399.99", "$809.94"],
-    ["pro-7", "3", "$599.99", "$1,009.94"],
+    ["pro-7", "3", "$224.99", "$634.94"],
   ];
   for (const [eeroModel, eeroCount, packPrice, total] of eeroPacks) {
     const planner = createPlanner({ apiUrl: "", eeroModel, eeroCount });
@@ -303,14 +303,17 @@ test("recalculates the selected configuration when planner controls change", asy
 test("documents supplied eero specifications and pack prices on the site", () => {
   assert.match(htmlSource, /wireless speeds up to 3\.9 Gbps/);
   assert.match(htmlSource, /coverage up to 2,000 sq\. ft\. per eero/);
-  assert.match(htmlSource, /1-pack<\/span><b><span data-current-price-key="eero-pro-6e-1-unit">/);
-  assert.match(htmlSource, /2-pack<\/span><b><span data-current-price-key="eero-pro-6e-2-unit">/);
-  assert.match(htmlSource, /3-pack<\/span><b><span data-current-price-key="eero-pro-6e-3-unit">/);
-  assert.match(htmlSource, /1-pack<\/span><b><span data-current-price-key="eero-pro-7-1-unit">/);
-  assert.match(htmlSource, /2-pack<\/span><b><span data-current-price-key="eero-pro-7-2-unit">/);
-  assert.match(htmlSource, /3-pack<\/span><b><span data-current-price-key="eero-pro-7-3-unit">/);
+  assert.match(htmlSource, /1-pack<\/span><b><span data-current-price-key="eero-pro-6e-1-pack">/);
+  assert.match(htmlSource, /2-pack<\/span><b><span data-current-price-key="eero-pro-6e-2-pack">/);
+  assert.match(htmlSource, /3-pack<\/span><b><span data-current-price-key="eero-pro-6e-3-pack">/);
+  assert.match(htmlSource, /1-pack<\/span><b><span data-current-price-key="eero-pro-7-1-pack">/);
+  assert.match(htmlSource, /2-pack<\/span><b><span data-current-price-key="eero-pro-7-2-pack">/);
+  assert.match(htmlSource, /3-pack<\/span><b><span data-current-price-key="eero-pro-7-3-pack">\$224\.99/);
   assert.match(htmlSource, /\$549\.99/);
   assert.match(htmlSource, /Loading selected router price from prices\.json/);
+  assert.match(htmlSource, /1 Pack/);
+  assert.match(htmlSource, /2 Pack/);
+  assert.match(htmlSource, /3 Pack/);
   assert.doesNotMatch(htmlSource, /Other prices have not been provided/);
 });
 

@@ -13,7 +13,7 @@ The site is a lightweight, static HTML/CSS/JavaScript website designed for GitHu
 - eero Built-in coverage and setup notes
 - Zigbee, Matter, and Thread smart-home overview
 - Cart-based price examples
-- An interactive configuration planner for Fire TV, Echo model and quantity, optional Echo Sub, and eero Pro 6E/Pro 7 with one-, two-, or three-unit choices
+- An interactive configuration planner for Fire TV, Echo model and quantity, optional Echo Sub, and eero Pro 6E/Pro 7 with 1 Pack, 2 Pack, or 3 Pack bundles
 
 ## Publish with GitHub Pages
 

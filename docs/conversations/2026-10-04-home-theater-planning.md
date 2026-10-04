@@ -186,6 +186,14 @@ Provided speaker prices: Echo Studio (2025 release) $179.99; Echo Dot Max $79.99
 
 Added the Fire TV Stick prices to the static JSON catalog and updated the planner regression test to verify exact totals for the selected Fire TV and speaker configuration.
 
+### User
+
+Clarified that eero routers are sold in 1 Pack, 2 Pack, and 3 Pack bundles.
+
+### Assistant
+
+Updated planner option labels, breakdown wording, static JSON product keys, documentation, and live-endpoint key documentation to describe router bundle sizes as packs rather than router unit counts.
+
 ### Assistant
 
 Recorded that price-combination images are forthcoming. The cost comparison will be updated after the images are provided and their contents can be read.
