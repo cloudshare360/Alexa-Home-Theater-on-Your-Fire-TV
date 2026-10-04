@@ -4,6 +4,8 @@ A beginner-friendly guide to building an Alexa Home Theater over time, improving
 
 ## Website
 
+[Visit the published website →](https://cloudshare360.github.io/Alexa-Home-Theater-on-Your-Fire-TV/)
+
 The site is a lightweight, static HTML/CSS website designed for GitHub Pages. It brings together:
 
 - Echo Dot Max and Echo Studio comparisons
