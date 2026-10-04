@@ -15,6 +15,14 @@ const devicePriceCatalog = JSON.parse(
   fs.readFileSync(path.join(__dirname, "..", "device-prices.json"), "utf8"),
 );
 const htmlSource = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+const homeTheaterSource = fs.readFileSync(
+  path.join(__dirname, "..", "home-theater.html"),
+  "utf8",
+);
+const pagesWorkflowSource = fs.readFileSync(
+  path.join(__dirname, "..", ".github", "workflows", "pages.yml"),
+  "utf8",
+);
 const stylesSource = fs.readFileSync(path.join(__dirname, "..", "styles.css"), "utf8");
 const formatUSD = (amountInCents) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" })
@@ -37,6 +45,23 @@ test("provides responsive viewport, tablet, and mobile layouts", () => {
   assert.match(stylesSource, /\.plan-breakdown li \{[^}]*font-size: 15px/);
   assert.match(stylesSource, /\.plan-breakdown li small \{[^}]*font-size: 12px/);
   assert.match(stylesSource, /\.plan-tv strong \{[^}]*font-size: 16px; font-weight: 700; text-align: right/);
+});
+
+test("publishes illustrative two-to-five speaker layouts with an optional Echo Sub", () => {
+  assert.match(htmlSource, /href="home-theater\.html"/);
+  assert.match(homeTheaterSource, /<meta name="viewport" content="width=device-width, initial-scale=1">/);
+  assert.match(pagesWorkflowSource, /cp index\.html home-theater\.html/);
+  for (const count of [2, 3, 4, 5]) {
+    const card = homeTheaterSource.match(
+      new RegExp(`<article class="layout-card" data-speaker-count="${count}">([\\s\\S]*?)</article>`),
+    );
+    assert.ok(card, `Expected a ${count}-speaker layout card`);
+    assert.match(card[1], new RegExp(`<h3>${count} speakers</h3>`));
+    assert.equal((card[1].match(/class="speaker-marker"/g) ?? []).length, count);
+    assert.equal((card[1].match(/class="sub-marker"/g) ?? []).length, 1);
+  }
+  assert.match(homeTheaterSource, /Mixed Echo speaker[\s\S]*?models are not supported/i);
+  assert.match(homeTheaterSource, /not guaranteed compatibility/i);
 });
 
 function createPlanner({

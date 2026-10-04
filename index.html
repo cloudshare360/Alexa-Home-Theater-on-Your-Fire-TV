@@ -22,6 +22,7 @@
         <a class="nav-github" href="https://github.com/cloudshare360/Alexa-Home-Theater-on-Your-Fire-TV" target="_blank" rel="noopener">GitHub repository <span aria-hidden="true">↗</span></a>
         <a href="#choose">Choose your speakers</a>
         <a href="#setup">Set up theater</a>
+        <a href="home-theater.html">Speaker layouts</a>
         <a href="#wifi">Wi-Fi & smart home</a>
         <a href="#planner">Build your own configuration</a>
         <a href="#budget">Budget</a>
@@ -40,7 +41,7 @@
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#choose">Explore your options <span aria-hidden="true">↓</span></a>
-            <a class="text-link" href="#budget">See the example budgets <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="home-theater.html">See speaker layouts <span aria-hidden="true">→</span></a>
           </div>
           <a class="button button-repo" href="https://github.com/cloudshare360/Alexa-Home-Theater-on-Your-Fire-TV" target="_blank" rel="noopener">
             <span class="repo-mark" aria-hidden="true">⌘</span>
@@ -205,7 +206,7 @@
             <p>Amazon’s supplied product wording says a compatible Echo Studio with eero Built-in can add up to 1,000 sq. ft. of coverage to an existing eero network.</p>
             <div class="metric-row"><div><strong>Up to 1,000</strong><span>sq. ft. advertised</span></div><div><strong>eero only</strong><span>not a universal extender</span></div></div>
               <p class="fine-print">That advertised Echo extension is separate from choosing the eero router system itself. An eero mesh kit uses dedicated routers/nodes; Echo eero Built-in support depends on the Echo model and current compatibility.</p>
-              <p class="fine-print">Coverage varies. Not every Echo is a mesh node. Verify support for the exact model, eero system, software, and region. The supplied WIRED excerpt describes 5-GHz-only operation, speeds up to 100 Mbps, up to 10 devices, and recommends no more than four Echo extenders.</p>
+              <p class="fine-print">Coverage varies. Not every Echo is a mesh node. Verify support for the exact model, eero system, software, and region. For Echo Dot Max specifically, do not assume eero Built-in support until it appears in eero’s current eligible-device list. Place a compatible extender where it still gets a useful eero signal—not deep inside the dead zone. The supplied WIRED excerpt describes 5-GHz-only operation, speeds up to 100 Mbps, up to 10 devices, and recommends no more than four Echo extenders.</p>
             <details class="compat-details">
               <summary>Compatibility details from the supplied article excerpt</summary>
               <p>The excerpt lists eero gateways including eero Pro 6E, eero 6+, eero Pro 6, eero 6, eero Pro, and eero, plus Echo Dot and Echo (4th and 5th generation variants). It says eero Built-in was available in the US and Canada and cites eero software 6.12.1 or later at the time of that article. This may not be the current support list; the project’s separate Amazon note names Echo Studio, so verify current support in eero documentation or the app.</p>
@@ -220,7 +221,7 @@
               <li><span class="protocol-badge">M</span><div><b>Matter</b><small>Compatible Matter-enabled devices</small></div></li>
               <li><span class="protocol-badge">T</span><div><b>Thread</b><small>Thread Border Router function for compatible Thread devices</small></div></li>
             </ul>
-            <p class="fine-print">Protocol support does not guarantee every feature works with every product. Some devices may still need another hub or their own app.</p>
+            <p class="fine-print">These protocol notes apply to the compatible Echo Studio described in the supplied project notes. Do not assume Echo Dot Max has the same hub protocols. Support for each protocol does not guarantee every feature works with every product; check the model’s current specifications and accessory requirements.</p>
           </article>
         </div>
 
@@ -270,6 +271,23 @@
             <li>Enable <b>eero Built-in</b> and select supported speakers.</li>
           </ol>
         </div>
+        <div class="wifi-howto climate-howto">
+          <div>
+            <p class="eyebrow">Comfort / plan room by room</p>
+            <h3>Smart sensors can inform comfort; they do not create HVAC zones.</h3>
+            <p>If an Echo model exposes a temperature sensor in the Alexa app, that reading may be usable in supported routines. A compatible smart thermostat can then respond to supported Alexa controls, but the Echo is not itself a thermostat and does not operate heating or cooling equipment.</p>
+          </div>
+          <ol>
+            <li><b>Check your HVAC first:</b> find out whether the home already has independently controlled zones.</li>
+            <li><b>Match devices carefully:</b> confirm thermostat, room-sensor, Echo model, and Alexa compatibility before buying.</li>
+            <li><b>Know the limit:</b> separate room control usually needs compatible HVAC zoning equipment and controls; a sensor or extra Echo alone cannot make one-zone HVAC heat or cool rooms independently.</li>
+            <li><b>Set realistic expectations:</b> schedules and zoning may reduce energy use in the right home, but savings depend on the system, settings, weather, and occupancy—not guaranteed.</li>
+          </ol>
+        </div>
+        <p class="editor-note">
+          Avoid trying to create HVAC zones by closing supply vents. Ask a qualified HVAC professional whether your system supports zoning and which thermostats and room sensors it can use. For general smart-thermostat guidance, see
+          <a href="https://www.energystar.gov/products/smart_thermostats" target="_blank" rel="noopener">ENERGY STAR’s smart thermostat resources</a>.
+        </p>
         <p class="editor-note">
           Existing Sonos speakers and Echo Dots do not automatically join an Alexa
           Home Theater speaker group. Set up audio and smart-home integrations

@@ -39,7 +39,7 @@ jobs:
       - name: Prepare the public site
         run: |
           mkdir -p _site
-          cp index.html styles.css planner.js pricing-config.js prices.json device-prices.json _site/
+          cp index.html home-theater.html styles.css planner.js pricing-config.js prices.json device-prices.json _site/
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

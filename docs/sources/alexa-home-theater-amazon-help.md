@@ -97,6 +97,12 @@ With a compatible TV and HDMI ARC connection, Alexa Home Theater can also play T
 - The supplied instructions also recommend setting the TV audio output to its TV speakers, raising the volume, and checking that sound comes from them.
 - If calibration still fails, restart the Echo speakers and Fire TV, then create the home theater again.
 
+## Illustrative living-room layouts
+
+The site's [speaker layout page](../../home-theater.html) visualizes two, three, four, and five Echo speakers around a TV/listening position, with one optional Echo Sub near the TV. The drawings are conceptual placement examples, not a speaker-channel map, a substitute for the Fire TV calibration prompts, or a promise that every Fire TV supports each count.
+
+The supplied Amazon setup information says configurations can include up to five Echo speakers and one optional Sub, but some Fire TV devices support only two speakers of the same model plus a Sub. It also says mixed Echo speaker models are not supported. Verify the exact Fire TV/Echo pairing against Amazon's current [compatibility list](https://www.amazon.com/gp/help/customer/display.html?nodeId=TWcIor5YmepcPzYSah) before purchase or setup.
+
 ### Audio quality is poor
 
 - Test playback from more than one streaming service to check whether the issue is specific to a provider.

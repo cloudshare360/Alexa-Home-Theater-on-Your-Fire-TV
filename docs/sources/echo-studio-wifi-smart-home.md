@@ -20,13 +20,25 @@ The supplied [WIRED eero Built-in article summary](./eero-built-in-echo-speakers
 
 ## Smart-home hub protocols
 
-The supplied project notes identify these protocols for Echo Studio acting as a smart-home hub:
+The supplied project notes identify these protocols for Echo Studio acting as a smart-home hub. This information has not been confirmed against a model-specific manufacturer specification in this document, and should not be assumed to apply to Echo Dot Max:
 
 - **Zigbee:** Connect supported Zigbee lights, switches, locks, and other compatible devices.
 - **Matter:** Connect supported Matter-certified devices for interoperability across compatible smart-home ecosystems.
 - **Thread:** Thread Border Router functionality can connect a Thread network to the home network and support compatible Thread devices.
 
 Protocol support alone does not guarantee that every device feature will work. Confirm the Echo Studio model's current capabilities and each accessory's compatibility, required app or setup flow, and any platform limitations. A separate hub may still be needed for devices or features not supported by the Echo.
+
+## Room-by-room temperature control
+
+An Echo's temperature reading, when the specific model exposes a sensor in the Alexa app, can be useful input for supported routines. A reading or routine is not the same as independent HVAC control: Echo speakers do not create HVAC zones or operate heating and cooling equipment by themselves.
+
+Room-by-room control depends on the home's HVAC design. Independent control generally requires an HVAC system with supported zones and compatible zone controls, thermostats, and room sensors. A room sensor may help a compatible thermostat decide when to call for heat or cooling, but it does not guarantee that only that room will be conditioned. Verify that the exact thermostat, sensor, Echo model, and Alexa features work together before purchasing.
+
+Thermostat schedules or properly configured zones may reduce energy use in some homes, but savings are not guaranteed; they depend on the HVAC system, climate, settings, and occupancy. Do not try to create zones by closing vents without advice from an HVAC professional.
+
+## Echo Dot Max compatibility boundary
+
+Do not infer that Echo Dot Max supports eero Built-in, temperature sensing, or the same Zigbee, Matter, or Thread hub capabilities as Echo Studio. Check the exact model's current Amazon specifications and the eligible-device list in the eero app. Even when an Echo is an eligible eero Built-in extender, it must have a useful connection to the eero mesh; placing it deep in a dead zone may not improve service there. A dedicated eero node and an Echo extender are different products with different capabilities.
 
 ## How this relates to Alexa Home Theater
 
@@ -36,4 +48,4 @@ The project notes also mention existing Sonos speakers and an Echo Dot pair. The
 
 ## Source status
 
-The eero Built-in statement and protocol list in this document were supplied as project notes. A direct Amazon product or feature link for those claims has not yet been added here. Verify details against current [Amazon Echo Studio information](https://www.amazon.com/echo-studio) and [eero support](https://support.eero.com/) before publishing them as definitive compatibility guidance.
+The eero Built-in statement and protocol list in this document were supplied as project notes; exact Echo Dot Max compatibility and model-specific temperature-sensor behavior have not been verified here. Treat them as conditional, not as a confirmed feature list. Check [Amazon Echo Studio information](https://www.amazon.com/echo-studio), [Amazon Echo Dot Max information](https://www.amazon.com/echo-dot-max), the current [eero support documentation](https://support.eero.com/), and [ENERGY STAR's smart thermostat resources](https://www.energystar.gov/products/smart_thermostats) before publishing model-specific claims or planning HVAC changes.

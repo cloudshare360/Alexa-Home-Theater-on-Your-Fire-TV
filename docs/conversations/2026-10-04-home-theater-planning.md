@@ -198,6 +198,26 @@ Updated planner option labels, breakdown wording, static JSON product keys, docu
 
 Recorded that price-combination images are forthcoming. The cost comparison will be updated after the images are provided and their contents can be read.
 
+## eero coverage and room temperature follow-up
+
+### User
+
+Asked how eero Pro 7 and Pro 6E work with Echo Studio and Echo Dot Max as possible Wi-Fi extenders, how to improve coverage room by room, and whether Echo smart-home hubs and temperature controls could support room-by-room comfort and lower costs.
+
+### Assistant
+
+Clarified that only Echo models currently listed as compatible with eero Built-in should be treated as mesh extenders; Echo Dot Max support must be checked rather than inferred. Recommended placing an eligible Echo where it still has a useful connection to the eero mesh, not inside the dead zone, and distinguished Echo extenders from dedicated eero nodes. Added that an Echo temperature sensor or routine does not create HVAC zones: independent room control depends on the home's HVAC equipment and compatible thermostats, controls, and sensors. Savings are conditional, not guaranteed. Updated the guide and source notes with these qualifications and an ENERGY STAR smart-thermostat reference.
+
+## Home Theater room-layout page
+
+### User
+
+Asked for a home theater page showing a living-room TV with two, three, four, and five surround speakers, and one optional subwoofer.
+
+### Assistant
+
+Added a dedicated responsive page with top-down living-room diagrams for two through five Echo speakers and one optional Echo Sub. Clarified that layouts are illustrative rather than channel maps, that speaker models cannot be mixed, and that some Fire TV devices support only two speakers plus a Sub. Added navigation from the main guide, included the page in the GitHub Pages deployment, and documented the diagrams in the source notes.
+
 ## Planner calculation verification
 
 ### User
