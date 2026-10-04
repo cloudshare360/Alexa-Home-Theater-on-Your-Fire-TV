@@ -152,7 +152,19 @@ Provided eero Pro 7 listing details: tri-band Wi-Fi 7, up to 3.9 Gbps, up to 2,0
 
 ### Assistant
 
-Updated the Pro 7 information card and planner hint with the supplied specs and ranges. Since the range spans configurations and no exact 1-, 2-, or 3-unit prices were provided, the planner shows the range but does not invent an exact set price or include it in the subtotal. Added a shopping-cost source note and regression tests.
+Initially added the Pro 7 specifications and configuration range, without assigning an exact price to any pack size.
+
+### User
+
+Provided the exact eero Pro 7 listing prices: 1-pack $224.99 (previously $299.99), 2-pack $399.99 (previously $549.99), and 3-pack $599.99 (previously $799.99).
+
+### User
+
+Provided the exact eero Pro 6E listing prices: 1-pack $149.99 (previously $199.99), 2-pack $259.99 (previously $349.99), and 3-pack $374.99 (previously $499.99), with “More bandwidth and gigabit+ speeds” product wording.
+
+### Assistant
+
+Updated both eero cards and the planner to calculate totals from the supplied model- and pack-specific listing price. Added all current and previous pack prices to the shopping-cost notes and tests for each pack selection.
 
 ### Assistant
 

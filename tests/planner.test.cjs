@@ -26,6 +26,7 @@ function createPlanner({
   storage = new Map(),
   apiUrl = "https://prices.example.test/prices",
   eeroModel = "pro-6e",
+  eeroCount = "2",
 } = {}) {
   class Element {
     constructor(value = "") {
@@ -62,7 +63,7 @@ function createPlanner({
     "#include-eero": new Element(),
     "#eero-picks": new Element(),
     "#eero-model": new Element(eeroModel),
-    "#eero-count": new Element("2"),
+    "#eero-count": new Element(eeroCount),
     "#eero-price-hint": new Element(),
     "#plan-title": new Element(),
     "#plan-tv": new Element(),
@@ -81,7 +82,7 @@ function createPlanner({
     value: eeroModel,
     textContent: eeroModel === "pro-7" ? "eero Pro 7 · Wi-Fi 7" : "eero Pro 6E · Wi-Fi 6E",
   }];
-  nodes["#eero-count"].selectedOptions = [{ value: "2", textContent: "2-unit set" }];
+  nodes["#eero-count"].selectedOptions = [{ value: eeroCount, textContent: `${eeroCount}-unit set` }];
   nodes["#eero-picks"].querySelectorAll = () => [nodes["#eero-model"], nodes["#eero-count"]];
 
   const speaker = new Element("dot-max");
@@ -224,19 +225,39 @@ test("does not use cached offer data older than one hour", async () => {
   assert.match(nodes["#live-price-status"].textContent, /temporarily unavailable/);
 });
 
-test("shows the supplied Pro 7 configuration range without inventing a set price", async () => {
+test("uses supplied eero pack prices in the matching planner configuration", async () => {
   const { nodes } = createPlanner({ apiUrl: "", eeroModel: "pro-7" });
   await new Promise(setImmediate);
 
-  assert.match(nodes["#eero-price-hint"].textContent, /\$224\.99–\$599\.99/);
-  assert.match(nodes["#eero-price-hint"].textContent, /previous range \$299\.99–\$799\.99/);
-  assert.match(nodes["#plan-breakdown"].children[2].children[1].textContent, /Price not provided/);
-  assert.equal(nodes["#plan-total"].textContent, "$409.95");
+  assert.match(nodes["#eero-price-hint"].textContent, /2-pack \$399\.99 \(previously \$549\.99\)/);
+  assert.equal(nodes["#plan-breakdown"].children[2].children[1].textContent, "$399.99");
+  assert.match(nodes["#plan-breakdown"].children[2].children[0].children[0].textContent, /Supplied Amazon listing/);
+  assert.equal(nodes["#plan-total"].textContent, "$809.94");
+
+  const eeroPacks = [
+    ["pro-6e", "1", "$149.99", "$559.94"],
+    ["pro-6e", "2", "$259.99", "$669.94"],
+    ["pro-6e", "3", "$374.99", "$784.94"],
+    ["pro-7", "1", "$224.99", "$634.94"],
+    ["pro-7", "2", "$399.99", "$809.94"],
+    ["pro-7", "3", "$599.99", "$1,009.94"],
+  ];
+  for (const [eeroModel, eeroCount, packPrice, total] of eeroPacks) {
+    const planner = createPlanner({ apiUrl: "", eeroModel, eeroCount });
+    await new Promise(setImmediate);
+    assert.equal(planner.nodes["#plan-breakdown"].children[2].children[1].textContent, packPrice);
+    assert.equal(planner.nodes["#plan-total"].textContent, total);
+  }
 });
 
-test("documents supplied Pro 7 speeds, coverage, and listing range on the site", () => {
+test("documents supplied eero specifications and pack prices on the site", () => {
   assert.match(htmlSource, /wireless speeds up to 3\.9 Gbps/);
   assert.match(htmlSource, /coverage up to 2,000 sq\. ft\. per eero/);
-  assert.match(htmlSource, /\$224\.99–\$599\.99/);
-  assert.match(htmlSource, /up to 25% off/);
+  assert.match(htmlSource, /1-pack<\/span><b>\$149\.99/);
+  assert.match(htmlSource, /2-pack<\/span><b>\$259\.99/);
+  assert.match(htmlSource, /3-pack<\/span><b>\$374\.99/);
+  assert.match(htmlSource, /1-pack<\/span><b>\$224\.99/);
+  assert.match(htmlSource, /2-pack<\/span><b>\$399\.99/);
+  assert.match(htmlSource, /3-pack<\/span><b>\$599\.99/);
+  assert.match(htmlSource, /\$549\.99/);
 });

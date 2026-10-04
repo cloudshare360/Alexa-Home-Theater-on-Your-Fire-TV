@@ -25,7 +25,19 @@ const examplePricesInCents = {
   studio: 17999,
   fireTvCube: 8999,
   echoSub: 12999,
-  eeroPro6eTwoPack: 25999,
+};
+
+const eeroListingPrices = {
+  "pro-6e": {
+    1: { current: 14999, previous: 19999 },
+    2: { current: 25999, previous: 34999 },
+    3: { current: 37499, previous: 49999 },
+  },
+  "pro-7": {
+    1: { current: 22499, previous: 29999 },
+    2: { current: 39999, previous: 54999 },
+    3: { current: 59999, previous: 79999 },
+  },
 };
 
 const offerCacheStorageKey = "home-theater-amazon-offer-cache";
@@ -258,15 +270,13 @@ function updatePlan() {
     : null;
   const fireTvPricing = getPrice(getProductKey(fireTvOption.value), fireTvExamplePrice);
   const eeroProductKey = getProductKey(eeroModelSelect.value, eeroCountSelect.value);
-  const eeroExamplePrice =
-    eeroModelSelect.value === "pro-6e" && eeroCountSelect.value === "2"
-      ? examplePricesInCents.eeroPro6eTwoPack
-      : null;
+  const selectedEeroListing = eeroListingPrices[eeroModelSelect.value]?.[eeroCountSelect.value];
+  const eeroExamplePrice = selectedEeroListing?.current ?? null;
   const eeroPricing = includeEeroCheckbox.checked
     ? getPrice(eeroProductKey, eeroExamplePrice)
     : null;
-  if (eeroPricing && eeroModelSelect.value === "pro-7" && eeroPricing.amountInCents === null) {
-    eeroPricing.source = "Exact set price not provided";
+  if (eeroPricing && selectedEeroListing && eeroPricing.source === "Supplied cart example") {
+    eeroPricing.source = "Supplied Amazon listing";
   }
   const subPricing = includeSubCheckbox.checked
     ? getPrice(getProductKey("sub"), examplePricesInCents.echoSub)
@@ -332,9 +342,9 @@ function updatePlan() {
   eeroPicks.querySelectorAll("select").forEach((select) => {
     select.disabled = !includeEeroCheckbox.checked;
   });
-  if (eeroModelSelect.value === "pro-7") {
+  if (selectedEeroListing) {
     eeroPriceHint.textContent =
-      "Supplied Amazon listing: $224.99–$599.99, up to 25% off (previous range $299.99–$799.99). Exact price for this set size was not supplied, so it is excluded from the subtotal.";
+      `Supplied Amazon listing: ${eeroCountSelect.value}-pack ${money.format(selectedEeroListing.current / 100)} (previously ${money.format(selectedEeroListing.previous / 100)}). Offers can change.`;
   } else {
     eeroPriceHint.textContent = eeroPricing
       ? eeroPricing.source === "Price not provided"

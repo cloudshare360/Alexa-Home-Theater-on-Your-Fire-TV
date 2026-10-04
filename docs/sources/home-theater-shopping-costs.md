@@ -78,8 +78,19 @@ The user supplied the following Amazon listing details on October 4, 2026:
 - Tri-band mesh Wi-Fi 7 router.
 - Wireless speeds up to 3.9 Gbps.
 - Coverage up to 2,000 sq. ft. per eero.
-- Up to 25% off.
-- Current price range: $224.99–$599.99.
-- Previous price range: $299.99–$799.99.
+- 1-pack: $224.99, previously $299.99.
+- 2-pack: $399.99, previously $549.99.
+- 3-pack: $599.99, previously $799.99.
 
-These ranges cover multiple configurations; the exact price for each 1-, 2-, or 3-unit planner option was not supplied. The planner displays the range but does not treat any point in it as the selected set's exact price or include it in the subtotal.
+The user later supplied the individual pack sizes and prices, replacing the earlier configuration-wide ranges. The planner uses the matching current listing price for each selected pack size and labels it as supplied Amazon listing data, not as a live quote. Offers can change.
+
+## eero Pro 6E listing information
+
+The user supplied the following Amazon listing details on October 4, 2026:
+
+- More bandwidth and gigabit+ speeds.
+- 1-pack: $149.99, previously $199.99.
+- 2-pack: $259.99, previously $349.99.
+- 3-pack: $374.99, previously $499.99.
+
+The planner uses the matching supplied listing price for the selected pack size. These are examples from the supplied listing and are not live quotes.
