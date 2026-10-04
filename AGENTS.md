@@ -83,16 +83,16 @@ For page-level behavior: `python3 -m http.server 8000` from the repo root, then 
 
 Shipped: affordable starter framing (Fire TV Stick 4K 2nd Gen + 2 × Echo Dot Max = $197.97, optional eero Pro 6E 1-pack = $347.96), the interactive planner, `home-theater.html` layouts, a `#budget` section whose Dot Max and Studio cards follow the live planner selections, the CSV-derived catalog with `previousAmount` metadata, the dormant live-offer integration, and the CI coverage gate.
 
-Verified baseline: `npm run test:coverage` passes 26 tests at 100% coverage on `planner.js`. The rendered planner was checked in Chromium: one Fire TV row, totals `$197.97` (2 × Dot Max + Fire TV Stick 4K) and `$1,119.93` (5 × Studio + Fire TV Cube + Echo Sub), and no errors with eero unchecked.
+Verified baseline: `npm run test:coverage` passes 26 tests at 100% coverage on `planner.js`. The rendered planner was checked in Chromium locally and on the published Pages URL after deploying `1b8b2ba`: one Fire TV row in every selection, totals `$197.97` (2 × Dot Max + Fire TV Stick 4K) and `$1,119.93` (5 × Studio + Fire TV Cube + Echo Sub), and no script errors with eero unchecked. The only console entry is a `favicon.ico` 404.
 
 Open items for whoever continues:
 
 1. **Confirm the eero Pro 7 3 Pack price.** The catalog, budget table, and planner all use $224.99 — identical to the 1 Pack — with no previous price, per the latest supplied table. The transcript earlier recorded $599.99 (previously $799.99). Ask the user before changing any value.
 2. **Price-combination screenshots.** The transcript's last two entries say images are still forthcoming; six screenshots currently sit in `Temp-Images/`. Transcribe any new combinations into `docs/sources/home-theater-shopping-costs.md`, then into the catalog, HTML fallbacks, and tests.
 3. **Live pricing** stays front-end only until a compliant backend exists. `pricing-config.js` `apiUrl` is intentionally empty.
-4. **Deployed-build re-check.** The planner error that occurred when eero was unchecked is fixed and verified locally; confirm it again on the Pages URL after the next deployment completes.
-5. **Unused catalog metadata.** `prices.json` still defines `dot-max-cart`, `studio-cart`, `four-dot-max-speakers`, `four-studio-speakers`, `five-dot-max`, and `five-studio`, which no longer render anywhere in the page. They are only covered by tests. Remove them together with their test assertions, or restore the historical cart section deliberately.
-6. **Catalog conversion is manual.** If the catalog keeps growing, add a small CSV→JSON generator and a test for its parity.
+4. **Unused catalog metadata.** `prices.json` still defines `dot-max-cart`, `studio-cart`, `four-dot-max-speakers`, `four-studio-speakers`, `five-dot-max`, and `five-studio`, which no longer render anywhere in the page. They are only covered by tests. Remove them together with their test assertions, or restore the historical cart section deliberately.
+5. **Catalog conversion is manual.** If the catalog keeps growing, add a small CSV→JSON generator and a test for its parity.
+6. **Workflow hygiene.** `actions/checkout@v4`, `actions/setup-node@v4`, `actions/configure-pages@v5`, `actions/upload-pages-artifact@v3`, and `actions/deploy-pages@v4` emit Node.js 20 deprecation warnings; bump them when convenient.
 
 ## Skills
 
