@@ -10,3 +10,8 @@ docs/sources/images/
 *.env
 *.env.*
 !.env.example
+
+# Local development and coverage output.
+node_modules/
+coverage/
+.nyc_output/

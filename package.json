@@ -1,0 +1,11 @@
+{
+  "name": "alexa-home-theater-guide",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/planner.test.cjs",
+    "test:coverage": "c8 --include='**/planner.js' --reporter=text --check-coverage --lines 100 --functions 100 --branches 100 --statements 100 node --test tests/planner.test.cjs"
+  },
+  "devDependencies": {
+    "c8": "12.0.0"
+  }
+}

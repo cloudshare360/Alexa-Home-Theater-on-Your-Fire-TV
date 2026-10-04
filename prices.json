@@ -2,60 +2,47 @@
   "currency": "USD",
   "prices": {
     "fire-tv-cube-3rd-gen": {
-      "amount": 89.99,
       "source": "Supplied cart example"
     },
     "fire-tv-stick-4k-max-2nd-gen": {
-      "amount": 44.99,
       "source": "Supplied price"
     },
     "fire-tv-stick-4k-2nd-gen": {
-      "amount": 37.99,
       "source": "Supplied price"
     },
     "fire-tv-stick-4k-plus": {
-      "amount": 37.99,
       "source": "Supplied price"
     },
     "echo-dot-max": {
-      "amount": 79.99,
       "source": "Supplied cart example"
     },
     "echo-studio-2025": {
-      "amount": 179.99,
       "source": "Supplied cart example"
     },
     "echo-sub": {
-      "amount": 129.99,
       "source": "Supplied cart example"
     },
     "eero-pro-6e-1-pack": {
-      "amount": 149.99,
       "previousAmount": 199.99,
       "source": "Supplied Amazon listing"
     },
     "eero-pro-6e-2-pack": {
-      "amount": 259.99,
       "previousAmount": 349.99,
       "source": "Supplied Amazon listing"
     },
     "eero-pro-6e-3-pack": {
-      "amount": 374.99,
       "previousAmount": 499.99,
       "source": "Supplied Amazon listing"
     },
     "eero-pro-7-1-pack": {
-      "amount": 224.99,
       "previousAmount": 299.99,
       "source": "Supplied Amazon listing"
     },
     "eero-pro-7-2-pack": {
-      "amount": 399.99,
       "previousAmount": 549.99,
       "source": "Supplied Amazon listing"
     },
     "eero-pro-7-3-pack": {
-      "amount": 224.99,
       "source": "Supplied Amazon listing"
     }
   },

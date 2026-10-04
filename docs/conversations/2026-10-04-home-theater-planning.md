@@ -198,6 +198,56 @@ Updated planner option labels, breakdown wording, static JSON product keys, docu
 
 Recorded that price-combination images are forthcoming. The cost comparison will be updated after the images are provided and their contents can be read.
 
+## Planner calculation verification
+
+### User
+
+Asked to unit-test the page so changing devices and quantities recalculates the planner from the prices in `device-prices.csv` and its converted JSON file.
+
+### Assistant
+
+Changed the planner to use `device-prices.json` for product amounts, kept `prices.json` for source labels, previous prices, and example cart definitions, and added a selection matrix covering all Fire TV models, both speaker models at quantities two through five, all eero model/pack combinations, and optional Echo Sub. Updated the Pages workflow to publish the price JSON.
+
+### User
+
+Requested Playwright integration testing of the published planner across different device and quantity combinations, with totals checked against the catalog.
+
+### Assistant
+
+Ran the published page through 448 combinations in Chromium. Totals matched, but the deployed version raised a JavaScript error whenever eero was unchecked. Fixed the edge case in the planner; the updated build will be checked again after deployment.
+
+### User
+
+Asked for workspace-specific agent skills and concise project context to improve token-efficient agentic development.
+
+### Assistant
+
+Added `.github/copilot-instructions.md` and focused skills for price/planner work and guide/source edits. Documented the project's static-site architecture, price source-of-truth, validation commands, and handling of ignored local data.
+
+### User
+
+Requested 100% code coverage for unit and integration testing.
+
+### Assistant
+
+Added c8 with enforced 100% statement, branch, function, and line coverage for `planner.js`; expanded the suite to 19 tests covering all 448 supported selection combinations and malformed catalog, cache, and live-offer paths. The Pages workflow now runs this coverage gate before deployment.
+
+### User
+
+Reported that the selected Fire TV price was not visible in the planner.
+
+### Assistant
+
+Added a selected Fire TV price line below the model selector, using the selected catalog or live offer price and source.
+
+### User
+
+Asked for improved readability of the right-side result panel, especially its dark background and small type, with responsive styling.
+
+### Assistant
+
+Changed the results panel to a light background with high-contrast text, larger item/source/status typography, and responsive layout. Playwright checks measured contrast above 4.5:1 and verified no horizontal overflow at desktop, tablet, and mobile widths.
+
 ### User
 
 All the images are pasted as part of Temp-Images.

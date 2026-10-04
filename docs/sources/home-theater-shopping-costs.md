@@ -106,7 +106,7 @@ The user supplied these Fire TV prices on October 4, 2026:
 | Fire TV Stick 4K (2nd Generation) | $37.99 |
 | Fire TV Stick 4K Plus | $37.99 |
 
-These prices are maintained in [the static price catalog](../../prices.json) and used when calculating the planner subtotal.
+These prices are maintained in the CSV-derived [device price catalog](../../device-prices.json) and used when calculating the planner subtotal.
 
 ## Speaker and subwoofer prices
 

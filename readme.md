@@ -25,11 +25,13 @@ The workflow at `.github/workflows/pages.yml` deploys the site when changes are 
 4. Open the **Actions** tab and check the **Deploy GitHub Pages** workflow.
 5. After it succeeds, open the Pages URL shown in the workflow deployment.
 
-The deployment workflow publishes `index.html`, `styles.css`, `planner.js`, `pricing-config.js`, and `prices.json`. It does not publish the `Temp-Images` cart screenshots, the conversation/source documents, or product-photo crops.
+The deployment workflow publishes `index.html`, `styles.css`, `planner.js`, `pricing-config.js`, `prices.json`, and `device-prices.json`. It does not publish the `Temp-Images` cart screenshots, the conversation/source documents, or product-photo crops.
+
+The Pages workflow runs the planner unit tests and requires 100% statement, branch, function, and line coverage before deployment. Run `npm ci` and `npm run test:coverage` locally. The test suite exercises every supported Fire TV, speaker quantity, eero pack, and optional Echo Sub combination against `device-prices.json`.
 
 ### Live price endpoint
 
-The planner reads its supplied example/listing prices from `prices.json`; the same values populate the product cards and planner totals. Update that JSON file to maintain the static catalog. Prices not yet supplied are marked with a `null` amount and are excluded from totals. The planner can also read offers from a server-side endpoint, but the endpoint is not configured by default. After deploying a compliant backend, set its public HTTPS URL as `apiUrl` in `pricing-config.js`. The browser never stores Creators API credentials. If a refresh fails, a previously fetched offer is used only while it is less than one hour old; otherwise, the planner falls back to prices from `prices.json`.
+The planner reads device prices from `device-prices.json`, converted from `device-prices.csv`; these prices drive product displays and planner totals. Keep the CSV and JSON export aligned when updating supplied prices. `prices.json` contains source labels, previous prices, and example cart component mappings. The planner can also read offers from a server-side endpoint, but the endpoint is not configured by default. After deploying a compliant backend, set its public HTTPS URL as `apiUrl` in `pricing-config.js`. The browser never stores Creators API credentials. If a refresh fails, a previously fetched offer is used only while it is less than one hour old; otherwise, the planner falls back to `device-prices.json`.
 
 ## Preview locally
 
@@ -46,3 +48,7 @@ Then open <http://localhost:8000>.
 The device details and setup instructions are based on supplied comparison imagery and pasted excerpts from Amazon and WIRED. Prices are examples from cart screenshots, not current offers. Compatibility, app steps, specifications, and prices can change; check manufacturer sources before buying or setting up devices.
 
 Detailed working notes remain under [`docs/sources/`](docs/sources/), including [Alexa Home Theater setup](docs/sources/alexa-home-theater-amazon-help.md), [eero Built-in](docs/sources/eero-built-in-echo-speakers.md), [Echo Studio Wi-Fi and smart-home capabilities](docs/sources/echo-studio-wifi-smart-home.md), [shopping costs](docs/sources/home-theater-shopping-costs.md), and the proposed [Amazon live-pricing architecture](docs/sources/amazon-live-pricing-architecture.md).
+
+## Agent guidance
+
+Repository-specific Copilot context is in `.github/copilot-instructions.md`. Task-specific skills for price/planner work and guide/source edits are in `.github/skills/`; load only the skill relevant to the task.
