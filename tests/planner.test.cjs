@@ -47,6 +47,37 @@ test("provides responsive viewport, tablet, and mobile layouts", () => {
   assert.match(stylesSource, /\.plan-tv strong \{[^}]*font-size: 16px; font-weight: 700; text-align: right/);
 });
 
+test("positions the homepage as an affordable, compatibility-aware connected-living guide", () => {
+  assert.match(htmlSource, /Build an affordable\s+Alexa Home Theater/);
+  assert.match(htmlSource, /compatible\s+eero mesh Wi-Fi/);
+  assert.match(htmlSource, /supported smart-home control/i);
+  assert.match(htmlSource, /each feature needs compatible devices and its own setup/i);
+  assert.match(htmlSource, /href="#planner">Build your setup/);
+});
+
+test("shows the lowest-cost supplied starter setup with optional eero pricing", () => {
+  const fireTvPrice = devicePriceCatalog.items.find(
+    (item) => item.deviceName === "Fire TV Stick 4K (2nd Generation)",
+  ).price;
+  const speakerPrice = devicePriceCatalog.items.find(
+    (item) => item.deviceName === "Echo Dot Max",
+  ).price;
+  const eeroPrice = devicePriceCatalog.items.find(
+    (item) => item.deviceName === "eero Pro 6E" && item.quantity === 1,
+  ).price;
+  assert.match(htmlSource, /Your lowest-cost\s+<em>theater start\.<\/em>/);
+  assert.match(htmlSource, /Fire TV Stick 4K \(2nd Generation\)/);
+  assert.match(htmlSource, /2 × Echo Dot Max/);
+  assert.match(htmlSource, /current Wi-Fi if it works well/i);
+  assert.match(htmlSource, /eero Pro 6E 1-pack/);
+  assert.match(htmlSource, new RegExp(`\\$${fireTvPrice.toFixed(2)}`));
+  assert.match(htmlSource, new RegExp(`\\$${(speakerPrice * 2).toFixed(2)}`));
+  assert.match(htmlSource, new RegExp(`\\$${(fireTvPrice + speakerPrice * 2).toFixed(2)}`));
+  assert.match(htmlSource, new RegExp(`\\$${eeroPrice.toFixed(2)}`));
+  assert.match(htmlSource, new RegExp(`\\$${(fireTvPrice + speakerPrice * 2 + eeroPrice).toFixed(2)}`));
+  assert.match(htmlSource, /not live offers/);
+});
+
 test("publishes illustrative two-to-five speaker layouts with an optional Echo Sub", () => {
   assert.match(htmlSource, /href="home-theater\.html"/);
   assert.match(homeTheaterSource, /<meta name="viewport" content="width=device-width, initial-scale=1">/);

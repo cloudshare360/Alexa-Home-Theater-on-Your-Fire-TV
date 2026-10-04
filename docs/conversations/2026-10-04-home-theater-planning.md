@@ -218,6 +218,24 @@ Asked for a home theater page showing a living-room TV with two, three, four, an
 
 Added a dedicated responsive page with top-down living-room diagrams for two through five Echo speakers and one optional Echo Sub. Clarified that layouts are illustrative rather than channel maps, that speaker models cannot be mixed, and that some Fire TV devices support only two speakers plus a Sub. Added navigation from the main guide, included the page in the GitHub Pages deployment, and documented the diagrams in the source notes.
 
+## Homepage positioning
+
+### User
+
+Asked to make the homepage describe a low-cost Alexa Home Theater alongside eero mesh Wi-Fi and smart-home hub capabilities as an attractive all-in-one solution.
+
+### Assistant
+
+Reframed the hero around affordable Alexa Home Theater, compatible eero mesh Wi-Fi, and supported smart-home control as one connected-living plan that can grow in stages. Kept the wording compatibility-aware: the three capabilities need compatible devices and separate setup, rather than implying they are supplied by one device or guaranteed together.
+
+### User
+
+Asked to prioritize the cheapest initial configuration: one Fire TV Stick, two speakers, and a one-pack eero mesh kit as an optional addition.
+
+### Assistant
+
+Added a homepage starter recommendation using the least-cost supplied Fire TV Stick listing, two matching Echo Dot Max speakers, and optional eero Pro 6E 1-pack. Labeled item prices and totals as the supplied October 4, 2026 listing snapshot, not current offers; clarified that an existing working Wi-Fi network can be used without buying eero.
+
 ## Planner calculation verification
 
 ### User
