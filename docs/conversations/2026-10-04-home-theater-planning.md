@@ -166,6 +166,14 @@ Provided the exact eero Pro 6E listing prices: 1-pack $149.99 (previously $199.9
 
 Updated both eero cards and the planner to calculate totals from the supplied model- and pack-specific listing price. Added all current and previous pack prices to the shopping-cost notes and tests for each pack selection.
 
+### User
+
+Asked to keep prices static in a JSON file and have the planner read from it.
+
+### Assistant
+
+Moved product prices, prior eero pack prices, and example-cart component mappings to `prices.json`. The planner fetches the catalog on page load, uses it for selection totals and marked-up product/budget prices, and continues to prefer configured live offers when available. The Pages workflow publishes the JSON file.
+
 ### Assistant
 
 Recorded that price-combination images are forthcoming. The cost comparison will be updated after the images are provided and their contents can be read.

@@ -8,6 +8,9 @@ const plannerSource = fs.readFileSync(
   path.join(__dirname, "..", "planner.js"),
   "utf8",
 );
+const staticPrices = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "..", "prices.json"), "utf8"),
+);
 const htmlSource = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
 const stylesSource = fs.readFileSync(path.join(__dirname, "..", "styles.css"), "utf8");
 
@@ -73,6 +76,21 @@ function createPlanner({
     "#plan-price-note": new Element(),
     "#live-price-status": new Element(),
   };
+  const priceDisplayElements = [
+    ["[data-current-price-key]", "eero-pro-6e-2-unit", "currentPriceKey"],
+    ["[data-previous-price-key]", "eero-pro-6e-2-unit", "previousPriceKey"],
+    ["[data-current-price-key]", "echo-dot-max", "currentPriceKey"],
+    ["[data-product-price-key]", "echo-dot-max", "productPriceKey"],
+    ["[data-config-total-key]", "dot-max-cart", "configTotalKey"],
+    ["[data-config-difference]", "four-studio-speakers:four-dot-max-speakers", "configDifference"],
+    ["[data-config-difference]", "studio-cart:dot-max-cart", "configDifference"],
+  ].map(([selector, key, datasetProperty]) => {
+    const element = new Element();
+    element.dataset[datasetProperty] = key;
+    element.dataset.priceQuantity = "4";
+    element.dataset.priceSuffix = "";
+    return [selector, element];
+  });
   const fireTvOption = new Element("cube");
   fireTvOption.textContent = "Fire TV Cube (3rd Generation)";
   fireTvOption.dataset.price = "89.99";
@@ -95,8 +113,11 @@ function createPlanner({
     querySelector(selector) {
       return selector === 'input[name="speaker-model"]:checked' ? speaker : nodes[selector];
     },
-    querySelectorAll() {
-      return [speaker];
+    querySelectorAll(selector) {
+      const prices = priceDisplayElements
+        .filter(([elementSelector]) => elementSelector === selector)
+        .map(([, element]) => element);
+      return selector === 'input[name="speaker-model"]' ? [speaker] : prices;
     },
     createElement() {
       return new Element();
@@ -127,7 +148,14 @@ function createPlanner({
       setTimeout,
       clearTimeout,
     },
-    fetch: async () => {
+    fetch: async (url) => {
+      if (url === "prices.json") {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => staticPrices,
+        };
+      }
       if (fetchFails) throw new Error("offline");
       return {
         ok: true,
@@ -137,7 +165,7 @@ function createPlanner({
     },
   };
   vm.runInNewContext(plannerSource, context, { filename: "planner.js" });
-  return { nodes, speaker, storage };
+  return { nodes, speaker, storage, priceDisplayElements };
 }
 
 const liveOffers = {
@@ -163,7 +191,7 @@ test("keeps the cart examples when no endpoint is configured", async () => {
   await new Promise(setImmediate);
 
   assert.equal(nodes["#plan-total"].textContent, "$669.94");
-  assert.match(nodes["#live-price-status"].textContent, /not connected/);
+  assert.match(nodes["#live-price-status"].textContent, /prices from prices\.json/);
 });
 
 test("keeps the existing cart-example estimate when no offer cache exists", async () => {
@@ -171,7 +199,7 @@ test("keeps the existing cart-example estimate when no offer cache exists", asyn
   await new Promise(setImmediate);
 
   assert.equal(nodes["#plan-total"].textContent, "$669.94");
-  assert.match(nodes["#live-price-status"].textContent, /temporarily unavailable/);
+  assert.match(nodes["#live-price-status"].textContent, /Price refresh failed/);
   assert.equal(nodes["#plan-breakdown"].children[0].children[0].children[0].textContent, "Supplied cart example");
 });
 
@@ -222,7 +250,7 @@ test("does not use cached offer data older than one hour", async () => {
   await new Promise(setImmediate);
 
   assert.equal(nodes["#plan-total"].textContent, "$669.94");
-  assert.match(nodes["#live-price-status"].textContent, /temporarily unavailable/);
+  assert.match(nodes["#live-price-status"].textContent, /Price refresh failed/);
 });
 
 test("uses supplied eero pack prices in the matching planner configuration", async () => {
@@ -252,6 +280,7 @@ test("uses supplied eero pack prices in the matching planner configuration", asy
 
 test("recalculates the selected configuration when planner controls change", async () => {
   const { nodes, speaker } = createPlanner({ apiUrl: "" });
+  await new Promise(setImmediate);
 
   const fireTvStick = nodes["#fire-tv-choice"].selectedOptions[0];
   fireTvStick.value = "stick-4k";
@@ -276,13 +305,30 @@ test("recalculates the selected configuration when planner controls change", asy
 test("documents supplied eero specifications and pack prices on the site", () => {
   assert.match(htmlSource, /wireless speeds up to 3\.9 Gbps/);
   assert.match(htmlSource, /coverage up to 2,000 sq\. ft\. per eero/);
-  assert.match(htmlSource, /1-pack<\/span><b>\$149\.99/);
-  assert.match(htmlSource, /2-pack<\/span><b>\$259\.99/);
-  assert.match(htmlSource, /3-pack<\/span><b>\$374\.99/);
-  assert.match(htmlSource, /1-pack<\/span><b>\$224\.99/);
-  assert.match(htmlSource, /2-pack<\/span><b>\$399\.99/);
-  assert.match(htmlSource, /3-pack<\/span><b>\$599\.99/);
+  assert.match(htmlSource, /1-pack<\/span><b><span data-current-price-key="eero-pro-6e-1-unit">/);
+  assert.match(htmlSource, /2-pack<\/span><b><span data-current-price-key="eero-pro-6e-2-unit">/);
+  assert.match(htmlSource, /3-pack<\/span><b><span data-current-price-key="eero-pro-6e-3-unit">/);
+  assert.match(htmlSource, /1-pack<\/span><b><span data-current-price-key="eero-pro-7-1-unit">/);
+  assert.match(htmlSource, /2-pack<\/span><b><span data-current-price-key="eero-pro-7-2-unit">/);
+  assert.match(htmlSource, /3-pack<\/span><b><span data-current-price-key="eero-pro-7-3-unit">/);
   assert.match(htmlSource, /\$549\.99/);
-  assert.match(htmlSource, /Supplied Amazon listing: 2-pack \$259\.99 \(previously \$349\.99\)/);
+  assert.match(htmlSource, /Loading selected router price from prices\.json/);
   assert.doesNotMatch(htmlSource, /Other prices have not been provided/);
+});
+
+test("loads the static product price catalog from the JSON file", async () => {
+  const { nodes, priceDisplayElements } = createPlanner({ apiUrl: "" });
+  await new Promise(setImmediate);
+
+  assert.equal(nodes["#plan-total"].textContent, "$669.94");
+  assert.equal(nodes["#plan-breakdown"].children[0].children[1].textContent, "$319.96");
+  assert.equal(nodes["#plan-breakdown"].children[1].children[1].textContent, "$89.99");
+  assert.equal(nodes["#plan-breakdown"].children[2].children[1].textContent, "$259.99");
+  assert.equal(priceDisplayElements[0][1].textContent, "$259.99");
+  assert.equal(priceDisplayElements[1][1].textContent, "$349.99");
+  assert.equal(priceDisplayElements[2][1].textContent, "$79.99");
+  assert.equal(priceDisplayElements[3][1].textContent, "$319.96");
+  assert.equal(priceDisplayElements[4][1].textContent, "$669.94");
+  assert.equal(priceDisplayElements[5][1].textContent, "$400.00");
+  assert.equal(priceDisplayElements[6][1].textContent, "$529.99");
 });

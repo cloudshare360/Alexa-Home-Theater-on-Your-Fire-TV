@@ -25,11 +25,11 @@ The workflow at `.github/workflows/pages.yml` deploys the site when changes are 
 4. Open the **Actions** tab and check the **Deploy GitHub Pages** workflow.
 5. After it succeeds, open the Pages URL shown in the workflow deployment.
 
-The deployment workflow publishes `index.html`, `styles.css`, `planner.js`, and `pricing-config.js`. It does not publish the `Temp-Images` cart screenshots, the conversation/source documents, or product-photo crops.
+The deployment workflow publishes `index.html`, `styles.css`, `planner.js`, `pricing-config.js`, and `prices.json`. It does not publish the `Temp-Images` cart screenshots, the conversation/source documents, or product-photo crops.
 
 ### Live price endpoint
 
-The planner can read offers from a server-side endpoint, but the endpoint is not configured by default. After deploying a compliant backend, set its public HTTPS URL as `apiUrl` in `pricing-config.js`. The browser never stores Creators API credentials. If a refresh fails, a previously fetched offer is used only while it is less than one hour old; otherwise, the planner shows the supplied cart examples or an unavailable-price message.
+The planner reads its supplied example/listing prices from `prices.json`; the same values populate the product cards and planner totals. Update that JSON file to maintain the static catalog. Prices not yet supplied are marked with a `null` amount and are excluded from totals. The planner can also read offers from a server-side endpoint, but the endpoint is not configured by default. After deploying a compliant backend, set its public HTTPS URL as `apiUrl` in `pricing-config.js`. The browser never stores Creators API credentials. If a refresh fails, a previously fetched offer is used only while it is less than one hour old; otherwise, the planner falls back to prices from `prices.json`.
 
 ## Preview locally
 

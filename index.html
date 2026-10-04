@@ -98,7 +98,7 @@
                 <li><span>Dimensions</span><strong>4.27″ × 4.27″ × 3.9″</strong></li>
                 <li><span>Weight</span><strong>17.8 oz</strong></li>
               </ul>
-              <p class="price-tag">Example price <strong>$79.99</strong><small>per speaker in supplied cart images</small></p>
+              <p class="price-tag">Example price <strong data-current-price-key="echo-dot-max">$79.99</strong><small>per speaker in supplied cart images</small></p>
             </div>
           </article>
 
@@ -115,7 +115,7 @@
                 <li><span>Dimensions</span><strong>6.1″ × 5.6″ × 5.8″</strong></li>
                 <li><span>Weight</span><strong>57.5 oz</strong></li>
               </ul>
-              <p class="price-tag">Example price <strong>$179.99</strong><small>per speaker in supplied cart images</small></p>
+              <p class="price-tag">Example price <strong data-current-price-key="echo-studio-2025">$179.99</strong><small>per speaker in supplied cart images</small></p>
             </div>
           </article>
         </div>
@@ -236,9 +236,9 @@
               <h4>eero Pro 6E</h4>
               <p>More bandwidth and gigabit+ speeds with a tri-band Wi-Fi 6E mesh system.</p>
               <ul class="cost-list eero-pack-prices">
-                <li><span>1-pack</span><b>$149.99 <del>$199.99</del></b></li>
-                <li><span>2-pack</span><b>$259.99 <del>$349.99</del></b></li>
-                <li><span>3-pack</span><b>$374.99 <del>$499.99</del></b></li>
+                <li><span>1-pack</span><b><span data-current-price-key="eero-pro-6e-1-unit">$149.99</span> <del data-previous-price-key="eero-pro-6e-1-unit">$199.99</del></b></li>
+                <li><span>2-pack</span><b><span data-current-price-key="eero-pro-6e-2-unit">$259.99</span> <del data-previous-price-key="eero-pro-6e-2-unit">$349.99</del></b></li>
+                <li><span>3-pack</span><b><span data-current-price-key="eero-pro-6e-3-unit">$374.99</span> <del data-previous-price-key="eero-pro-6e-3-unit">$499.99</del></b></li>
               </ul>
               <p class="fine-print">Prices shown from the supplied Amazon listing; offers can change.</p>
             </article>
@@ -247,9 +247,9 @@
               <h4>eero Pro 7</h4>
               <p>Tri-band mesh Wi-Fi 7 router with wireless speeds up to 3.9 Gbps and coverage up to 2,000 sq. ft. per eero.</p>
               <ul class="cost-list eero-pack-prices">
-                <li><span>1-pack</span><b>$224.99 <del>$299.99</del></b></li>
-                <li><span>2-pack</span><b>$399.99 <del>$549.99</del></b></li>
-                <li><span>3-pack</span><b>$599.99 <del>$799.99</del></b></li>
+                <li><span>1-pack</span><b><span data-current-price-key="eero-pro-7-1-unit">$224.99</span> <del data-previous-price-key="eero-pro-7-1-unit">$299.99</del></b></li>
+                <li><span>2-pack</span><b><span data-current-price-key="eero-pro-7-2-unit">$399.99</span> <del data-previous-price-key="eero-pro-7-2-unit">$549.99</del></b></li>
+                <li><span>3-pack</span><b><span data-current-price-key="eero-pro-7-3-unit">$599.99</span> <del data-previous-price-key="eero-pro-7-3-unit">$799.99</del></b></li>
               </ul>
               <p class="fine-print">Prices shown from the supplied Amazon listing; offers can change.</p>
             </article>
@@ -296,22 +296,22 @@
                 <span class="field-number">01</span>
                 <span class="field-copy"><strong>Choose your Fire TV</strong><small>Select one device</small></span>
                 <select id="fire-tv-choice" name="fire-tv">
-                  <option value="cube" data-price="89.99">Fire TV Cube (3rd Generation)</option>
-                  <option value="stick-max" data-price="">Fire TV Stick 4K Max (2nd Generation)</option>
-                  <option value="stick-4k" data-price="">Fire TV Stick 4K (2nd Generation)</option>
-                  <option value="stick-plus" data-price="">Fire TV Stick 4K Plus</option>
+                  <option value="cube">Fire TV Cube (3rd Generation)</option>
+                  <option value="stick-max">Fire TV Stick 4K Max (2nd Generation)</option>
+                  <option value="stick-4k">Fire TV Stick 4K (2nd Generation)</option>
+                  <option value="stick-plus">Fire TV Stick 4K Plus</option>
                 </select>
               </label>
               <fieldset class="planner-field speaker-choice">
                 <legend><span class="field-number">02</span><span class="field-copy"><strong>Choose your Echo speakers</strong><small>One model per theater; mixed models are not supported</small></span></legend>
                 <div class="choice-options">
                   <label class="choice-option">
-                    <input type="radio" name="speaker-model" value="dot-max" data-price="79.99" checked>
-                    <span><b>Echo Dot Max</b><small>$79.99 each · cart example</small></span>
+                    <input type="radio" name="speaker-model" value="dot-max" checked>
+                    <span><b>Echo Dot Max</b><small><span data-current-price-key="echo-dot-max" data-price-suffix=" each · cart example">$79.99</span></small></span>
                   </label>
                   <label class="choice-option">
-                    <input type="radio" name="speaker-model" value="studio" data-price="179.99">
-                    <span><b>Echo Studio (2025 release)</b><small>$179.99 each · cart example</small></span>
+                    <input type="radio" name="speaker-model" value="studio">
+                    <span><b>Echo Studio (2025 release)</b><small><span data-current-price-key="echo-studio-2025" data-price-suffix=" each · cart example">$179.99</span></small></span>
                   </label>
                 </div>
               </fieldset>
@@ -348,13 +348,13 @@
                       <option value="3">3-unit set</option>
                     </select>
                   </label>
-                  <p class="eero-price-hint" id="eero-price-hint">Supplied Amazon listing: 2-pack $259.99 (previously $349.99). Select a router model and pack size to see its price.</p>
+                  <p class="eero-price-hint" id="eero-price-hint">Loading selected router price from prices.json...</p>
                 </div>
               </fieldset>
               <label class="sub-option">
                 <input id="include-sub" type="checkbox">
                 <span class="sub-check" aria-hidden="true">+</span>
-                <span><b>Add an Echo Sub</b><small>$129.99 · optional, based on cart example</small></span>
+                <span><b>Add an Echo Sub</b><small><span data-current-price-key="echo-sub" data-price-suffix=" · optional, based on cart example">$129.99</span></small></span>
               </label>
             </form>
             <aside class="planner-result" aria-live="polite" aria-atomic="true">
@@ -391,33 +391,33 @@
             <article class="budget-card budget-entry">
               <p class="card-kicker">Configuration A · four speakers</p>
               <h3>Echo Dot Max</h3>
-              <p class="budget-total">$669<span>.94</span></p>
+              <p class="budget-total" data-config-total-key="dot-max-cart">$669.94</p>
               <p class="budget-caption">Cart subtotal shown</p>
               <ul class="cost-list">
-                <li><span>4 × Echo Dot Max</span><b>$319.96</b></li>
-                <li><span>eero Pro 6E</span><b>$259.99</b></li>
-                <li><span>Fire TV Cube</span><b>$89.99</b></li>
+                <li><span>4 × Echo Dot Max</span><b data-product-price-key="echo-dot-max" data-price-quantity="4">$319.96</b></li>
+                <li><span>eero Pro 6E</span><b data-product-price-key="eero-pro-6e-2-unit">$259.99</b></li>
+                <li><span>Fire TV Cube</span><b data-product-price-key="fire-tv-cube-3rd-gen">$89.99</b></li>
               </ul>
             </article>
             <article class="budget-card budget-upgrade">
               <p class="card-kicker">Configuration B · four speakers + sub</p>
               <h3>Echo Studio</h3>
-              <p class="budget-total">$1,199<span>.93</span></p>
+              <p class="budget-total" data-config-total-key="studio-cart">$1,199.93</p>
               <p class="budget-caption">Cart subtotal shown</p>
               <ul class="cost-list">
-                <li><span>4 × Echo Studio</span><b>$719.96</b></li>
-                <li><span>Echo Sub</span><b>$129.99</b></li>
-                <li><span>eero Pro 6E</span><b>$259.99</b></li>
-                <li><span>Fire TV Cube</span><b>$89.99</b></li>
+                <li><span>4 × Echo Studio</span><b data-product-price-key="echo-studio-2025" data-price-quantity="4">$719.96</b></li>
+                <li><span>Echo Sub</span><b data-product-price-key="echo-sub">$129.99</b></li>
+                <li><span>eero Pro 6E</span><b data-product-price-key="eero-pro-6e-2-unit">$259.99</b></li>
+                <li><span>Fire TV Cube</span><b data-product-price-key="fire-tv-cube-3rd-gen">$89.99</b></li>
               </ul>
             </article>
             <article class="budget-card budget-note">
               <span class="note-star" aria-hidden="true">✳</span>
               <p class="card-kicker">Compare like for like</p>
-              <h3>$400 more<br>for four Studios</h3>
-              <p>The cart comparison also adds a $129.99 Echo Sub to the Studio configuration. That’s why the two full cart totals differ by $529.99—not just the speaker price.</p>
+              <h3><span data-config-difference="four-studio-speakers:four-dot-max-speakers">$400.00</span> more<br>for four Studios</h3>
+              <p>The cart comparison also adds an <span data-current-price-key="echo-sub">$129.99</span> Echo Sub to the Studio configuration. That’s why the two full cart totals differ by <span data-config-difference="studio-cart:dot-max-cart">$529.99</span>—not just the speaker price.</p>
               <div class="budget-divider"></div>
-              <p class="five-speaker"><b>Five speakers, speaker-only estimate</b><br>Dot Max: $399.95<br>Studio: $899.95</p>
+              <p class="five-speaker"><b>Five speakers, speaker-only estimate</b><br>Dot Max: <span data-product-price-key="echo-dot-max" data-price-quantity="5">$399.95</span><br>Studio: <span data-product-price-key="echo-studio-2025" data-price-quantity="5">$899.95</span></p>
             </article>
           </div>
           <p class="budget-disclaimer">

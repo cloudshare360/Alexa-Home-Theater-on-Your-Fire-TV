@@ -20,29 +20,12 @@ const money = new Intl.NumberFormat("en-US", {
   currency: "USD",
 });
 
-const examplePricesInCents = {
-  dotMax: 7999,
-  studio: 17999,
-  fireTvCube: 8999,
-  echoSub: 12999,
-};
-
-const eeroListingPrices = {
-  "pro-6e": {
-    1: { current: 14999, previous: 19999 },
-    2: { current: 25999, previous: 34999 },
-    3: { current: 37499, previous: 49999 },
-  },
-  "pro-7": {
-    1: { current: 22499, previous: 29999 },
-    2: { current: 39999, previous: 54999 },
-    3: { current: 59999, previous: 79999 },
-  },
-};
-
 const offerCacheStorageKey = "home-theater-amazon-offer-cache";
 const offerCacheMaxAgeMs = 60 * 60 * 1000;
 let offerCacheApiUrl = "";
+let staticPrices = new Map();
+let staticConfigurations = {};
+let staticPriceLoadError = false;
 const productKeys = new Set([
   "fire-tv-cube-3rd-gen",
   "fire-tv-stick-4k-max-2nd-gen",
@@ -59,6 +42,108 @@ const productKeys = new Set([
   "eero-pro-7-3-unit",
 ]);
 let livePrices = new Map();
+
+function parseStaticPrice(price) {
+  if (!price || typeof price !== "object") return null;
+  if (price.amount === null) {
+    return {
+      amountInCents: null,
+      previousAmountInCents: null,
+      source: typeof price.source === "string" ? price.source : "Price not provided",
+    };
+  }
+  const amount = Number(price.amount);
+  const previousAmount = price.previousAmount === undefined ? null : Number(price.previousAmount);
+  if (!Number.isFinite(amount) || amount <= 0) return null;
+  if (previousAmount !== null && (!Number.isFinite(previousAmount) || previousAmount <= 0)) return null;
+  return {
+    amountInCents: Math.round(amount * 100),
+    previousAmountInCents:
+      previousAmount === null ? null : Math.round(previousAmount * 100),
+    source: typeof price.source === "string" ? price.source : "Supplied price",
+  };
+}
+
+function renderStaticPrices() {
+  for (const element of document.querySelectorAll("[data-current-price-key]")) {
+    const price = staticPrices.get(element.dataset.currentPriceKey);
+    if (!price || price.amountInCents === null) continue;
+    element.textContent = money.format(price.amountInCents / 100);
+    if (element.dataset.priceSuffix) {
+      element.textContent += element.dataset.priceSuffix;
+    }
+  }
+  for (const element of document.querySelectorAll("[data-previous-price-key]")) {
+    const price = staticPrices.get(element.dataset.previousPriceKey);
+    if (price?.previousAmountInCents !== null && price?.previousAmountInCents !== undefined) {
+      element.textContent = money.format(price.previousAmountInCents / 100);
+    }
+  }
+  for (const element of document.querySelectorAll("[data-product-price-key]")) {
+    const price = staticPrices.get(element.dataset.productPriceKey);
+    const quantity = Number(element.dataset.priceQuantity ?? "1");
+    if (!price || price.amountInCents === null || !Number.isInteger(quantity) || quantity < 1) {
+      continue;
+    }
+    element.textContent = money.format((price.amountInCents * quantity) / 100);
+  }
+  const calculatedConfigurations = new Map();
+  for (const [key, items] of Object.entries(staticConfigurations)) {
+    if (!Array.isArray(items)) continue;
+    let totalInCents = 0;
+    let valid = true;
+    for (const item of items) {
+      const price = staticPrices.get(item.product);
+      if (!price || price.amountInCents === null || !Number.isInteger(item.quantity) || item.quantity < 1) {
+        valid = false;
+        break;
+      }
+      totalInCents += price.amountInCents * item.quantity;
+    }
+    if (valid) calculatedConfigurations.set(key, totalInCents);
+  }
+  for (const element of document.querySelectorAll("[data-config-total-key]")) {
+    const total = calculatedConfigurations.get(element.dataset.configTotalKey);
+    if (total !== undefined) element.textContent = money.format(total / 100);
+  }
+  for (const element of document.querySelectorAll("[data-config-difference]")) {
+    const [higher, lower] = element.dataset.configDifference.split(":");
+    const difference = calculatedConfigurations.get(higher) - calculatedConfigurations.get(lower);
+    if (Number.isFinite(difference)) {
+      element.textContent = money.format(Math.abs(difference) / 100);
+    }
+  }
+}
+
+async function loadStaticPrices() {
+  try {
+    const response = await fetch("prices.json", {
+      headers: { Accept: "application/json" },
+    });
+    if (!response.ok) throw new Error(`Static price file returned HTTP ${response.status}.`);
+    const payload = await response.json();
+    if (payload?.currency !== "USD" || !payload.prices || typeof payload.prices !== "object" || Array.isArray(payload.prices)) {
+      throw new Error("Static price file has an invalid format.");
+    }
+    const parsedPrices = new Map();
+    for (const [key, value] of Object.entries(payload.prices)) {
+      if (!productKeys.has(key)) continue;
+      const price = parseStaticPrice(value);
+      if (price) parsedPrices.set(key, price);
+    }
+    staticPrices = parsedPrices;
+    staticConfigurations =
+      payload.configurations && typeof payload.configurations === "object" && !Array.isArray(payload.configurations)
+        ? payload.configurations
+        : {};
+    staticPriceLoadError = false;
+    renderStaticPrices();
+  } catch {
+    staticPrices = new Map();
+    staticPriceLoadError = true;
+  }
+  updatePlan();
+}
 
 function getProductKey(value, eeroCount) {
   const fireTvKeys = {
@@ -164,8 +249,9 @@ async function loadLivePrices() {
   const apiUrl = typeof configuredApiUrl === "string" ? configuredApiUrl.trim() : "";
   if (!apiUrl) {
     livePrices = new Map();
-    livePriceStatus.textContent =
-      "Live pricing is not connected. Supplied cart examples are shown where available.";
+    livePriceStatus.textContent = staticPriceLoadError
+      ? "The static price list could not be loaded. Check the connection and reload; the displayed subtotal may be incomplete."
+      : "Using supplied prices from prices.json. Prices are examples, not live quotes.";
     updatePlan();
     return;
   }
@@ -234,15 +320,21 @@ async function loadLivePrices() {
       livePriceStatus.textContent += " This browser could not save the temporary fallback.";
     }
   } catch {
-    livePriceStatus.textContent = livePrices.size
-      ? `Price refresh failed. ${formatOfferStatus(livePrices, "")}`
-      : "Live prices are temporarily unavailable. Supplied cart examples remain identified as examples.";
+    if (livePrices.size) {
+      livePriceStatus.textContent = `Price refresh failed. ${formatOfferStatus(livePrices, "")}`;
+    } else if (staticPriceLoadError) {
+      livePriceStatus.textContent =
+        "Price refresh failed and the static price list could not be loaded. The displayed subtotal may be incomplete.";
+    } else {
+      livePriceStatus.textContent =
+        "Price refresh failed. Using supplied prices from prices.json where available.";
+    }
   }
 
   updatePlan();
 }
 
-function getPrice(productKey, examplePriceInCents) {
+function getPrice(productKey) {
   const offer = productKey ? livePrices.get(productKey) : null;
   if (offer) {
     return {
@@ -250,9 +342,10 @@ function getPrice(productKey, examplePriceInCents) {
       source: `${offer.cached ? "Cached Amazon offer" : "Amazon offer"} · last retrieved ${formatRetrievedAt(offer.retrievedAt)}`,
     };
   }
-  return examplePriceInCents === null
-    ? { amountInCents: null, source: "Price not provided" }
-    : { amountInCents: examplePriceInCents, source: "Supplied cart example" };
+  const staticPrice = productKey ? staticPrices.get(productKey) : null;
+  return staticPrice
+    ? { ...staticPrice }
+    : { amountInCents: null, previousAmountInCents: null, source: "Price not provided" };
 }
 
 function updatePlan() {
@@ -260,26 +353,16 @@ function updatePlan() {
   const speakerModel = document.querySelector('input[name="speaker-model"]:checked');
   const speakerOption = speakerModel.closest(".choice-option");
   const speakerName = speakerOption.querySelector("b").textContent;
-  const speakerPricing = getPrice(
-    getProductKey(speakerModel.value),
-    Math.round(Number(speakerModel.dataset.price) * 100),
-  );
+  const speakerPricing = getPrice(getProductKey(speakerModel.value));
   const speakerCount = Number(speakerCountSelect.value);
-  const fireTvExamplePrice = fireTvOption.dataset.price
-    ? Math.round(Number(fireTvOption.dataset.price) * 100)
-    : null;
-  const fireTvPricing = getPrice(getProductKey(fireTvOption.value), fireTvExamplePrice);
+  const fireTvPricing = getPrice(getProductKey(fireTvOption.value));
   const eeroProductKey = getProductKey(eeroModelSelect.value, eeroCountSelect.value);
-  const selectedEeroListing = eeroListingPrices[eeroModelSelect.value]?.[eeroCountSelect.value];
-  const eeroExamplePrice = selectedEeroListing?.current ?? null;
+  const selectedEeroListing = staticPrices.get(eeroProductKey);
   const eeroPricing = includeEeroCheckbox.checked
-    ? getPrice(eeroProductKey, eeroExamplePrice)
+    ? getPrice(eeroProductKey)
     : null;
-  if (eeroPricing && selectedEeroListing && eeroPricing.source === "Supplied cart example") {
-    eeroPricing.source = "Supplied Amazon listing";
-  }
   const subPricing = includeSubCheckbox.checked
-    ? getPrice(getProductKey("sub"), examplePricesInCents.echoSub)
+    ? getPrice(getProductKey("sub"))
     : null;
   const speakerTotal =
     speakerPricing.amountInCents === null
@@ -342,9 +425,9 @@ function updatePlan() {
   eeroPicks.querySelectorAll("select").forEach((select) => {
     select.disabled = !includeEeroCheckbox.checked;
   });
-  if (selectedEeroListing) {
+  if (selectedEeroListing?.amountInCents !== null && selectedEeroListing?.amountInCents !== undefined) {
     eeroPriceHint.textContent =
-      `Supplied Amazon listing: ${eeroCountSelect.value}-pack ${money.format(selectedEeroListing.current / 100)} (previously ${money.format(selectedEeroListing.previous / 100)}). Offers can change.`;
+      `${eeroPricing.source}: ${eeroCountSelect.value}-pack ${money.format(eeroPricing.amountInCents / 100)}${eeroPricing.previousAmountInCents === null ? "" : ` (previously ${money.format(eeroPricing.previousAmountInCents / 100)})`}. Offers can change.`;
   } else {
     eeroPriceHint.textContent = eeroPricing
       ? eeroPricing.source === "Price not provided"
@@ -367,4 +450,4 @@ for (const control of [
 }
 
 updatePlan();
-loadLivePrices();
+loadStaticPrices().then(loadLivePrices);
