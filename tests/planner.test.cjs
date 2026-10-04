@@ -44,8 +44,8 @@ test("provides responsive viewport, tablet, and mobile layouts", () => {
   assert.match(stylesSource, /\.planner-result \{[^}]*background: #f8f6f1/);
   assert.match(stylesSource, /\.plan-breakdown li \{[^}]*font-size: 15px/);
   assert.match(stylesSource, /\.plan-breakdown li small \{[^}]*font-size: 12px/);
+  assert.match(stylesSource, /\.plan-breakdown li b \{[^}]*font-size: 16px; text-align: right/);
   assert.match(stylesSource, /\.cost-list li\[hidden\] \{ display: none; \}/);
-  assert.match(stylesSource, /\.plan-tv strong \{[^}]*font-size: 16px; font-weight: 700; text-align: right/);
 });
 
 test("positions the homepage as an affordable, compatibility-aware connected-living guide", () => {
@@ -94,6 +94,7 @@ test("starts planner at two Dot Max speakers with selectable Studio, Fire TV, an
   assert.match(htmlSource, /<input id="include-eero" type="checkbox">/);
   assert.match(htmlSource, /<div class="eero-picks" id="eero-picks" hidden>/);
   assert.match(htmlSource, /id="plan-title">2 Echo Dot Max speakers/);
+  assert.doesNotMatch(htmlSource, /id="plan-tv(?:-price)?"/);
   assert.match(htmlSource, /Updates with the Fire TV, speaker quantity, and optional eero\/Sub selections above/);
 });
 
@@ -169,8 +170,6 @@ function createPlanner({
     "#eero-count": new Element(eeroCount),
     "#eero-price-hint": new Element(),
     "#plan-title": new Element(),
-    "#plan-tv": new Element(),
-    "#plan-tv-price": new Element(),
     "#plan-breakdown": new Element(),
     "#plan-total-label": new Element(),
     "#plan-total": new Element(),
@@ -621,12 +620,14 @@ test("recalculates every planner selection from the CSV-derived JSON price catal
             assert.equal(nodes["#plan-breakdown"].children[1].children[1].textContent,
               formatUSD(catalogPrice("FireTV", fireTvOption.textContent)));
             assert.equal(
+              nodes["#plan-breakdown"].children.filter((item) =>
+                item.children[0].textContent === fireTvOption.textContent).length,
+              1,
+            );
+            assert.equal(
               nodes["#fire-tv-price"].textContent,
               `Supplied ${fireTvOption.value === "cube" ? "cart example" : "price"}: ${formatUSD(catalogPrice("FireTV", fireTvOption.textContent))}`,
             );
-            assert.equal(nodes["#plan-tv"].textContent, fireTvOption.textContent);
-            assert.equal(nodes["#plan-tv-price"].textContent,
-              formatUSD(catalogPrice("FireTV", fireTvOption.textContent)));
             if (router) {
               assert.equal(
                 nodes["#plan-breakdown"].children[2].children[1].textContent,
@@ -648,6 +649,60 @@ test("recalculates every planner selection from the CSV-derived JSON price catal
             assert.equal(nodes["#plan-breakdown"].children.length, 2 + (router ? 1 : 0) + (includeSub ? 1 : 0));
           }
         }
+      }
+    }
+  }
+});
+
+test("lists the selected Fire TV exactly once in the planner result", async () => {
+  const resultPanel = htmlSource.split('<aside class="planner-result"').pop().split("</aside>")[0];
+
+  assert.match(resultPanel, /id="plan-title"/);
+  assert.match(resultPanel, /id="plan-breakdown"/);
+  assert.doesNotMatch(resultPanel, /id="plan-tv(?:-price)?"/);
+  assert.doesNotMatch(resultPanel, /class="plan-tv/);
+  assert.doesNotMatch(stylesSource, /\.plan-tv\b/);
+  assert.match(htmlSource, /id="fire-tv-price"/);
+
+  const { nodes, speakers, fireTvOptions } = createPlanner({ apiUrl: "" });
+  await new Promise(setImmediate);
+  nodes["#include-eero"].checked = false;
+  nodes["#include-sub"].checked = false;
+
+  for (const fireTv of fireTvOptions) {
+    for (const speaker of speakers) {
+      for (const speakerCount of ["2", "3", "4", "5"]) {
+        nodes["#fire-tv-choice"].selectedOptions = [fireTv];
+        for (const choice of speakers) choice.checked = choice === speaker;
+        nodes["#speaker-count"].value = speakerCount;
+        nodes["#speaker-count"].listeners.change();
+
+        const breakdown = nodes["#plan-breakdown"].children;
+        const itemNames = breakdown.map((item) => item.children[0].textContent);
+        assert.deepEqual(
+          itemNames.filter((name) => name === fireTv.textContent),
+          [fireTv.textContent],
+          `${fireTv.textContent} must appear exactly once for ${speakerCount} speakers`,
+        );
+        assert.equal(breakdown.length, 2);
+
+        const speakerPrice = Math.round(devicePriceCatalog.items.find((item) =>
+          item.deviceType === "Speaker" &&
+          item.deviceName === (speaker.value === "studio"
+            ? "Echo Studio (2025 release)"
+            : "Echo Dot Max")).price * 100);
+        const fireTvPrice = Math.round(devicePriceCatalog.items.find((item) =>
+          item.deviceType === "FireTV" && item.deviceName === fireTv.textContent).price * 100);
+
+        assert.equal(breakdown[1].children[1].textContent, formatUSD(fireTvPrice));
+        assert.equal(
+          nodes["#plan-total"].textContent,
+          formatUSD(speakerPrice * Number(speakerCount) + fireTvPrice),
+        );
+        assert.equal(
+          nodes["#fire-tv-price"].textContent,
+          `Supplied ${fireTv.value === "cube" ? "cart example" : "price"}: ${formatUSD(fireTvPrice)}`,
+        );
       }
     }
   }
@@ -857,7 +912,7 @@ test("shows unavailable prices and skips invalid catalog rows and display values
   await new Promise(setImmediate);
 
   assert.equal(nodes["#fire-tv-price"].textContent, "Fire TV price not provided.");
-  assert.equal(nodes["#plan-tv-price"].textContent, "Price not provided");
+  assert.equal(nodes["#plan-breakdown"].children[1].children[1].textContent, "Price not provided");
   assert.equal(nodes["#plan-total-label"].textContent, "Known subtotal");
   assert.equal(nodes["#plan-total"].textContent, "$259.99");
   assert.match(nodes["#plan-price-note"].textContent, /Prices not provided and excluded/);
