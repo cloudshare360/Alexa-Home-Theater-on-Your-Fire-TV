@@ -6,13 +6,14 @@ A beginner-friendly guide to building an Alexa Home Theater over time, improving
 
 [Visit the published website →](https://cloudshare360.github.io/Alexa-Home-Theater-on-Your-Fire-TV/)
 
-The site is a lightweight, static HTML/CSS website designed for GitHub Pages. It brings together:
+The site is a lightweight, static HTML/CSS/JavaScript website designed for GitHub Pages. It brings together:
 
 - Echo Dot Max and Echo Studio comparisons
 - Alexa Home Theater compatibility and setup basics
 - eero Built-in coverage and setup notes
 - Zigbee, Matter, and Thread smart-home overview
 - Cart-based price examples
+- An interactive configuration planner for Fire TV, Echo model and quantity, optional Echo Sub, and eero Pro 6E/Pro 7 with one-, two-, or three-unit choices
 
 ## Publish with GitHub Pages
 
@@ -24,7 +25,7 @@ The workflow at `.github/workflows/pages.yml` deploys the site when changes are 
 4. Open the **Actions** tab and check the **Deploy GitHub Pages** workflow.
 5. After it succeeds, open the Pages URL shown in the workflow deployment.
 
-The deployment workflow deliberately publishes only `index.html` and `styles.css`. It does not publish the `Temp-Images` cart screenshots, the conversation/source documents, or product-photo crops.
+The deployment workflow deliberately publishes only `index.html`, `styles.css`, and `planner.js`. It does not publish the `Temp-Images` cart screenshots, the conversation/source documents, or product-photo crops.
 
 ## Preview locally
 

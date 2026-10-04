@@ -30,7 +30,7 @@ jobs:
       - name: Prepare the public site
         run: |
           mkdir -p _site
-          cp index.html styles.css _site/
+          cp index.html styles.css planner.js _site/
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

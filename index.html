@@ -23,6 +23,7 @@
         <a href="#choose">Choose your speakers</a>
         <a href="#setup">Set up theater</a>
         <a href="#wifi">Wi-Fi & smart home</a>
+        <a href="#planner">Build a setup</a>
         <a href="#budget">Budget</a>
       </nav>
     </header>
@@ -203,7 +204,8 @@
             <h3>Extend an eero network</h3>
             <p>Amazon’s supplied product wording says a compatible Echo Studio with eero Built-in can add up to 1,000 sq. ft. of coverage to an existing eero network.</p>
             <div class="metric-row"><div><strong>Up to 1,000</strong><span>sq. ft. advertised</span></div><div><strong>eero only</strong><span>not a universal extender</span></div></div>
-            <p class="fine-print">Coverage varies. Not every Echo is a mesh node. Verify support for the exact model, eero system, software, and region. The supplied WIRED excerpt describes 5-GHz-only operation, speeds up to 100 Mbps, up to 10 devices, and recommends no more than four Echo extenders.</p>
+              <p class="fine-print">That advertised Echo extension is separate from choosing the eero router system itself. An eero mesh kit uses dedicated routers/nodes; Echo eero Built-in support depends on the Echo model and current compatibility.</p>
+              <p class="fine-print">Coverage varies. Not every Echo is a mesh node. Verify support for the exact model, eero system, software, and region. The supplied WIRED excerpt describes 5-GHz-only operation, speeds up to 100 Mbps, up to 10 devices, and recommends no more than four Echo extenders.</p>
             <details class="compat-details">
               <summary>Compatibility details from the supplied article excerpt</summary>
               <p>The excerpt lists eero gateways including eero Pro 6E, eero 6+, eero Pro 6, eero 6, eero Pro, and eero, plus Echo Dot and Echo (4th and 5th generation variants). It says eero Built-in was available in the US and Canada and cites eero software 6.12.1 or later at the time of that article. This may not be the current support list; the project’s separate Amazon note names Echo Studio, so verify current support in eero documentation or the app.</p>
@@ -220,6 +222,29 @@
             </ul>
             <p class="fine-print">Protocol support does not guarantee every feature works with every product. Some devices may still need another hub or their own app.</p>
           </article>
+        </div>
+
+        <div class="eero-compare">
+          <div class="eero-compare-heading">
+            <p class="eyebrow">eero mesh / choose your generation</p>
+            <h3>Pro 6E or Pro 7?</h3>
+            <p>Both are eero mesh-router families. Pro 7 is the Wi-Fi 7 generation; Pro 6E is Wi-Fi 6E. Choose based on your internet plan, client devices, home layout, and budget.</p>
+          </div>
+          <div class="eero-models">
+            <article class="eero-model">
+              <span class="eero-generation">Wi-Fi 6E</span>
+              <h4>eero Pro 6E</h4>
+              <p>Tri-band Wi-Fi 6E mesh system. The supplied cart screenshot shows a 2-unit set for <b>$259.99</b>.</p>
+              <span class="model-price">Known example: $259.99 / 2-unit set</span>
+            </article>
+            <article class="eero-model model-new">
+              <span class="eero-generation">Wi-Fi 7</span>
+              <h4>eero Pro 7</h4>
+              <p>Newer Wi-Fi 7 mesh generation. No Pro 7 price was included in the supplied cart screenshots.</p>
+              <span class="model-price">Price not provided</span>
+            </article>
+          </div>
+          <p class="editor-note">The planner supports 1-, 2-, and 3-unit selections for either model. It only prices the Pro 6E 2-unit set from the supplied screenshot; it does not extrapolate a single-unit, 3-unit, or Pro 7 price. Compare current technical specifications and coverage with <a href="https://support.eero.com/" target="_blank" rel="noopener">eero support</a> before buying.</p>
         </div>
 
         <div class="wifi-howto">
@@ -242,11 +267,105 @@
         </p>
       </section>
 
+      <section class="planner-section" id="planner">
+        <div class="section-wrap">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">04 / Build your configuration</p>
+              <h2>Your room.<br><em>Your combination.</em></h2>
+            </div>
+            <p class="section-intro">
+              Choose one compatible Fire TV model and one Echo speaker model.
+              Adjust the speaker quantity and optionally add an Echo Sub to see
+              a planning estimate based on the prices collected so far.
+            </p>
+          </div>
+          <div class="planner-card" id="configuration-planner">
+            <form class="planner-controls">
+              <label class="planner-field">
+                <span class="field-number">01</span>
+                <span class="field-copy"><strong>Choose your Fire TV</strong><small>Select one device</small></span>
+                <select id="fire-tv-choice" name="fire-tv">
+                  <option value="cube" data-price="89.99">Fire TV Cube (3rd Generation)</option>
+                  <option value="stick-max" data-price="">Fire TV Stick 4K Max (2nd Generation)</option>
+                  <option value="stick-4k" data-price="">Fire TV Stick 4K (2nd Generation)</option>
+                  <option value="stick-plus" data-price="">Fire TV Stick 4K Plus</option>
+                </select>
+              </label>
+              <fieldset class="planner-field speaker-choice">
+                <legend><span class="field-number">02</span><span class="field-copy"><strong>Choose your Echo speakers</strong><small>One model per theater; mixed models are not supported</small></span></legend>
+                <div class="choice-options">
+                  <label class="choice-option">
+                    <input type="radio" name="speaker-model" value="dot-max" data-price="79.99" checked>
+                    <span><b>Echo Dot Max</b><small>$79.99 each · cart example</small></span>
+                  </label>
+                  <label class="choice-option">
+                    <input type="radio" name="speaker-model" value="studio" data-price="179.99">
+                    <span><b>Echo Studio (2025 release)</b><small>$179.99 each · cart example</small></span>
+                  </label>
+                </div>
+              </fieldset>
+              <label class="planner-field">
+                <span class="field-number">03</span>
+                <span class="field-copy"><strong>How many speakers?</strong><small>Choose between two and five</small></span>
+                <select id="speaker-count" name="speaker-count">
+                  <option value="2">2 speakers</option>
+                  <option value="3">3 speakers</option>
+                  <option value="4" selected>4 speakers</option>
+                  <option value="5">5 speakers</option>
+                </select>
+              </label>
+              <fieldset class="eero-choice">
+                <legend><span class="field-number">04</span><span class="field-copy"><strong>Choose an eero mesh system</strong><small>Compare Pro 6E and Pro 7; choose 1, 2, or 3 units</small></span></legend>
+                <label class="sub-option eero-toggle" for="include-eero">
+                  <input id="include-eero" type="checkbox" checked>
+                  <span class="sub-check" aria-hidden="true">⌁</span>
+                  <span><b>Include an eero mesh system</b><small>Uncheck if you already have a compatible eero system</small></span>
+                </label>
+                <div class="eero-picks" id="eero-picks">
+                  <label class="eero-field" for="eero-model">
+                    <span>eero model</span>
+                    <select id="eero-model" name="eero-model">
+                      <option value="pro-6e">eero Pro 6E · Wi-Fi 6E</option>
+                      <option value="pro-7">eero Pro 7 · Wi-Fi 7</option>
+                    </select>
+                  </label>
+                  <label class="eero-field" for="eero-count">
+                    <span>system size</span>
+                    <select id="eero-count" name="eero-count">
+                      <option value="1">1 unit</option>
+                      <option value="2" selected>2-unit set</option>
+                      <option value="3">3-unit set</option>
+                    </select>
+                  </label>
+                  <p class="eero-price-hint" id="eero-price-hint">Supplied cart screenshot: Pro 6E 2-pack at $259.99. Other prices have not been provided.</p>
+                </div>
+              </fieldset>
+              <label class="sub-option">
+                <input id="include-sub" type="checkbox">
+                <span class="sub-check" aria-hidden="true">+</span>
+                <span><b>Add an Echo Sub</b><small>$129.99 · optional, based on cart example</small></span>
+              </label>
+            </form>
+            <aside class="planner-result" aria-live="polite" aria-atomic="true">
+              <p class="card-kicker">Your selected setup</p>
+              <h3 id="plan-title">4 Echo Dot Max speakers</h3>
+              <p class="plan-tv" id="plan-tv">Fire TV Cube (3rd Generation)</p>
+              <ul class="plan-breakdown" id="plan-breakdown"></ul>
+              <div class="plan-total-row"><span id="plan-total-label">Estimated equipment subtotal</span><strong id="plan-total">$0.00</strong></div>
+              <p class="plan-price-note" id="plan-price-note"></p>
+              <p class="planner-disclaimer">Price estimates use the supplied cart screenshots; they are not live prices and exclude tax and other items. Unavailable prices are omitted from the known subtotal. Verify exact Fire TV/Echo pairing with Amazon: supported speaker counts may vary by Fire TV model.</p>
+              <a class="button button-light" href="https://www.amazon.com/gp/help/customer/display.html?nodeId=TWcIor5YmepcPzYSah" target="_blank" rel="noopener">Check device compatibility <span aria-hidden="true">↗</span></a>
+            </aside>
+          </div>
+        </div>
+      </section>
+
       <section class="budget-section" id="budget">
         <div class="section-wrap">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">04 / Spend at your pace</p>
+              <p class="eyebrow">05 / Spend at your pace</p>
               <h2>Start small.<br><em>Grow your setup.</em></h2>
             </div>
             <p class="section-intro">
@@ -336,5 +455,6 @@
         </div>
       </div>
     </footer>
+    <script src="planner.js" defer></script>
   </body>
-</html>
+  </html>
