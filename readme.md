@@ -1,1 +1,41 @@
-Home Theater - every common man dream in living room tv
+# Living Room, Levelled Up
+
+A beginner-friendly guide to building an Alexa Home Theater over time, improving eero Wi-Fi coverage, and connecting compatible smart-home devices.
+
+## Website
+
+The site is a lightweight, static HTML/CSS website designed for GitHub Pages. It brings together:
+
+- Echo Dot Max and Echo Studio comparisons
+- Alexa Home Theater compatibility and setup basics
+- eero Built-in coverage and setup notes
+- Zigbee, Matter, and Thread smart-home overview
+- Cart-based price examples
+
+## Publish with GitHub Pages
+
+The workflow at `.github/workflows/pages.yml` deploys the site when changes are pushed to `main` or when manually started from GitHub Actions.
+
+1. Push the site files to the repository's `main` branch.
+2. In the GitHub repository, open **Settings → Pages**.
+3. Set the publishing source to **GitHub Actions**.
+4. Open the **Actions** tab and check the **Deploy GitHub Pages** workflow.
+5. After it succeeds, open the Pages URL shown in the workflow deployment.
+
+The deployment workflow deliberately publishes only `index.html` and `styles.css`. It does not publish the `Temp-Images` cart screenshots, the conversation/source documents, or product-photo crops.
+
+## Preview locally
+
+From the repository root, run:
+
+```sh
+python3 -m http.server 8000
+```
+
+Then open <http://localhost:8000>.
+
+## Source notes
+
+The device details and setup instructions are based on supplied comparison imagery and pasted excerpts from Amazon and WIRED. Prices are examples from cart screenshots, not current offers. Compatibility, app steps, specifications, and prices can change; check manufacturer sources before buying or setting up devices.
+
+Detailed working notes remain under [`docs/sources/`](docs/sources/), including [Alexa Home Theater setup](docs/sources/alexa-home-theater-amazon-help.md), [eero Built-in](docs/sources/eero-built-in-echo-speakers.md), [Echo Studio Wi-Fi and smart-home capabilities](docs/sources/echo-studio-wifi-smart-home.md), and [shopping costs](docs/sources/home-theater-shopping-costs.md).
