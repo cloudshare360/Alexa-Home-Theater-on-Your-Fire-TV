@@ -431,3 +431,35 @@ Asked for the unit and integration test cases to be updated, everything verified
 ### Assistant
 
 Confirmed the duplicate was a display issue only: the total already counted the Fire TV once, but the result panel showed it in both a summary row and the itemized breakdown. The summary row and its styles were removed, leaving one Fire TV line with its price and source in the breakdown. Removed a duplicated title assignment left in `planner.js` and added a test that asserts the selected Fire TV appears exactly once across every Fire TV, speaker model, and speaker count combination, that the total adds it once, that no `plan-tv` markup or styles remain, and that the selector hint still shows its source and price. Verified with 26 passing tests at 100% statement, branch, function, and line coverage for `planner.js`, plus a browser check of the rendered planner showing one Fire TV row and correct totals with and without the eero pack and Echo Sub. Committed the change and pushed it to `main` so the Pages workflow can redeploy.
+
+## All-in-one solution, hub protocols, and eero extension
+
+### User
+
+Pasted research comparing smart-home hub protocols for Echo Studio and Echo Dot Max, with citations to Amazon's Thread and Matter documentation and its Zigbee help article. It reported that both models are Matter-enabled with Thread 1.3 Border Routers, that eero 7 is also a Thread Border Router, and that neither model is documented as a Zigbee hub.
+
+### User
+
+Asked for the home page to present this as an all-in-one solution providing a smart home hub with the listed protocols, and to extend an eero Pro 6E network with an Echo Dot.
+
+### User
+
+Added that Home Theater should be part of the all-in-one framing.
+
+### User
+
+Supplied a Best Buy Tech Tips video, "Extend Your Wi-Fi with eero and Amazon", as a reference.
+
+### Assistant
+
+Reframed the Wi-Fi and smart-home section as one all-in-one living-room plan and added a three-card role strip covering Home Theater, eero mesh Wi-Fi, and the smart-home hub. Replaced the earlier protocol list with a capability table read from Amazon's Alexa smart-home developer documentation on October 4, 2026: Matter over Wi-Fi and Thread, Thread 1.3 Border Router, Bluetooth used for setup, and Alexa smart-home control listed for both models; Zigbee shown as not listed; and Home Theater audio compared for the two models. Added the note that eero 7 and eero Max 7 are also listed as Thread Border Routers, so an Echo Studio, an Echo Dot Max, and an eero 7 can provide several. Reworded the coverage card to cover extending an eero Pro 6E with a compatible Echo, including a caution that Echo Dot Max eligibility must be checked rather than assumed, and added the supplied video as an unreviewed visual reference.
+
+Verified the protocol lists against Amazon's Thread and Matter pages and recorded them in a new source note. Corrected the earlier Zigbee claim for Echo Studio, which current Amazon documentation does not support, and noted that a separate hub or bridge such as an Echo Hub is needed for Zigbee accessories.
+
+### User
+
+Supplied a second video reference, "Your Echo Can Do THIS? Set Up Your Own Surround Sound With Alexa Home Theater", and asked for it to be added.
+
+### Assistant
+
+Added it to the Alexa Home Theater setup section as a supplied video reference, with the same caveat that it was not reviewed and that Amazon's current on-device steps should be followed, and recorded the link in the Amazon Home Theater source note. During browser checks of the new content, found and fixed a 58-pixel horizontal overflow at 390 pixels caused by the new capability table sizing its grid column, and raised the contrast of the card body, fine print, and citation text in the Wi-Fi and smart-home cards to at least 4.7:1. Verified the role strip collapses to one column on small screens, the capability table scrolls inside its card, and the suite passes with 27 tests at 100% coverage.

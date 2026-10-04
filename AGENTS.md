@@ -22,8 +22,8 @@ No bundler, no runtime dependencies, no framework. Plain HTML/CSS/JavaScript. No
 | `device-prices.csv` | Editable price table — one row per device or router pack |
 | `device-prices.json` | Browser-consumed conversion of the CSV |
 | `prices.json` | Per-key `source` labels, `previousAmount` values, and named `configurations` |
-| `tests/planner.test.cjs` | Node built-in test runner + `vm` with a mocked DOM; 26 tests |
-| `docs/sources/*.md` | Topic research notes (Amazon help, eero Built-in, Echo comparison, shopping costs, live-pricing architecture) |
+| `tests/planner.test.cjs` | Node built-in test runner + `vm` with a mocked DOM; 27 tests |
+| `docs/sources/*.md` | Topic research notes (Amazon help, eero Built-in, Echo comparison, shopping costs, hub protocols, live-pricing architecture) |
 | `docs/conversations/2026-10-04-home-theater-planning.md` | Chronological transcript of the planning conversation |
 | `Temp-Images/`, `docs/sources/images/` | Local-only research assets, gitignored |
 | `scripts/` | Untracked local tooling; leave untracked unless asked |
@@ -55,7 +55,7 @@ Run before reporting work as done (`/verify` wraps this):
 
 ```sh
 npm ci                  # once per fresh checkout
-npm run test:coverage   # 26 tests + 100% coverage gate
+npm run test:coverage   # 27 tests + 100% coverage gate
 node --check planner.js
 node -e "for (const f of ['device-prices.json','prices.json']) JSON.parse(require('fs').readFileSync(f))"
 git diff --check
@@ -83,7 +83,9 @@ For page-level behavior: `python3 -m http.server 8000` from the repo root, then 
 
 Shipped: affordable starter framing (Fire TV Stick 4K 2nd Gen + 2 × Echo Dot Max = $197.97, optional eero Pro 6E 1-pack = $347.96), the interactive planner, `home-theater.html` layouts, a `#budget` section whose Dot Max and Studio cards follow the live planner selections, the CSV-derived catalog with `previousAmount` metadata, the dormant live-offer integration, and the CI coverage gate.
 
-Verified baseline: `npm run test:coverage` passes 26 tests at 100% coverage on `planner.js`. The rendered planner was checked in Chromium locally and on the published Pages URL after deploying `1b8b2ba`: one Fire TV row in every selection, totals `$197.97` (2 × Dot Max + Fire TV Stick 4K) and `$1,119.93` (5 × Studio + Fire TV Cube + Echo Sub), and no script errors with eero unchecked. The only console entry is a `favicon.ico` 404.
+Verified baseline: `npm run test:coverage` passes 27 tests at 100% coverage on `planner.js`. The rendered planner was checked in Chromium locally and on the published Pages URL after deploying `1b8b2ba`: one Fire TV row in every selection, totals `$197.97` (2 × Dot Max + Fire TV Stick 4K) and `$1,119.93` (5 × Studio + Fire TV Cube + Echo Sub), and no script errors with eero unchecked. The only console entry is a `favicon.ico` 404.
+
+The `#wifi` section presents the all-in-one plan as three roles — Home Theater, eero mesh Wi-Fi, and smart-home hub — with a capability table sourced from Amazon's Alexa smart-home developer documentation (read October 4, 2026). Two video references are listed as supplied, unreviewed material.
 
 Open items for whoever continues:
 
@@ -92,7 +94,8 @@ Open items for whoever continues:
 3. **Live pricing** stays front-end only until a compliant backend exists. `pricing-config.js` `apiUrl` is intentionally empty.
 4. **Unused catalog metadata.** `prices.json` still defines `dot-max-cart`, `studio-cart`, `four-dot-max-speakers`, `four-studio-speakers`, `five-dot-max`, and `five-studio`, which no longer render anywhere in the page. They are only covered by tests. Remove them together with their test assertions, or restore the historical cart section deliberately.
 5. **Catalog conversion is manual.** If the catalog keeps growing, add a small CSV→JSON generator and a test for its parity.
-6. **Workflow hygiene.** `actions/checkout@v4`, `actions/setup-node@v4`, `actions/configure-pages@v5`, `actions/upload-pages-artifact@v3`, and `actions/deploy-pages@v4` emit Node.js 20 deprecation warnings; bump them when convenient.
+6. **Small-text contrast outside the Wi-Fi section.** `.starter-item small`, `.starter-disclaimer`, `.metric-row span`, `.field-copy small`, `.choice-option small`, `.sub-option small`, `.budget-starter-disclaimer`, and `.layout-key .fine-print` still sit between 3.0:1 and 4.4:1. The Wi-Fi and smart-home cards were raised to at least 4.7:1; apply the same treatment when touching those areas.
+7. **Workflow hygiene.** `actions/checkout@v4`, `actions/setup-node@v4`, `actions/configure-pages@v5`, `actions/upload-pages-artifact@v3`, and `actions/deploy-pages@v4` emit Node.js 20 deprecation warnings; bump them when convenient.
 
 ## Skills
 

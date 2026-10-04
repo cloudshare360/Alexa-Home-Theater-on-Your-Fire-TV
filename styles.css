@@ -175,6 +175,8 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
 .tip-icon { color: #f2a27b; font-size: 19px; line-height: 1; }
 .tip-row p { margin-bottom: 0; color: #aab4c1; font-size: 10px; line-height: 1.7; }
 .tip-row b { color: var(--white); }
+.dark-section .fine-print { margin: 20px 0 0; color: #9ba8b7; font-size: 10px; line-height: 1.7; }
+.dark-section .fine-print a { color: #ffd1b8; font-weight: 700; }
 .troubleshooting { margin-top: 28px; border-top: 1px solid rgb(255 255 255 / 13%); border-bottom: 1px solid rgb(255 255 255 / 13%); }
 .troubleshooting summary, .compat-details summary { padding: 16px 0; cursor: pointer; color: #f0a17a; font-size: 11px; font-weight: 700; }
 .troubleshooting-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 17px 30px; padding: 0 0 20px; }
@@ -183,28 +185,34 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
 .troubleshooting-grid p b { color: #e8edf2; }
 
 .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-.feature-card { padding: 31px; border: 1px solid var(--line); border-radius: 13px; background: var(--white); }
+.role-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 18px; }
+.role-card { display: flex; flex-direction: column; gap: 9px; padding: 26px 28px; border: 1px solid var(--line); border-radius: 13px; background: var(--white); }
+.role-icon { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 11px; color: white; background: var(--navy); font-size: 17px; }
+.role-card h3 { margin: 0; font-size: 19px; }
+.role-card p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.7; }
+.role-card .text-link { margin-top: auto; font-size: 11px; }
+.feature-card { min-width: 0; padding: 31px; border: 1px solid var(--line); border-radius: 13px; background: var(--white); }
 .wifi-card { background: #eef2eb; }
 .hub-card { background: #f2ede7; }
 .feature-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; }
 .feature-icon { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 12px; color: white; background: var(--navy); font-size: 20px; }
 .feature-label { color: #8992a0; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .feature-card h3 { margin-bottom: 11px; font-size: 24px; }
-.feature-card > p { color: var(--muted); font-size: 11px; line-height: 1.75; }
+.feature-card > p { color: #5f6a7c; font-size: 11px; line-height: 1.75; }
 .metric-row { display: grid; grid-template-columns: 1fr 1fr; margin: 20px 0; padding: 16px 0; border-block: 1px solid rgb(20 32 51 / 11%); }
 .metric-row > div { display: flex; flex-direction: column; gap: 2px; }
 .metric-row strong { font-family: var(--font-display); font-size: 16px; }
 .metric-row span { color: #798596; font-size: 9px; }
-.feature-card .fine-print { margin: 17px 0 0; color: #818b99; font-size: 9px; line-height: 1.7; }
+.feature-card .fine-print { margin: 17px 0 0; color: #5c6779; font-size: 9px; line-height: 1.7; }
 .compat-details { margin-top: 12px; padding-top: 3px; border-top: 1px solid rgb(20 32 51 / 11%); }
 .compat-details summary { padding: 12px 0 6px; color: #536176; font-size: 9px; }
-.compat-details p { margin-bottom: 0; color: #798596; font-size: 9px; line-height: 1.7; }
-.protocol-list { display: grid; gap: 12px; margin: 20px 0 0; padding: 0; list-style: none; }
-.protocol-list li { display: flex; align-items: center; gap: 12px; }
-.protocol-badge { display: grid; width: 30px; height: 30px; flex: 0 0 30px; place-items: center; border: 1px solid #d8d2c9; border-radius: 50%; color: #596579; font-family: var(--font-display); font-size: 11px; font-weight: 700; }
-.protocol-list div { display: flex; flex-direction: column; }
-.protocol-list b { font-size: 11px; }
-.protocol-list small { color: #798596; font-size: 9px; }
+.compat-details p { margin-bottom: 0; color: #5c6779; font-size: 9px; line-height: 1.7; }
+.protocol-table-wrap { margin-top: 20px; overflow-x: auto; }
+.protocol-table { width: 100%; border-collapse: collapse; font-size: 10px; }
+.protocol-table th, .protocol-table td { padding: 9px 8px; border-bottom: 1px solid rgb(20 32 51 / 10%); text-align: left; line-height: 1.5; }
+.protocol-table thead th { color: #596579; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.protocol-table tbody th { color: #3c4757; font-weight: 600; }
+.protocol-table td { color: #525c6b; white-space: nowrap; }
 .wifi-howto { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 18px; padding: 28px 31px; border-radius: 12px; color: var(--white); background: var(--navy-soft); }
 .wifi-howto .eyebrow { margin-bottom: 11px; color: #f2a27b; font-size: 9px; }
 .wifi-howto h3 { max-width: 420px; margin-bottom: 8px; font-size: 21px; }
@@ -213,6 +221,7 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
 .wifi-howto li::marker { color: #f2a27b; font-weight: 700; }
 .wifi-howto b { color: white; }
 .wifi-howto a { color: #ffd1b8; }
+.wifi-howto .fine-print { margin-top: 10px; color: #9dabb9; font-size: 9px; }
 .climate-howto { margin-top: 12px; }
 .climate-howto ol { align-content: start; }
 
@@ -411,6 +420,7 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
   .starter-section { grid-template-columns: 1fr 1fr; gap: 24px; }
   .starter-bundle { padding: 20px; }
   .speaker-card { grid-template-columns: 1fr; }
+  .role-strip { grid-template-columns: 1fr; }
   .speaker-image { min-height: 180px; }
   .speaker-illustration { width: 150px; }
   .speaker-content { padding: 5px 24px 25px; }
@@ -468,6 +478,8 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
   .tip-row { grid-template-columns: 1fr; gap: 16px; }
   .troubleshooting-grid { grid-template-columns: 1fr; gap: 13px; }
   .feature-card { padding: 24px; }
+  .role-card { padding: 22px 20px; }
+  .protocol-table { min-width: 340px; }
   .wifi-howto { grid-template-columns: 1fr; gap: 17px; padding: 24px; }
   .budget-section { padding-block: 70px; }
   .planner-section { padding-block: 70px; }

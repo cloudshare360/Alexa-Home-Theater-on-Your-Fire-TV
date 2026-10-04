@@ -79,6 +79,22 @@ According to the supplied article, compatible Echo devices added later may exten
 - This extends an eero network; it is not described as a general-purpose extender for arbitrary router brands.
 - If streaming or theater playback remains unreliable, check network conditions and device placement as well as the speaker's eero Built-in status.
 
+## Extending an eero Pro 6E with an Echo Dot
+
+To extend an eero Pro 6E network with an Echo Dot, confirm the exact Echo Dot generation appears in the eligible-device list in the eero app before buying. The list in the supplied excerpt contains Echo Dot and Echo (4th and 5th generation variants). Do not assume a newer model such as Echo Dot Max is eligible because it is newer; check the current list, since support has been added and revised between releases.
+
+## Related protocol roles
+
+Mesh extension and Thread Border Router support are different features. Amazon's current smart-home documentation lists eero 7 and eero Max 7 as Thread Border Routers alongside Echo Studio (2025 release) and Echo Dot Max (2025 release), so a home can have more than one Thread Border Router. That does not change the eero Built-in rules above. See [Smart-home Hub Protocols for Echo Studio and Echo Dot Max](./smart-home-hub-protocols.md).
+
+## Supplied video reference
+
+The user supplied this video as background reading on extending Wi-Fi with eero and Amazon:
+
+- Best Buy Tech Tips: "Extend Your Wi-Fi with eero and Amazon" — <https://www.youtube.com/watch?v=8H9_yqgXJ9w>
+
+The video was not reviewed while writing this guide and no statement here is sourced from it. Treat it as a place to check for a current visual walkthrough, and confirm any specific claim in current eero or Amazon documentation before repeating it.
+
 ## Related project guide
 
 See [Echo Studio, Wi-Fi Coverage, and Smart Home Hub](./echo-studio-wifi-smart-home.md) for how network extension relates to a broader Echo Studio and home-theater setup.

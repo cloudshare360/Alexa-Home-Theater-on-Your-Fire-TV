@@ -98,6 +98,62 @@ test("starts planner at two Dot Max speakers with selectable Studio, Fire TV, an
   assert.match(htmlSource, /Updates with the Fire TV, speaker quantity, and optional eero\/Sub selections above/);
 });
 
+test("presents the all-in-one living room roles with documented hub protocols", () => {
+  const wifiSection = htmlSource.split('<section class="content-section section-wrap" id="wifi">')[1]
+    .split("<section")[0];
+
+  assert.match(wifiSection, /One all-in-one living-room plan/);
+  assert.match(wifiSection, /Each capability needs compatible hardware and its own setup/);
+  assert.match(wifiSection, /class="role-strip"/);
+  for (const role of [/Home Theater/, /eero mesh Wi-Fi/, /Smart-home hub/]) {
+    assert.match(wifiSection, role);
+  }
+  assert.match(wifiSection, /href="#hub-protocols"/);
+  assert.match(wifiSection, /id="hub-protocols"/);
+  assert.match(wifiSection, /Extend an eero network with a compatible Echo/);
+  assert.match(wifiSection, /Extend an eero Pro 6E mesh network with a compatible Echo speaker/);
+  assert.match(wifiSection, /Do not assume Echo Dot Max is eligible/);
+
+  const hubCard = wifiSection.split('id="hub-protocols"')[1].split("</article>")[0];
+  assert.match(hubCard, /Echo Studio \(1st Gen and newer, 2025 release\) and Echo Dot Max \(2025 release\)/);
+  assert.match(hubCard, /built-in Thread 1\.3 Border Routers/);
+  for (const row of [
+    /Matter, over Wi-Fi and Thread/,
+    /Thread Border Router/,
+    /Bluetooth used for setup/,
+    /Alexa smart-home control/,
+    /Zigbee hub/,
+    /Alexa Home Theater audio/,
+  ]) {
+    assert.match(hubCard, row);
+  }
+  assert.equal((hubCard.match(/<td>Not listed<\/td>/g) ?? []).length, 2);
+  assert.equal((hubCard.match(/<td>Listed<\/td>/g) ?? []).length, 6);
+  assert.match(hubCard, /eero 7 and eero Max 7 are also listed as Thread Border Routers/);
+  assert.match(hubCard, /separate bridge or hub such as an Echo Hub/);
+  assert.match(hubCard, /developer\.amazon\.com\/docs\/alexaplus\/smarthome\/thread-support\.html/);
+  assert.match(hubCard, /developer\.amazon\.com\/docs\/alexaplus\/smarthome\/matter-support\.html/);
+  assert.match(hubCard, /nodeId=G8LQHC9R2S736XUQ/);
+  assert.match(hubCard, /Read from Amazon’s documentation in October 2026/);
+  assert.doesNotMatch(hubCard, /Supported lights, switches, locks/);
+
+  assert.match(wifiSection, /youtube\.com\/watch\?v=8H9_yqgXJ9w/);
+  assert.match(wifiSection, /It was not reviewed for this guide/);
+  const setupSection = htmlSource.split('<section class="dark-section" id="setup">')[1].split("</section>")[0];
+  assert.match(setupSection, /youtube\.com\/watch\?v=47ayN08x0D4/);
+  assert.match(setupSection, /Your Echo Can Do THIS\? Set Up Your Own Surround Sound With Alexa Home Theater/);
+  assert.match(setupSection, /follow Amazon’s current setup steps on the Fire TV rather than the video/);
+  assert.match(stylesSource, /\.role-strip \{[^}]*grid-template-columns: repeat\(3, 1fr\)/);
+  assert.match(stylesSource, /\.protocol-table-wrap \{[^}]*overflow-x: auto/);
+  assert.match(stylesSource, /\.protocol-table \{[^}]*border-collapse: collapse/);
+  assert.match(stylesSource, /\.feature-card \{[^}]*min-width: 0/);
+  assert.match(stylesSource, /\.dark-section \.fine-print a \{[^}]*color/);
+  assert.match(stylesSource, /\.feature-card \.fine-print \{[^}]*color: #5c6779/);
+  assert.match(stylesSource, /\.feature-card > p \{[^}]*color: #5f6a7c/);
+  assert.match(stylesSource, /\.compat-details p \{[^}]*color: #5c6779/);
+  assert.doesNotMatch(stylesSource, /\.protocol-list|\.protocol-badge/);
+});
+
 test("publishes illustrative two-to-five speaker layouts with an optional Echo Sub", () => {
   assert.match(htmlSource, /href="home-theater\.html"/);
   assert.match(homeTheaterSource, /<meta name="viewport" content="width=device-width, initial-scale=1">/);

@@ -115,3 +115,11 @@ The supplied content listed a video guide section but did not include its video 
 - [Play Audio from Your Fire TV on Your Echo Devices](https://www.amazon.com/gp/help/customer/display.html?nodeId=GDFMQWDYT5MCAEA4)
 
 Amazon's page also links to its [Echo Sub setup instructions](https://www.amazon.com/gp/help/customer/display.html?nodeId=GEFZ4LXXFASPF4MF) and [Fire TV/Echo compatibility list](https://www.amazon.com/gp/help/customer/display.html?nodeId=TWcIor5YmepcPzYSah); consult those pages for device-specific or updated details.
+
+## Supplied video reference
+
+The user supplied this third-party video as background reading on setting up surround sound with Alexa Home Theater:
+
+- "Your Echo Can Do THIS? Set Up Your Own Surround Sound With Alexa Home Theater" — <https://www.youtube.com/watch?v=47ayN08x0D4>
+
+The video was not reviewed while writing this guide, and no setup step, compatibility claim, or supported-configuration statement here is sourced from it. It is listed on the site only as a visual reference, with a pointer back to Amazon's current on-device steps. Treat any detail it shows as unverified until it matches Amazon's current guidance.

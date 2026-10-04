@@ -211,6 +211,7 @@
             <div><span class="tip-icon">◉</span><p><b>For lip sync:</b> use Lip Sync Tuning in Alexa Home Theater settings.</p></div>
             <div><span class="tip-icon">↔</span><p><b>For TV audio:</b> HDMI ARC can route TV and connected-source audio through Echo speakers on compatible equipment.</p></div>
           </div>
+          <p class="fine-print">Supplied video reference: <a href="https://www.youtube.com/watch?v=47ayN08x0D4" target="_blank" rel="noopener">Your Echo Can Do THIS? Set Up Your Own Surround Sound With Alexa Home Theater</a>. It was not reviewed for this guide, so follow Amazon’s current setup steps on the Fire TV rather than the video.</p>
           <details class="troubleshooting">
             <summary>Setup not working? Start with these checks</summary>
             <div class="troubleshooting-grid">
@@ -230,35 +231,72 @@
             <h2>One living room.<br><em>More connected.</em></h2>
           </div>
           <p class="section-intro">
-            A compatible Echo Studio can play multiple roles—but theater pairing,
-            eero extension, and smart-device setup are separate features, each
-            with its own compatibility requirements.
+            One all-in-one living-room plan: a supported Fire TV with matching
+            Echo speakers for Alexa Home Theater, an eero mesh network you can
+            extend with a compatible Echo, and Matter and Thread smart-home
+            control. Each capability needs compatible hardware and its own setup.
           </p>
+        </div>
+
+        <div class="role-strip">
+          <article class="role-card">
+            <span class="role-icon" aria-hidden="true">▶</span>
+            <h3>Home Theater</h3>
+            <p>A supported Fire TV plus two to five matching Echo speakers forms an Alexa Home Theater system. Supported speaker counts depend on the Fire TV model, and speaker models cannot be mixed.</p>
+            <a class="text-link" href="home-theater.html">See room layouts <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="role-card">
+            <span class="role-icon" aria-hidden="true">⌁</span>
+            <h3>eero mesh Wi-Fi</h3>
+            <p>Start with an eero Pro 6E or Pro 7 pack, then extend an eero Pro 6E network with a compatible Echo placed where it still has a useful eero signal.</p>
+            <a class="text-link" href="#budget">Compare router packs <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="role-card">
+            <span class="role-icon" aria-hidden="true">⌘</span>
+            <h3>Smart-home hub</h3>
+            <p>Echo Studio and Echo Dot Max are documented as Matter-enabled devices with built-in Thread 1.3 Border Routers, so many compatible accessories can join without a separate hub.</p>
+            <a class="text-link" href="#hub-protocols">Compare protocols <span aria-hidden="true">→</span></a>
+          </article>
         </div>
 
         <div class="feature-grid">
           <article class="feature-card wifi-card">
             <div class="feature-top"><span class="feature-icon">⌁</span><span class="feature-label">Wi-Fi coverage</span></div>
-            <h3>Extend an eero network</h3>
-            <p>Amazon’s supplied product wording says a compatible Echo Studio with eero Built-in can add up to 1,000 sq. ft. of coverage to an existing eero network.</p>
+            <h3>Extend an eero network with a compatible Echo</h3>
+            <p>Extend an eero Pro 6E mesh network with a compatible Echo speaker. Amazon’s supplied product wording says a compatible Echo Studio with eero Built-in can add up to 1,000 sq. ft. of coverage to an existing eero network.</p>
             <div class="metric-row"><div><strong>Up to 1,000</strong><span>sq. ft. advertised</span></div><div><strong>eero only</strong><span>not a universal extender</span></div></div>
               <p class="fine-print">That advertised Echo extension is separate from choosing the eero router system itself. An eero mesh kit uses dedicated routers/nodes; Echo eero Built-in support depends on the Echo model and current compatibility.</p>
-              <p class="fine-print">Coverage varies. Not every Echo is a mesh node. Verify support for the exact model, eero system, software, and region. For Echo Dot Max specifically, do not assume eero Built-in support until it appears in eero’s current eligible-device list. Place a compatible extender where it still gets a useful eero signal—not deep inside the dead zone. The supplied WIRED excerpt describes 5-GHz-only operation, speeds up to 100 Mbps, up to 10 devices, and recommends no more than four Echo extenders.</p>
+              <p class="fine-print">Coverage varies. Not every Echo is a mesh node. Verify support for the exact model, eero system, software, and region. Place a compatible extender where it still gets a useful eero signal—not deep inside the dead zone. The supplied WIRED excerpt describes 5-GHz-only operation, speeds up to 100 Mbps, up to 10 devices, and recommends no more than four Echo extenders.</p>
             <details class="compat-details">
               <summary>Compatibility details from the supplied article excerpt</summary>
               <p>The excerpt lists eero gateways including eero Pro 6E, eero 6+, eero Pro 6, eero 6, eero Pro, and eero, plus Echo Dot and Echo (4th and 5th generation variants). It says eero Built-in was available in the US and Canada and cites eero software 6.12.1 or later at the time of that article. This may not be the current support list; the project’s separate Amazon note names Echo Studio, so verify current support in eero documentation or the app.</p>
+              <p>To extend an eero Pro 6E with an Echo Dot, confirm the exact Echo Dot generation appears in the eligible-device list in the eero app before buying. Do not assume Echo Dot Max is eligible because it is a newer model.</p>
             </details>
           </article>
-          <article class="feature-card hub-card">
+          <article class="feature-card hub-card" id="hub-protocols">
             <div class="feature-top"><span class="feature-icon">⌘</span><span class="feature-label">Smart-home hub</span></div>
-            <h3>Connect supported devices</h3>
-            <p>The supplied project notes identify these protocols for Echo Studio. Confirm the exact Studio model and accessory requirements before choosing devices.</p>
-            <ul class="protocol-list">
-              <li><span class="protocol-badge">Z</span><div><b>Zigbee</b><small>Supported lights, switches, locks, and accessories</small></div></li>
-              <li><span class="protocol-badge">M</span><div><b>Matter</b><small>Compatible Matter-enabled devices</small></div></li>
-              <li><span class="protocol-badge">T</span><div><b>Thread</b><small>Thread Border Router function for compatible Thread devices</small></div></li>
-            </ul>
-            <p class="fine-print">These protocol notes apply to the compatible Echo Studio described in the supplied project notes. Do not assume Echo Dot Max has the same hub protocols. Support for each protocol does not guarantee every feature works with every product; check the model’s current specifications and accessory requirements.</p>
+            <h3>Matter and Thread on both models</h3>
+            <p>Amazon’s Alexa smart-home developer documentation lists Echo Studio (1st Gen and newer, 2025 release) and Echo Dot Max (2025 release) as Matter-enabled devices with built-in Thread 1.3 Border Routers.</p>
+            <div class="protocol-table-wrap">
+              <table class="protocol-table">
+                <thead>
+                  <tr><th scope="col">Capability</th><th scope="col">Echo Studio</th><th scope="col">Echo Dot Max</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Matter, over Wi-Fi and Thread</th><td>Listed</td><td>Listed</td></tr>
+                  <tr><th scope="row">Thread Border Router</th><td>Thread 1.3</td><td>Thread 1.3</td></tr>
+                  <tr><th scope="row">Bluetooth used for setup</th><td>Listed</td><td>Listed</td></tr>
+                  <tr><th scope="row">Alexa smart-home control</th><td>Listed</td><td>Listed</td></tr>
+                  <tr><th scope="row">Zigbee hub</th><td>Not listed</td><td>Not listed</td></tr>
+                  <tr><th scope="row">Alexa Home Theater audio</th><td>Strongest fit</td><td>Supported count varies by Fire TV</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="fine-print">Read from Amazon’s documentation in October 2026. If you need Zigbee, plan on a separate bridge or hub such as an Echo Hub. Because eero 7 and eero Max 7 are also listed as Thread Border Routers, an Echo Studio, an Echo Dot Max, and an eero 7 can serve as several Thread Border Routers in one home. Protocol support does not guarantee that every feature of every compatible device will work, and app and region support can change.</p>
+            <details class="compat-details">
+              <summary>Sources for the capability table</summary>
+              <p>Amazon’s <a href="https://developer.amazon.com/docs/alexaplus/smarthome/thread-support.html" target="_blank" rel="noopener">Thread support page</a> and <a href="https://developer.amazon.com/docs/alexaplus/smarthome/matter-support.html" target="_blank" rel="noopener">Matter support page</a> list both Echo models and the eero Thread Border Routers. Amazon’s <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=G8LQHC9R2S736XUQ" target="_blank" rel="noopener">Zigbee smart-home help article</a> tells you to ask Alexa whether a device has a built-in hub and does not name Echo Studio or Echo Dot Max.</p>
+            </details>
           </article>
         </div>
 
@@ -300,6 +338,7 @@
             <p class="eyebrow">eero Built-in / setup snapshot</p>
             <h3>Give compatible Echo speakers a place on the mesh.</h3>
             <p>The supplied WIRED excerpt describes linking Amazon and eero accounts, then enabling compatible Echo devices from the eero app.</p>
+            <p class="fine-print">For a visual walkthrough, see the supplied reference: <a href="https://www.youtube.com/watch?v=8H9_yqgXJ9w" target="_blank" rel="noopener">Extend Your Wi-Fi with eero and Amazon</a> (Best Buy Tech Tips). It was not reviewed for this guide, so confirm any step in the eero app or Amazon documentation.</p>
           </div>
           <ol>
             <li>Update eero, Alexa, and Echo software.</li>

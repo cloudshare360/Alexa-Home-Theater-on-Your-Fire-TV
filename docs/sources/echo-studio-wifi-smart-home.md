@@ -20,13 +20,19 @@ The supplied [WIRED eero Built-in article summary](./eero-built-in-echo-speakers
 
 ## Smart-home hub protocols
 
-The supplied project notes identify these protocols for Echo Studio acting as a smart-home hub. This information has not been confirmed against a model-specific manufacturer specification in this document, and should not be assumed to apply to Echo Dot Max:
+Amazon's current Alexa smart-home developer documentation, read on October 4, 2026, lists **both** Echo Studio (1st Gen and newer, 2025 release) and Echo Dot Max (2025 release) as Matter-enabled devices with built-in Thread 1.3 Border Routers. Alexa supports Matter over Wi-Fi and Matter over Thread, and uses Bluetooth Low Energy during commissioning.
 
-- **Zigbee:** Connect supported Zigbee lights, switches, locks, and other compatible devices.
-- **Matter:** Connect supported Matter-certified devices for interoperability across compatible smart-home ecosystems.
-- **Thread:** Thread Border Router functionality can connect a Thread network to the home network and support compatible Thread devices.
+- **Matter:** compatible Matter-enabled devices, over Wi-Fi or Thread.
+- **Thread:** Thread Border Router function, listed at Thread 1.3 for these models.
+- **Bluetooth:** used to pass network credentials during Matter setup.
 
-Protocol support alone does not guarantee that every device feature will work. Confirm the Echo Studio model's current capabilities and each accessory's compatibility, required app or setup flow, and any platform limitations. A separate hub may still be needed for devices or features not supported by the Echo.
+Full device lists and citations are in [Smart-home Hub Protocols for Echo Studio and Echo Dot Max](./smart-home-hub-protocols.md). Because the protocol lists match, smart-home capability alone does not separate the two models; audio quality and the supported speaker count for a given Fire TV are the practical differences.
+
+### Zigbee correction
+
+Earlier project notes in this document listed **Zigbee** as an Echo Studio capability. Amazon's current documentation does not support that for either model: neither appears in the Matter or Thread Border Router lists, and Amazon's Zigbee help article tells users to ask Alexa whether a device has a built-in hub rather than naming these models. Treat Zigbee as **not listed** for Echo Studio and Echo Dot Max, and plan on a separate hub or bridge such as an Echo Hub if a Zigbee accessory is required. If Amazon later documents otherwise, update this note, [the protocol note](./smart-home-hub-protocols.md), and the site together.
+
+Protocol support alone does not guarantee that every device feature will work. Confirm the Echo model's current capabilities and each accessory's compatibility, required app or setup flow, and any platform limitations. A separate hub may still be needed for devices or features not supported by the Echo.
 
 ## Room-by-room temperature control
 
@@ -38,7 +44,7 @@ Thermostat schedules or properly configured zones may reduce energy use in some 
 
 ## Echo Dot Max compatibility boundary
 
-Do not infer that Echo Dot Max supports eero Built-in, temperature sensing, or the same Zigbee, Matter, or Thread hub capabilities as Echo Studio. Check the exact model's current Amazon specifications and the eligible-device list in the eero app. Even when an Echo is an eligible eero Built-in extender, it must have a useful connection to the eero mesh; placing it deep in a dead zone may not improve service there. A dedicated eero node and an Echo extender are different products with different capabilities.
+Echo Dot Max is documented with the same Matter and Thread 1.3 Border Router support as Echo Studio, so it should no longer be excluded from the smart-home hub role. Two boundaries still apply: eero Built-in mesh extension is a separate feature with its own eligible-device list, and an Echo extender still needs a useful connection to the eero mesh, so placing it deep in a dead zone may not improve service there. A dedicated eero node and an Echo extender are different products with different capabilities.
 
 ## How this relates to Alexa Home Theater
 
@@ -48,4 +54,4 @@ The project notes also mention existing Sonos speakers and an Echo Dot pair. The
 
 ## Source status
 
-The eero Built-in statement and protocol list in this document were supplied as project notes; exact Echo Dot Max compatibility and model-specific temperature-sensor behavior have not been verified here. Treat them as conditional, not as a confirmed feature list. Check [Amazon Echo Studio information](https://www.amazon.com/echo-studio), [Amazon Echo Dot Max information](https://www.amazon.com/echo-dot-max), the current [eero support documentation](https://support.eero.com/), and [ENERGY STAR's smart thermostat resources](https://www.energystar.gov/products/smart_thermostats) before publishing model-specific claims or planning HVAC changes.
+The eero Built-in statement came from supplied project notes. The protocol lists in this document were verified against Amazon's Alexa smart-home developer documentation on October 4, 2026 and are recorded in [Smart-home Hub Protocols for Echo Studio and Echo Dot Max](./smart-home-hub-protocols.md); the earlier Zigbee claim for Echo Studio did not survive that check. Model-specific temperature-sensor behavior and eero Built-in eligibility are still unverified here. Treat all of it as conditional, not as a confirmed feature list. Check [Amazon Echo Studio information](https://www.amazon.com/echo-studio), [Amazon Echo Dot Max information](https://www.amazon.com/echo-dot-max), the current [eero support documentation](https://support.eero.com/), and [ENERGY STAR's smart thermostat resources](https://www.energystar.gov/products/smart_thermostats) before publishing model-specific claims or planning HVAC changes.
