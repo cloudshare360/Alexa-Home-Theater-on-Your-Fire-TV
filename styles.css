@@ -51,8 +51,8 @@ a { color: inherit; }
 .main-nav { display: flex; align-items: center; gap: clamp(16px, 2.5vw, 36px); }
 .main-nav a { color: #465267; font-size: 12px; font-weight: 700; text-decoration: none; transition: color .2s; }
 .main-nav a:hover, .main-nav a:focus-visible { color: var(--orange); }
-.main-nav .nav-github { padding: 8px 11px; border: 1px solid #d9d4ca; border-radius: 7px; color: var(--ink); }
-.main-nav .nav-github span { padding-left: 3px; color: var(--orange); }
+.main-nav .nav-github { padding: 8px 12px; border: 1px solid #d9d4ca; border-radius: 7px; color: var(--ink); background: #fff; }
+.main-nav .nav-github span { padding-left: 4px; color: var(--orange); }
 
 .hero { display: grid; min-height: 580px; grid-template-columns: 1fr .9fr; align-items: center; gap: 46px; padding-block: 76px 72px; }
 .eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; color: var(--orange); font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
@@ -243,8 +243,10 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
 .footer-inner > div:first-child p { margin: 14px 0 0; font-size: 10px; }
 .footer-meta { max-width: 510px; }
 .footer-meta p { margin-bottom: 8px; font-size: 9px; line-height: 1.7; }
-.footer-repo-link { color: #f2a27b; font-weight: 700; text-decoration: none; }
-.footer-repo-link:hover { color: white; }
+.footer-repo-link { display: inline-flex; min-height: 40px; align-items: center; gap: 8px; padding: 0 13px; border: 1px solid #f2a27b; border-radius: 7px; color: #fff; background: #263751; font-weight: 700; text-decoration: none; }
+.footer-repo-link span { color: #f2a27b; }
+.footer-repo-link:hover, .footer-repo-link:focus-visible { color: var(--navy); background: #f2a27b; }
+.footer-repo-link:hover span, .footer-repo-link:focus-visible span { color: var(--navy); }
 .footer-meta .copyright { margin: 0; color: #77869a; }
 
 @media (max-width: 900px) {
