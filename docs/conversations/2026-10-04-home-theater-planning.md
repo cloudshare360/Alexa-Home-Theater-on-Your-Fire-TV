@@ -236,6 +236,22 @@ Asked to prioritize the cheapest initial configuration: one Fire TV Stick, two s
 
 Added a homepage starter recommendation using the least-cost supplied Fire TV Stick listing, two matching Echo Dot Max speakers, and optional eero Pro 6E 1-pack. Labeled item prices and totals as the supplied October 4, 2026 listing snapshot, not current offers; clarified that an existing working Wi-Fi network can be used without buying eero.
 
+### User
+
+Asked to update the site's Budget section at `#budget` to reflect the cheapest supported start with a Fire TV Stick, two matching speakers, and optional one-pack eero.
+
+### Assistant
+
+Added the starter bundle and optional eero totals to the Budget section, using the CSV-derived catalog through the existing price-rendering mechanism. Documented the arithmetic and date caveat in the shopping-cost notes; added coverage asserting both starter totals.
+
+### User
+
+Clarified that the Dot Max budget example should start at two speakers and allow adjustment through five, eero Pro 6E should be optional, and the Fire TV should be selectable. Requested the same quantity-based behavior for Echo Studio.
+
+### Assistant
+
+Set the planner defaults to Fire TV Stick 4K (2nd Generation), two Echo Dot Max speakers, and eero unchecked. The existing planner supports choosing Echo Studio instead, changing the quantity from two through five, selecting any listed Fire TV, and toggling an eero pack; totals recalculate from the price catalog. Kept the four-speaker screenshot budget as a fixed historical cart and added a link to customize it in the planner.
+
 ## Planner calculation verification
 
 ### User

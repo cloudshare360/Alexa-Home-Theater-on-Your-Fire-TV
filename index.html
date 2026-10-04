@@ -88,22 +88,22 @@
           <div class="starter-item">
             <span class="starter-index">01</span>
             <div><b>Fire TV Stick 4K (2nd Generation)</b><small>Lowest supplied Fire TV listing price</small></div>
-            <strong>$37.99</strong>
+            <strong data-product-price-key="fire-tv-stick-4k-2nd-gen">$37.99</strong>
           </div>
           <div class="starter-item">
             <span class="starter-index">02</span>
             <div><b>2 × Echo Dot Max</b><small>Two speakers of the same model</small></div>
-            <strong>$159.98</strong>
+            <strong data-product-price-key="echo-dot-max" data-price-quantity="2">$159.98</strong>
           </div>
-          <div class="starter-total"><span>Starter theater example</span><strong>$197.97</strong></div>
+          <div class="starter-total"><span>Starter theater example</span><strong data-config-total-key="starter-theater">$197.97</strong></div>
           <div class="starter-optional">
             <span class="optional-label">Optional network upgrade</span>
             <div class="starter-item">
               <span class="starter-index">+</span>
               <div><b>eero Pro 6E 1-pack</b><small>Use only if you need a new or expanded eero network</small></div>
-              <strong>$149.99</strong>
+              <strong data-product-price-key="eero-pro-6e-1-pack">$149.99</strong>
             </div>
-            <div class="starter-total starter-total-optional"><span>With optional eero</span><strong>$347.96</strong></div>
+            <div class="starter-total starter-total-optional"><span>With optional eero</span><strong data-config-total-key="starter-theater-with-eero">$347.96</strong></div>
           </div>
           <p class="starter-disclaimer">Based on supplied listing prices dated October 4, 2026; not live offers. Excludes tax and other charges. Keep using your current router if it meets your needs. Verify exact Fire TV/Echo compatibility before purchase.</p>
         </div>
@@ -340,9 +340,9 @@
               <h2>Your room.<br><em>Your combination.</em></h2>
             </div>
             <p class="section-intro">
-              Choose one compatible Fire TV model and one Echo speaker model.
-              Adjust the speaker quantity and optionally add an Echo Sub to see
-              a planning estimate based on the prices collected so far.
+              Choose a Fire TV and either Echo Dot Max or Echo Studio. Start
+              with two matching speakers, adjust up to five, and see the total
+              update. An eero mesh pack and Echo Sub are optional additions.
             </p>
           </div>
           <div class="planner-card" id="configuration-planner">
@@ -353,10 +353,10 @@
                 <select id="fire-tv-choice" name="fire-tv">
                   <option value="cube">Fire TV Cube (3rd Generation)</option>
                   <option value="stick-max">Fire TV Stick 4K Max (2nd Generation)</option>
-                  <option value="stick-4k">Fire TV Stick 4K (2nd Generation)</option>
+                  <option value="stick-4k" selected>Fire TV Stick 4K (2nd Generation)</option>
                   <option value="stick-plus">Fire TV Stick 4K Plus</option>
                 </select>
-                <small class="selected-product-price" id="fire-tv-price" aria-live="polite">Loading selected Fire TV price...</small>
+                <small class="selected-product-price" id="fire-tv-price" aria-live="polite">$37.99 supplied example</small>
               </label>
               <fieldset class="planner-field speaker-choice">
                 <legend><span class="field-number">02</span><span class="field-copy"><strong>Choose your Echo speakers</strong><small>One model per theater; mixed models are not supported</small></span></legend>
@@ -375,20 +375,20 @@
                 <span class="field-number">03</span>
                 <span class="field-copy"><strong>How many speakers?</strong><small>Choose between two and five</small></span>
                 <select id="speaker-count" name="speaker-count">
-                  <option value="2">2 speakers</option>
+                  <option value="2" selected>2 speakers</option>
                   <option value="3">3 speakers</option>
-                  <option value="4" selected>4 speakers</option>
+                  <option value="4">4 speakers</option>
                   <option value="5">5 speakers</option>
                 </select>
               </label>
               <fieldset class="eero-choice">
                 <legend><span class="field-number">04</span><span class="field-copy"><strong>Choose an eero mesh system</strong><small>Compare Pro 6E and Pro 7; choose a 1 Pack, 2 Pack, or 3 Pack bundle</small></span></legend>
                 <label class="sub-option eero-toggle" for="include-eero">
-                  <input id="include-eero" type="checkbox" checked>
+                  <input id="include-eero" type="checkbox">
                   <span class="sub-check" aria-hidden="true">⌁</span>
                   <span><b>Include an eero mesh system</b><small>Uncheck if you already have a compatible eero system</small></span>
                 </label>
-                <div class="eero-picks" id="eero-picks">
+                <div class="eero-picks" id="eero-picks" hidden>
                   <label class="eero-field" for="eero-model">
                     <span>eero model</span>
                     <select id="eero-model" name="eero-model">
@@ -415,8 +415,8 @@
             </form>
             <aside class="planner-result" aria-live="polite" aria-atomic="true">
               <p class="card-kicker">Your selected setup</p>
-              <h3 id="plan-title">4 Echo Dot Max speakers</h3>
-              <p class="plan-tv"><span id="plan-tv">Fire TV Cube (3rd Generation)</span><strong id="plan-tv-price">$89.99</strong></p>
+              <h3 id="plan-title">2 Echo Dot Max speakers</h3>
+              <p class="plan-tv"><span id="plan-tv">Fire TV Stick 4K (2nd Generation)</span><strong id="plan-tv-price">$37.99</strong></p>
               <ul class="plan-breakdown" id="plan-breakdown"></ul>
               <div class="plan-total-row"><span id="plan-total-label">Estimated equipment subtotal</span><strong id="plan-total">$0.00</strong></div>
               <p class="plan-price-note" id="plan-price-note"></p>
@@ -436,16 +436,34 @@
               <h2>Start small.<br><em>Grow your setup.</em></h2>
             </div>
             <p class="section-intro">
-              These are examples from the supplied cart screenshots—not live
-              quotes. The project’s broader planning range is about $300–$1,200:
-              what you spend up front can be lower if you already own compatible
-              devices. Prices, sales, taxes, and availability change.
+              Start with the lowest-cost two-speaker example, then compare the
+              larger cart configurations below. Amounts come from supplied
+              listings and screenshots, not live quotes; your up-front cost can
+              be lower if you already own compatible devices.
             </p>
           </div>
 
+          <article class="budget-starter">
+            <div class="budget-starter-copy">
+              <p class="card-kicker">Lowest-cost start · 1 Fire TV + 2 matching speakers</p>
+              <h3>Build your theater first.<br><em>Add eero only if you need it.</em></h3>
+              <p>Use an existing Wi-Fi network that works well with your devices. An eero 1-pack is an optional network purchase, not a requirement for the theater bundle.</p>
+            </div>
+            <div class="budget-starter-prices">
+              <div><span>Fire TV Stick 4K (2nd Generation)</span><b data-product-price-key="fire-tv-stick-4k-2nd-gen">$37.99</b></div>
+              <div><span>2 × Echo Dot Max</span><b data-product-price-key="echo-dot-max" data-price-quantity="2">$159.98</b></div>
+              <div class="budget-starter-total"><span>Theater starter example</span><b data-config-total-key="starter-theater">$197.97</b></div>
+              <div class="budget-starter-optional">
+                <div><span>Optional: eero Pro 6E 1-pack</span><b data-product-price-key="eero-pro-6e-1-pack">$149.99</b></div>
+                <div class="budget-starter-total"><span>With optional eero</span><b data-config-total-key="starter-theater-with-eero">$347.96</b></div>
+              </div>
+            </div>
+            <p class="budget-starter-disclaimer">Based on supplied prices dated October 4, 2026; not current checkout offers. Excludes tax and other charges. Verify your exact Fire TV/Echo pairing with Amazon before buying.</p>
+          </article>
+
           <div class="budget-grid">
             <article class="budget-card budget-entry">
-              <p class="card-kicker">Configuration A · four speakers</p>
+              <p class="card-kicker">Supplied cart example · four speakers</p>
               <h3>Echo Dot Max</h3>
               <p class="budget-total" data-config-total-key="dot-max-cart">$669.94</p>
               <p class="budget-caption">Cart subtotal shown</p>
@@ -454,6 +472,7 @@
                 <li><span>eero Pro 6E</span><b data-product-price-key="eero-pro-6e-2-pack">$259.99</b></li>
                 <li><span>Fire TV Cube</span><b data-product-price-key="fire-tv-cube-3rd-gen">$89.99</b></li>
               </ul>
+              <p class="budget-customize">This is a fixed cart snapshot, not a required starting quantity. <a href="#planner">Choose any Fire TV, Echo Dot Max or Echo Studio, adjust from 2 to 5 matching speakers, and optionally add an eero pack. The total updates with your choices.</a></p>
             </article>
             <article class="budget-card budget-upgrade">
               <p class="card-kicker">Configuration B · four speakers + sub</p>

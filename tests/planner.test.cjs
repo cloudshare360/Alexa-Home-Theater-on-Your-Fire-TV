@@ -76,6 +76,24 @@ test("shows the lowest-cost supplied starter setup with optional eero pricing", 
   assert.match(htmlSource, new RegExp(`\\$${eeroPrice.toFixed(2)}`));
   assert.match(htmlSource, new RegExp(`\\$${(fireTvPrice + speakerPrice * 2 + eeroPrice).toFixed(2)}`));
   assert.match(htmlSource, /not live offers/);
+  const budgetSection = htmlSource.split('<section class="budget-section" id="budget">')[1]
+    .split("</section>")[0];
+  assert.match(budgetSection, /lowest-cost two-speaker example/);
+  assert.match(budgetSection, /An eero 1-pack is an optional network purchase/);
+  assert.match(budgetSection, /data-config-total-key="starter-theater"/);
+  assert.match(budgetSection, /data-config-total-key="starter-theater-with-eero"/);
+});
+
+test("starts planner at two Dot Max speakers with selectable Studio, Fire TV, and optional eero", () => {
+  assert.match(htmlSource, /<option value="stick-4k" selected>Fire TV Stick 4K \(2nd Generation\)<\/option>/);
+  assert.match(htmlSource, /<input type="radio" name="speaker-model" value="dot-max" checked>/);
+  assert.match(htmlSource, /<input type="radio" name="speaker-model" value="studio">/);
+  assert.match(htmlSource, /<option value="2" selected>2 speakers<\/option>/);
+  assert.match(htmlSource, /<option value="5">5 speakers<\/option>/);
+  assert.match(htmlSource, /<input id="include-eero" type="checkbox">/);
+  assert.match(htmlSource, /<div class="eero-picks" id="eero-picks" hidden>/);
+  assert.match(htmlSource, /id="plan-title">2 Echo Dot Max speakers/);
+  assert.match(htmlSource, /fixed cart snapshot,[\s\S]*?Echo Dot Max or Echo Studio,[\s\S]*?total updates/);
 });
 
 test("publishes illustrative two-to-five speaker layouts with an optional Echo Sub", () => {
@@ -171,6 +189,8 @@ function createPlanner({
     ["[data-config-total-key]", "dot-max-cart", "configTotalKey"],
     ["[data-config-difference]", "four-studio-speakers:four-dot-max-speakers", "configDifference"],
     ["[data-config-difference]", "studio-cart:dot-max-cart", "configDifference"],
+    ["[data-config-total-key]", "starter-theater", "configTotalKey"],
+    ["[data-config-total-key]", "starter-theater-with-eero", "configTotalKey"],
   ].map(([selector, key, datasetProperty]) => {
     const element = new Element();
     element.dataset[datasetProperty] = key;
@@ -655,6 +675,8 @@ test("loads product amounts from the CSV-derived JSON catalog", async () => {
   assert.equal(priceDisplayElements[4][1].textContent, "$669.94");
   assert.equal(priceDisplayElements[5][1].textContent, "$400.00");
   assert.equal(priceDisplayElements[6][1].textContent, "$529.99");
+  assert.equal(priceDisplayElements[7][1].textContent, "$197.97");
+  assert.equal(priceDisplayElements[8][1].textContent, "$347.96");
 });
 
 test("uses CSV-derived product amounts instead of duplicate metadata amounts", async () => {
@@ -723,9 +745,9 @@ test("shows unavailable prices and skips invalid catalog rows and display values
   assert.equal(nodes["#plan-total-label"].textContent, "Known subtotal");
   assert.equal(nodes["#plan-total"].textContent, "$259.99");
   assert.match(nodes["#plan-price-note"].textContent, /Prices not provided and excluded/);
-  assert.equal(priceDisplayElements[7][1].textContent, "$129.99 each");
-  assert.equal(priceDisplayElements[8][1].textContent, "");
-  assert.equal(priceDisplayElements[10][1].textContent, "$129.99");
+  assert.equal(priceDisplayElements[9][1].textContent, "$129.99 each");
+  assert.equal(priceDisplayElements[10][1].textContent, "");
+  assert.equal(priceDisplayElements[12][1].textContent, "$129.99");
 
   nodes["#eero-model"].value = "pro-7";
   nodes["#eero-model"].selectedOptions = [{ value: "pro-7", textContent: "eero Pro 7 · Wi-Fi 7" }];

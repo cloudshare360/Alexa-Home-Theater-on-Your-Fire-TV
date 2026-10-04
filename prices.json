@@ -47,6 +47,15 @@
     }
   },
   "configurations": {
+    "starter-theater": [
+      { "product": "fire-tv-stick-4k-2nd-gen", "quantity": 1 },
+      { "product": "echo-dot-max", "quantity": 2 }
+    ],
+    "starter-theater-with-eero": [
+      { "product": "fire-tv-stick-4k-2nd-gen", "quantity": 1 },
+      { "product": "echo-dot-max", "quantity": 2 },
+      { "product": "eero-pro-6e-1-pack", "quantity": 1 }
+    ],
     "dot-max-cart": [
       { "product": "echo-dot-max", "quantity": 4 },
       { "product": "eero-pro-6e-2-pack", "quantity": 1 },

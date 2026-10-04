@@ -15,6 +15,14 @@ The supplied cart screenshots show:
 
 Unrelated saved-for-later products and personal delivery/account details visible in the screenshots are not reproduced here.
 
+## Lowest-cost two-speaker starter example
+
+Using the supplied October 4, 2026 catalog snapshot, a starter theater with one Fire TV Stick 4K (2nd Generation) ($37.99) and two matching Echo Dot Max speakers ($159.98 total) comes to **$197.97** before tax. A one-pack eero Pro 6E ($149.99 in the same supplied price list) is optional, bringing the example equipment total to **$347.96**. Someone whose existing Wi-Fi works well can omit the eero purchase.
+
+These figures are arithmetic from user-supplied listing prices, not live offers or checkout quotes. Verify that the exact Fire TV/Echo models remain compatible before buying; some Fire TV devices support only two matching Echo speakers, while the supplied guide describes other supported configurations with more speakers.
+
+The planner starts with two Echo Dot Max speakers and the lowest-cost supplied Fire TV Stick. Users can switch between Echo Dot Max and Echo Studio, choose any listed Fire TV, and set the matching Echo speaker quantity from two through five; the equipment estimate recalculates from the CSV-derived catalog. eero is optional and can be added as a selected pack. The fixed four-speaker cart below remains unchanged as a historical screenshot example.
+
 ## Cart configuration A: four Echo Dot Max speakers
 
 | Item | Quantity | Unit price | Line total |

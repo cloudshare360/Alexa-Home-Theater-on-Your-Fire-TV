@@ -450,6 +450,7 @@ function updatePlan() {
   eeroPicks.querySelectorAll("select").forEach((select) => {
     select.disabled = !includeEeroCheckbox.checked;
   });
+  eeroPicks.hidden = !includeEeroCheckbox.checked;
   if (selectedEeroListing?.amountInCents !== null && selectedEeroListing?.amountInCents !== undefined) {
     eeroPriceHint.textContent =
       `${eeroPricing.source}: ${eeroCountSelect.value}-pack ${money.format(eeroPricing.amountInCents / 100)}${eeroPricing.previousAmountInCents === null ? "" : ` (previously ${money.format(eeroPricing.previousAmountInCents / 100)})`}. Offers can change.`;

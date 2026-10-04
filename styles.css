@@ -285,12 +285,26 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
 .eero-compare .editor-note { margin-bottom: 0; }
 
 .budget-section { padding-block: 100px 110px; background: #ece9e1; }
+.budget-starter { display: grid; grid-template-columns: .9fr 1.1fr; gap: 12px 36px; margin-bottom: 18px; padding: 25px 28px 17px; border: 1px solid #e4bca8; border-radius: 12px; background: #fffaf7; }
+.budget-starter-copy h3 { margin-bottom: 9px; font-size: 23px; line-height: 1.2; }
+.budget-starter-copy > p:last-child { margin-bottom: 0; color: #657186; font-size: 11px; line-height: 1.7; }
+.budget-starter-prices > div { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid #eee5df; color: #657186; font-size: 11px; }
+.budget-starter-prices b { color: var(--ink); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.budget-starter-prices .budget-starter-total { padding-left: 12px; color: var(--ink); font-weight: 700; }
+.budget-starter-total b { font-size: 16px; }
+.budget-starter-optional { margin-top: 8px; padding: 5px 12px 0; border-radius: 8px; background: #f1eee8; }
+.budget-starter-optional > div { display: flex; justify-content: space-between; gap: 16px; padding: 7px 0; color: #657186; font-size: 10px; }
+.budget-starter-optional .budget-starter-total { border-top: 1px solid #ded9cf; }
+.budget-starter-disclaimer { grid-column: 1 / -1; margin: 0; color: #818b99; font-size: 9px; line-height: 1.6; }
 .budget-grid { display: grid; grid-template-columns: 1fr 1fr .8fr; gap: 15px; }
 .budget-card { min-height: 350px; padding: 27px; border: 1px solid #dedad1; border-radius: 12px; background: var(--white); }
 .budget-card h3 { margin-bottom: 13px; }
 .budget-total { margin-bottom: -2px; font-family: var(--font-display); font-size: 47px; font-weight: 700; letter-spacing: -.07em; line-height: 1.15; }
 .budget-total span { font-size: 24px; vertical-align: 12px; }
 .budget-caption { margin-bottom: 17px; color: #8a93a0; font-size: 9px; }
+.budget-customize { margin: 17px 0 0; padding-top: 13px; border-top: 1px solid #eeece7; color: #657186; font-size: 10px; line-height: 1.65; }
+.budget-customize a { color: #9a4d30; font-weight: 700; }
+.budget-customize a:hover, .budget-customize a:focus-visible { color: var(--ink); }
 .cost-list { margin: 0; padding: 0; list-style: none; }
 .cost-list li { display: flex; justify-content: space-between; gap: 10px; padding: 9px 0; border-top: 1px solid #eeece7; font-size: 10px; }
 .cost-list li span { color: #747f90; }
@@ -404,6 +418,7 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
   .speaker-summary { min-height: 0; }
   .setup-layout { grid-template-columns: 1fr .85fr; gap: 25px; }
   .budget-grid { grid-template-columns: repeat(2, 1fr); }
+  .budget-starter { grid-template-columns: 1fr 1fr; gap: 16px 22px; }
   .budget-note { grid-column: 1 / -1; min-height: 270px; }
   .budget-router-prices { grid-template-columns: 1fr; gap: 15px; }
   .budget-router-note { margin-top: -7px; }
@@ -465,6 +480,7 @@ h2 { margin-bottom: 0; font-size: clamp(39px, 5vw, 59px); font-weight: 600; line
   .eero-model p { min-height: 0; }
   .planner-result { min-height: 360px; }
   .budget-grid { grid-template-columns: 1fr; }
+  .budget-starter { grid-template-columns: 1fr; padding: 21px 18px 15px; }
   .budget-router-prices { padding: 22px 18px 16px; }
   .budget-router-table { min-width: 440px; }
   .budget-router-table th, .budget-router-table td { padding: 10px 8px; }
