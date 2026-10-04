@@ -36,6 +36,7 @@ test("provides responsive viewport, tablet, and mobile layouts", () => {
   assert.match(stylesSource, /\.planner-result \{[^}]*background: #f8f6f1/);
   assert.match(stylesSource, /\.plan-breakdown li \{[^}]*font-size: 15px/);
   assert.match(stylesSource, /\.plan-breakdown li small \{[^}]*font-size: 12px/);
+  assert.match(stylesSource, /\.plan-tv strong \{[^}]*font-size: 16px; font-weight: 700; text-align: right/);
 });
 
 function createPlanner({
