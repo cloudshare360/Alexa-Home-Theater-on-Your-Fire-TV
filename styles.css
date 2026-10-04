@@ -67,6 +67,9 @@ h1 em, h2 em { color: var(--orange); font-style: normal; }
 .button:hover { transform: translateY(-2px); }
 .button-primary { color: var(--white); background: var(--navy); }
 .button-primary:hover { background: #263751; }
+.button-repo { min-height: 42px; margin-top: 16px; padding-inline: 14px; border: 1px solid #d8d2c7; color: var(--ink); background: transparent; font-size: 11px; }
+.button-repo:hover { border-color: var(--orange); background: #fffaf6; }
+.repo-mark { color: var(--orange); font-size: 15px; }
 .text-link { color: var(--ink); font-size: 12px; font-weight: 700; text-decoration: none; }
 .text-link span { padding-left: 5px; color: var(--orange); }
 .hero-note { margin: 21px 0 0; color: #8490a0; font-size: 11px; }
